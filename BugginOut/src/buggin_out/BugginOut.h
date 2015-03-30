@@ -12,7 +12,7 @@
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerDesert/";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerDesertLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
-static const wstring	W_INIT_FILE				= L"data/BugginOutInit.txt";
+static const wstring	W_INIT_FILE				= L"data/ZombiesssInit.txt";
 static const wstring	W_GUI_INIT_FILE			= L"data/BugginOutGUI.txt";
 static const string		W_DEBUG_FILE			= "DebugOutput.txt";
 
@@ -39,8 +39,8 @@ static const wstring	W_EXIT_COMMAND			= L"Exit";
 static const wstring	W_QUIT_COMMAND			= L"Quit";
 static const wstring	W_GREEN_CURSOR_PATH		= L"data/gui/cursor/green_cursor.png";
 static const wstring	W_RED_CURSOR_PATH		= L"data/gui/cursor/red_cursor.png";
-static const wstring	W_SPLASH_SCREEN_PATH	= L"data/gui/overlays/spiked_acid_splash_screen_overlay.png";
-static const wstring	W_MAIN_MENU_PATH		= L"data/gui/overlays/spiked_acid_main_menu_overlay.png";
+static const wstring	W_SPLASH_SCREEN_PATH	= L"data/gui/overlays/zombiesss_screen_overlay.png";
+static const wstring	W_MAIN_MENU_PATH		= L"data/gui/overlays/zombiesss_menu_overlay.png";
 static const wstring	W_START_IMAGE_PATH		= L"data/gui/buttons/start_game.png";
 static const wstring	W_START_IMAGE_MO_PATH	= L"data/gui/buttons/start_game_mo.png";
 static const wstring	W_EXIT_IMAGE_PATH		= L"data/gui/buttons/exit_game.png";

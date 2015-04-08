@@ -23,7 +23,6 @@
 #include "sssf\gsm\world\WorldLayer.h"
 #include <vector>
 #include <list>
-
 /*
 	The constructor initializes the data structures and loads
 	the necessary ones with recyclable objects for collision tests.

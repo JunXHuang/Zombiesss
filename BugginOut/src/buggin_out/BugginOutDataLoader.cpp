@@ -229,7 +229,7 @@ void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *r
 	bot->setCurrentState(JUMPING);
 	bot->applyPhysics(world);
 	bot->setPosition(initX, initY);
-	spriteManager->addBot(bot);
+	spriteManager->addBot(game, bot);
 }
 
 /*

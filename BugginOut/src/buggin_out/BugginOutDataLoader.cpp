@@ -237,7 +237,7 @@ void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *r
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setCurrentState(JUMPING);
 	bot->setAlpha(255);
-	spriteManager->addBot(bot);
+	spriteManager->addBot(game,bot);
 	bot->affixTightAABBBoundingVolume();
 }
 

@@ -1,26 +1,34 @@
 #include "sssf\game\Game.h"
-#include "sssf\gsm\physics\Collision.h"
+#include "sssf\gsm\ai\Bot.h"
 #include "buggin_out\BugginOutCollisionListener.h"
 
-void BugginOutCollisionListener::respondToCollision(Game *game, Collision *collision)
-{
-	// NOTE FROM THE COLLIDABLE OBJECTS, WHICH ARE IN THE COLLISION,
-	// WE CAN CHECK AND SEE ON WHICH SIDE THE COLLISION HAPPENED AND
-	// CHANGE SOME APPROPRIATE STATE ACCORDINGLY
+#include "Box2D\Dynamics\Contacts\b2Contact.h"
+#include "Box2D\Dynamics\b2Fixture.h"
 
-	if (!collision->isCollisionWithTile())
-	{
-		CollidableObject *sprite = collision->getCO1();
-		if (sprite->getCollisionEdge() == BOTTOM_EDGE)
-		{
-			// ENEMY IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
-			// AND MARK IT FOR REMOVAL
-		}
-		else
-		{
-			// PLAYER IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
-			// AND MARK IT FOR REMOVAL/RESPAWN/RESTART GAME, WHATEVER
-			// THE DEMANDS OF THE GAME ARE
-		}
-	}
+void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
+
+	//check if fixture A was a ball
+	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+	if (bodyUserData)
+		static_cast<Bot*>(bodyUserData);
+
+	//check if fixture B was a ball
+	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+	if (bodyUserData)
+		static_cast<Bot*>(bodyUserData);
+
+}
+
+void BugginOutCollisionListener::EndContact(b2Contact* contact) {
+
+	//check if fixture A was a ball
+	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+	if (bodyUserData)
+		static_cast<Bot*>(bodyUserData);
+
+	//check if fixture B was a ball
+	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+	if (bodyUserData)
+		static_cast<Bot*>(bodyUserData);
+
 }

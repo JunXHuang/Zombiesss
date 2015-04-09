@@ -97,7 +97,5 @@ void World::unloadWorld()
 */
 void World::update(Game *game)
 {
-	// NOTE THAT THIS METHOD IS NOT IMPLEMENTED BUT COULD BE
-	// SHOULD YOU WISH TO ADD ANY NON-COLLIDABLE LAYERS WITH
-	// DYNAMIC CONTENT OR PARTICLE SYSTEMS
+	b2world->Step(1.0f, 10, 10);
 }

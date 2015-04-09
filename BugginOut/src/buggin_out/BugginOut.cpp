@@ -42,7 +42,7 @@
 // DIRECTX INCLUDES
 #include "sssf\platforms\DirectX\DirectXGraphics.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
-#include <Box2D/Box2D.h>
+#include "Box2D\Box2D.h"
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -89,7 +89,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	// THIS WILL HANDLE PHYSICS COLLISION EVENTS
 	BugginOutCollisionListener *bugginOutCollisionListener = new BugginOutCollisionListener();
-	bugginOutGame->getGSM()->getPhysics()->setCollisionListener(bugginOutCollisionListener);
+	bugginOutGame->getGSM()->getWorld()->setCollisionListener(bugginOutCollisionListener);
 
 	// START THE GAME LOOP
 	bugginOutGame->runGameLoop();

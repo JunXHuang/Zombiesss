@@ -11,7 +11,6 @@
 #pragma once
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\ai\Bot.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
@@ -29,22 +28,21 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 {
 	// GET THE SPRITE TYPE INFO FOR THIS SPRITE
 	AnimatedSpriteType *spriteType = sprite->getSpriteType();
-	PhysicalProperties *pp = sprite->getPhysicalProperties();
 
 	// IS THE SPRITE VIEWABLE?
 	if (viewport->areWorldCoordinatesInViewport(	
-									pp->getX(),
-									pp->getY(),
-									spriteType->getTextureWidth(),
-									spriteType->getTextureHeight()))
+									sprite->getX(),
+									sprite->getY(),
+									sprite->getWidth(),
+									sprite->getHeight()))
 	{
 		// SINCE IT'S VIEWABLE, ADD IT TO THE RENDER LIST
 		RenderItem itemToAdd;
 		itemToAdd.id = sprite->getFrameIndex();
 		renderList->addRenderItem(	sprite->getCurrentImageID(),
-									pp->round(pp->getX()-viewport->getViewportX()),
-									pp->round(pp->getY()-viewport->getViewportY()),
-									pp->round(pp->getZ()),
+									(int)(sprite->getX() - viewport->getViewportX() + 0.5),
+									(int)(sprite->getY() - viewport->getViewportY() + 0.5),
+									0,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight());

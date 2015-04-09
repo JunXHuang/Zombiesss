@@ -1,11 +1,11 @@
 #pragma once
 
 #include "sssf\game\Game.h"
-#include "sssf\gsm\physics\CollisionListener.h"
-#include "sssf\gsm\physics\Collision.h"
+#include "Box2D\Dynamics\b2WorldCallbacks.h"
 
-class BugginOutCollisionListener : public CollisionListener
+class BugginOutCollisionListener : public b2ContactListener
 {
 public:
-	void respondToCollision(Game *game, Collision *collision);
+	void BeginContact(b2Contact* contact);
+	void EndContact(b2Contact* contact);
 };

@@ -14,8 +14,6 @@
 #include "sssf\game\Game.h"
 #include "sssf\game\WStringTable.h"
 #include "sssf\graphics\GameGraphics.h"
-#include "sssf\gsm\physics\Physics.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\state\GameStateManager.h"
@@ -39,7 +37,6 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 	// LET'S GET THE PLAYER'S PHYSICAL PROPERTIES, IN CASE WE WANT TO CHANGE THEM
 	GameStateManager *gsm = game->getGSM();
 	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
-	PhysicalProperties *pp = player->getPhysicalProperties();
 	Viewport *viewport = game->getGUI()->getViewport();
 	
 	// IF THE GAME IS IN PROGRESS
@@ -48,8 +45,8 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// WASD KEY PRESSES WILL CONTROL THE PLAYER
 		// SO WE'LL UPDATE THE PLAYER VELOCITY WHEN THESE KEYS ARE
 		// PRESSED, THAT WAY PHYSICS CAN CORRECT AS NEEDED
-		float vX = pp->getVelocityX();
-		float vY = pp->getVelocityY();
+		float vX = player->getVelocityX();
+		float vY = player->getVelocityY();
 
 		// YOU MIGHT WANT TO UNCOMMENT THIS FOR SOME TESTING,
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
@@ -75,7 +72,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDownForFirstTime(SPACE_KEY))
 		{
-			if (player->wasOnTileLastFrame())
+			if (player->getVelocityY() == 0.0f)
 			{
 				vY = JUMP_SPEED;
 			}
@@ -86,15 +83,15 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
-			gsm->getPhysics()->togglePhysics();
+			//gsm->getPhysics()->togglePhysics();
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
-			gsm->getPhysics()->activateForSingleUpdate();
+			//gsm->getPhysics()->activateForSingleUpdate();
 		}
 
 		// NOW SET THE ACTUAL PLAYER VELOCITY
- 		pp->setVelocity(vX, vY);
+ 		player->setVelocity(vX, vY);
 
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;

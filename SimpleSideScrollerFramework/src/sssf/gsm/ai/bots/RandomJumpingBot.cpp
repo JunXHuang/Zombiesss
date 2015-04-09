@@ -2,7 +2,6 @@
 #include "sssf\game\Game.h"
 #include "sssf\gsm\ai\bots\RandomJumpingBot.h"
 #include "sssf\gsm\state\GameStateManager.h"
-#include "sssf\gsm\physics\Physics.h"
 
 /*
 	This private constructor is only to be used for cloning bots, note
@@ -16,33 +15,9 @@ RandomJumpingBot::RandomJumpingBot(	unsigned int initMin,
 	initBot(initMin, initMax, initMaxVelocity);
 
 	cyclesRemainingBeforeThinking = 30;
-	pp.setVelocity(0.0f, 0.0f);
 
 	pickRandomCyclesInRange();
 }
-
-/*
-	This is the public constructor used by other classes for 
-	creating these types of bots.
-*/
-RandomJumpingBot::RandomJumpingBot(	Physics *physics,
-										unsigned int initMin, 
-										unsigned int initMax, 
-										unsigned int initMaxVelocity)
-{
-	// INIT THE BASIC STUFF
-	initBot(initMin, initMax, initMaxVelocity);
-
-	// AND START THE BOT OFF IN A RANDOM DIRECTION AND VELOCITY
-	// AND WITH RANDOM INTERVAL UNTIL IT THINKS AGAIN
-	this->pp.setVelocity(0, 0);
-	
-	//pickRandomJump(physics);
-	pickRandomCyclesInRange();
-
-
-}
-
 /*
 	clone - this method makes another RandomJumpingBot object, but does
 	not completely initialize it with similar data to this. Most of the 
@@ -101,7 +76,7 @@ void RandomJumpingBot::pickRandomCyclesInRange()
 	pickRandomVelocity - calculates a random velocity vector for this
 	bot and initializes the appropriate instance variables.
 */
-void RandomJumpingBot::pickRandomJump(Physics *physics)
+void RandomJumpingBot::pickRandomJump()
 {
 	// FIRST GET A RANDOM float FROM 0.0 TO 1.0
 	float randMax = RAND_MAX;
@@ -115,7 +90,7 @@ void RandomJumpingBot::pickRandomJump(Physics *physics)
 	float jumpVelocity = (float)maxVelocity;
 	float jumpVelocityX = jumpVelocity * cos(randomAngleInRadians);
 	float jumpVelocityY = -jumpVelocity * sin(randomAngleInRadians);
-	pp.setVelocity(jumpVelocityX, jumpVelocityY);
+	this->setVelocity(jumpVelocityX, jumpVelocityY);
 //	pp.setVelocity(0.0f, jumpVelocity);
 }
 
@@ -131,12 +106,12 @@ void RandomJumpingBot::think(Game *game)
 
 	if (cyclesRemainingBeforeThinking == 0)
 	{
-		if (this->wasOnTileLastFrame())
-		{
+		//if (this->wasOnTileLastFrame())
+		//{
 			GameStateManager *gsm = game->getGSM();
-			pickRandomJump(gsm->getPhysics());
+			pickRandomJump();
 			pickRandomCyclesInRange();
-		}
+		//}
 	}
 	else
 		cyclesRemainingBeforeThinking--;

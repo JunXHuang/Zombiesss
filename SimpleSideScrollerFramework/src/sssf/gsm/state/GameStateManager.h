@@ -21,7 +21,6 @@
 #include "sssf\data_loader\GameDataLoader.h"
 #include "sssf\graphics\RenderList.h"
 #include "sssf\gsm\state\GameState.h"
-#include "sssf\gsm\physics\Physics.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\world\World.h"
 #include "sssf\gsm\world\WorldLayer.h"
@@ -59,15 +58,11 @@ private:
 	// NOTE THAT WE CALL THE DYNAMIC OBJECTS "SPRITES"
 	SpriteManager *spriteManager;
 
-	// FOR DOING ALL COLLISION DETECTION AND RESOLUTION
-	Physics			physics;
-
 public:
 	// INLINED ACCESSOR METHODS
 	GameState		getCurrentGameState()	{ return currentGameState;			}
 	unsigned int	getCurrentLevel()		{ return currentLevel;				}
 	unsigned int	getNumLevels()			{ return levelNames.size();			}
-	Physics*		getPhysics()			{ return &physics;					}
 	SpriteManager*	getSpriteManager()		{ return spriteManager;				}
 	World*			getWorld()				{ return &world;					}
 	wstring			getCurrentLevelName()	{ return levelNames[currentLevel];	}

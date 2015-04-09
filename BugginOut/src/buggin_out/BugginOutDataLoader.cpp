@@ -172,26 +172,19 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	// LET'S MAKE A PLAYER SPRITE
 	// @TODO - IT WOULD BE BETTER TO LOAD THIS STUFF FROM A FILE
 	GameStateManager *gsm = game->getGSM();
-	Physics *physics = gsm->getPhysics();
-	physics->setGravity(W_GRAVITY);
+	World *world = gsm->getWorld();
+	world->setGravity(W_GRAVITY);
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	AnimatedSprite *player = spriteManager->getPlayer();
-	physics->addCollidableObject(player);
 
 	// NOTE THAT RED BOX MAN IS SPRITE ID 2
 	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(2);
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
-	PhysicalProperties *playerProps = player->getPhysicalProperties();
-	playerProps->setX(PLAYER_INIT_X);
-	playerProps->setY(PLAYER_INIT_Y);
-	playerProps->setVelocity(0.0f, 0.0f);
-	playerProps->setAccelerationX(0);
-	playerProps->setAccelerationY(0);
-	player->setOnTileThisFrame(false);
-	player->setOnTileLastFrame(false);
-	player->affixTightAABBBoundingVolume();
+	player->applyPhysics(world);
+	player->setPosition(PLAYER_INIT_X, PLAYER_INIT_Y);
+	player->setVelocity(0.0f, 0.0f);
 
 	AnimatedSpriteType *botSpriteType = spriteManager->getSpriteType(1);
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
@@ -229,16 +222,14 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
 {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
-	Physics *physics = game->getGSM()->getPhysics();
-	RandomJumpingBot *bot = new RandomJumpingBot(physics, 30, 120, 40);
-	physics->addCollidableObject(bot);
-	PhysicalProperties *pp = bot->getPhysicalProperties();
-	pp->setPosition(initX, initY);
+	World *world = game->getGSM()->getWorld();
+	RandomJumpingBot *bot = new RandomJumpingBot(30, 120, 40);
 	bot->setSpriteType(randomJumpingBotType);
-	bot->setCurrentState(JUMPING);
 	bot->setAlpha(255);
+	bot->setCurrentState(JUMPING);
+	bot->applyPhysics(world);
+	bot->setPosition(initX, initY);
 	spriteManager->addBot(bot);
-	bot->affixTightAABBBoundingVolume();
 }
 
 /*

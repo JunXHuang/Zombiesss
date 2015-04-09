@@ -123,13 +123,7 @@
     <ClCompile Include="src\sssf\gsm\sprite\SpriteManager.cpp">
       <Filter>src\sssf\gsm\sprite</Filter>
     </ClCompile>
-    <ClCompile Include="src\sssf\gsm\physics\AABB.cpp">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClCompile>
     <ClCompile Include="src\sssf\gsm\physics\CollidableObject.cpp">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sssf\gsm\physics\Physics.cpp">
       <Filter>src\sssf\gsm\physics</Filter>
     </ClCompile>
     <ClCompile Include="src\sssf\gui\Button.cpp">
@@ -248,22 +242,7 @@
     <ClInclude Include="src\sssf\gsm\sprite\SpriteManager.h">
       <Filter>src\sssf\gsm\sprite</Filter>
     </ClInclude>
-    <ClInclude Include="src\sssf\gsm\physics\AABB.h">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClInclude>
     <ClInclude Include="src\sssf\gsm\physics\CollidableObject.h">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sssf\gsm\physics\Collision.h">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sssf\gsm\physics\CollisionListener.h">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sssf\gsm\physics\PhysicalProperties.h">
-      <Filter>src\sssf\gsm\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sssf\gsm\physics\Physics.h">
       <Filter>src\sssf\gsm\physics</Filter>
     </ClInclude>
     <ClInclude Include="src\sssf\gui\Button.h">

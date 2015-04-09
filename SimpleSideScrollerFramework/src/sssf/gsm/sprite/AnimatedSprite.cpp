@@ -9,9 +9,12 @@
 */
 
 #include "sssf_VS\stdafx.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
+
+#include "Box2D\Dynamics\b2World.h"
+#include "Box2D\Dynamics\b2Fixture.h"
+#include "Box2D\Collision\Shapes\b2PolygonShape.h"
 
 /*
 	AnimatedSprite - Default constructor, just sets everything to 0.
@@ -21,10 +24,6 @@ AnimatedSprite::AnimatedSprite()
 	spriteType = 0;
 	frameIndex = 0;
 	animationCounter = 0;
-	pp.setVelocity(0.0f, 0.0f);
-	pp.setAccelerationX(0.0f);
-	pp.setAccelerationY(0.0f);
-	pp.setPosition(0.0f, 0.0f);
 }
 
 /*
@@ -51,6 +50,12 @@ void AnimatedSprite::changeFrame()
 	// GO BACK TO FIRST INDEX IF NECESSARY
 	if (frameIndex == spriteType->getSequenceSize(currentState))
 		frameIndex = 0;
+}
+
+void AnimatedSprite::setSpriteType(AnimatedSpriteType *initSpriteType) {
+	spriteType = initSpriteType;
+	width = spriteType->getTextureWidth();
+	height = spriteType->getTextureHeight();
 }
 
 /*
@@ -97,19 +102,4 @@ void AnimatedSprite::updateSprite()
 	// ANIMATION COUNTER HAS REACHED THE DURATION
 	if (animationCounter >= duration)
 		changeFrame();
-}
-
-void AnimatedSprite::affixTightAABBBoundingVolume()
-{
-	boundingVolume.setCenterX(pp.getX() + (spriteType->getTextureWidth()/2));
-	boundingVolume.setCenterY(pp.getY() + (spriteType->getTextureHeight()/2));
-	boundingVolume.setWidth((float)spriteType->getTextureWidth());
-	boundingVolume.setHeight((float)spriteType->getTextureHeight());
-}
-	
-
-void AnimatedSprite::correctToTightBoundingVolume()
-{
-	pp.setX(boundingVolume.getLeft());
-	pp.setY(boundingVolume.getTop());
 }

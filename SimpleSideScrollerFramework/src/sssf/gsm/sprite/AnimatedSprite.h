@@ -12,12 +12,11 @@
 #pragma once
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\physics\CollidableObject.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
+#include "sssf\gsm\world\World.h"
 #include "sssf\gui\Viewport.h"
 
-class AnimatedSprite : public CollidableObject
-{
+class AnimatedSprite : public CollidableObject {
 protected:
 	// SPRITE TYPE FOR THIS SPRITE. THE SPRITE TYPE IS THE ID
 	// OF AN AnimatedSpriteType OBJECT AS STORED IN THE SpriteManager
@@ -38,7 +37,6 @@ protected:
 
 	// USED TO ITERATE THROUGH THE CURRENT ANIMATION SEQUENCE
 	unsigned int animationCounter;
-
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
@@ -49,16 +47,13 @@ public:
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
 	{	alpha = initAlpha;						}
-	void setSpriteType(AnimatedSpriteType *initSpriteType)
-	{	spriteType = initSpriteType;			}
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
 	AnimatedSprite();
 	~AnimatedSprite();
+	void setSpriteType(AnimatedSpriteType *initSpriteType);
 	void changeFrame();
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);
 	void updateSprite();
-	void affixTightAABBBoundingVolume();
-	void correctToTightBoundingVolume();
 };

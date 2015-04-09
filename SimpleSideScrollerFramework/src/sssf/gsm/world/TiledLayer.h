@@ -17,7 +17,6 @@
 #include "sssf\gsm\world\WorldLayer.h"
 #include "sssf\gui\Viewport.h"
 #include "sssf\gsm\physics\CollidableObject.h"
-#include "sssf\gsm\physics\Physics.h"
 
 // THIS CLASS IS-A WorldLayer
 
@@ -38,9 +37,6 @@ protected:
 	int z;
 	// NOTE: z IS HERE IN CASE WE WANT TO LAYER SPRITES
 	// IN FRONT OF OR BEHIND LAYERS IN A GAME WORLD
-
-	// HELPER METHODS
-	void initOverlappingCellRange(AABB *aabb, int &startCol, int &endCol, int &startRow, int &endRow);
 
 public:
 	// INLINED ACCESSOR METHODS

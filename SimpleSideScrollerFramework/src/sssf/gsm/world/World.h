@@ -22,6 +22,9 @@
 #include "sssf\graphics\RenderList.h"
 #include "sssf\gsm\world\WorldLayer.h"
 
+#include "Box2D\Dynamics\b2World.h"
+#include "Box2D\Common\b2Math.h"
+
 class Game;
 class SpriteManager;
 
@@ -38,18 +41,27 @@ private:
 	// THESE ARE THE BACKGROUND LAYERS
 	vector<WorldLayer*> *layers;
 
+	b2Vec2* b2grav = new b2Vec2(0.0f, 9.8f);
+	b2World* b2world = new b2World(*b2grav);
 public:
 	// INLINED ACCESSOR METHODS
 	vector<WorldLayer*>*	getLayers()	{ return layers;				}
-	int						getNumLayers() { return layers->size(); }
-	int						getWorldHeight()	{ return worldHeight;			}
-	int						getWorldWidth()		{ return worldWidth;			}
+	int						getNumLayers() { return layers->size();		}
+	int						getWorldHeight()	{ return worldHeight;	}
+	int						getWorldWidth()		{ return worldWidth;	}
+	b2World*				getPWorld()			{ return b2world;		}
 
 	// INLINED MUTATOR METHODS
 	void setWorldHeight(int initWorldHeight)
-	{ worldHeight = initWorldHeight;		}
+	{ worldHeight = initWorldHeight;							}
 	void setWorldWidth(int initWorldWidth)
-	{ worldWidth = initWorldWidth;			}
+	{ worldWidth = initWorldWidth;								}
+	void setCollisionListener(b2ContactListener* initListener)
+	{ b2world->SetContactListener(initListener);				}
+	void setGravity(float initGravity) {
+		b2grav = new b2Vec2(0.0f, initGravity);
+		b2world->SetGravity(*b2grav);
+	}
 
 	// METHODS DEFINED in GameStateManager.cpp
 	World();

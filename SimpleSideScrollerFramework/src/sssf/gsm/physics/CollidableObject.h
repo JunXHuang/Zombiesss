@@ -1,7 +1,9 @@
 #pragma once
 #include "sssf_VS\stdafx.h"
-#include "sssf\gsm\physics\AABB.h"
-#include "sssf\gsm\physics\PhysicalProperties.h"
+#include "sssf\gsm\world\World.h"
+
+#include "Box2D\Box2D.h"
+#include "Box2D\Dynamics\b2Body.h"
 
 // THESE ARE THE SWEEP AND PRUNE ORDERINGS
 const unsigned int LEFT_EDGE = 0;
@@ -12,49 +14,36 @@ const unsigned int BOTTOM_EDGE = 3;
 class CollidableObject
 {
 protected:
-	AABB boundingVolume;
-	bool currentlyCollidable;
-	AABB sweptShape;
-	unsigned int sweepAndPruneIndices[4];
-	PhysicalProperties pp;
-	bool onTileThisFrame;
-	bool onTileLastFrame;
-	unsigned int collisionEdge;
+	b2BodyDef* bodyDef;
+	b2Body* body;
+
+	float width;
+	float height;
+	float density;
 
 public:
 	CollidableObject()	{}
 	~CollidableObject()	{}
 
-	// CollidableObject.cpp METHODS
-	void updateSweptShape(float percentageOfFrameTimeRemaining);
+	float getX() { return body->GetPosition().x; }
+	float getY() { return body->GetPosition().y; }
+	float getVelocityX() { return body->GetLinearVelocity().x; }
+	float getVelocityY() { return body->GetLinearVelocity().y; }
+	float getWidth() { return width; }
+	float getHeight() { return height; }
 
-	// INLINED METHODS
-	bool				isCurrentlyCollidable()		{ return currentlyCollidable;	}
-	bool				isOnTileThisFrame()			{ return onTileThisFrame;		}
-	bool				wasOnTileLastFrame()		{ return onTileLastFrame;		}
-	AABB*				getBoundingVolume()			{ return &boundingVolume;		}
-	AABB*				getSweptShape()				{ return &sweptShape;			}
-	PhysicalProperties* getPhysicalProperties()		{ return &pp;					}
-	unsigned int		getCollisionEdge()			{ return collisionEdge;			}
-
-	void				setCollisionEdge(unsigned int initCollisionEdge)
-	{	collisionEdge = initCollisionEdge; }
-	unsigned int		getSweepAndPruneIndex(unsigned int sweepAndPruneOrdering)		
-	{ return sweepAndPruneIndices[sweepAndPruneOrdering];	}
-	void				setSweepAndPruneIndex(unsigned int sweepAndPruneOrdering, unsigned int index)
-	{ sweepAndPruneIndices[sweepAndPruneOrdering] = index;  }
-
-	void setCurrentlyCollidable(bool initCurrentlyCollidable)
-	{	currentlyCollidable = initCurrentlyCollidable; }
-	void setOnTileThisFrame(bool initOnTileThisFrame)
-	{	onTileThisFrame = initOnTileThisFrame; }
-	void setOnTileLastFrame(bool initOnTileLastFrame)
-	{	onTileLastFrame = initOnTileLastFrame; }
-
-	void advanceOnTileStatus()
-	{
-		onTileLastFrame = onTileThisFrame;
-		onTileThisFrame = false;
+	void setPosition(float initX, float initY) {
+		b2Vec2 position = body->GetPosition();
+		position.x = initX;
+		position.y = initY;
+		body->SetTransform(position, 0.0f);
+	}
+	void setVelocity(float initX, float initY) {
+		b2Vec2 velocity = body->GetLinearVelocity();
+		velocity.x = initX;
+		velocity.y = initY;
+		body->SetLinearVelocity(velocity);
 	}
 
+	void applyPhysics(World* world);
 };

@@ -40,7 +40,6 @@
 */
 #pragma once
 #include "sssf_VS\stdafx.h"
-#include "sssf\gsm\physics\CollidableObject.h"
 #include <list>
 #include <vector>
 
@@ -48,6 +47,7 @@
 class RenderList;
 class Viewport;
 class Physics;
+class CollidableObject;
 
 class WorldLayer
 {

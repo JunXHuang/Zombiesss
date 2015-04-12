@@ -12,9 +12,12 @@
 #include "sssf\game\Game.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\graphics\RenderList.h"
+#include "sssf\gsm\world\World.h"
 #include "sssf\gsm\world\Tile.h"
 #include "sssf\gsm\world\TiledLayer.h"
 #include "sssf\gui\Viewport.h"
+
+#include <iostream>
 
 /*
 	TiledLayer - Constructor, it initializes the data structures
@@ -144,8 +147,30 @@ void TiledLayer::addRenderItemsToRenderList(RenderList *renderList,
 	not before. Trying to set a tile that hasn't been added
 	will result in an exception being thrown.
 */
-void TiledLayer::addTile(Tile *initTile)
+void TiledLayer::addTile(Game *game, Tile *initTile)
 {
+	if (initTile->collidable) {
+		b2World* world = game->getGSM()->getWorld()->getPWorld();
+
+		int index = tileLayout->size();
+		int row = index / columns;
+		int col = index % columns;
+		float width = tileWidth / PIXELS_PER_METER;
+		float height = tileHeight / PIXELS_PER_METER;
+
+		b2BodyDef* bodyDef = new b2BodyDef();
+		bodyDef->type = b2_staticBody;
+		bodyDef->position.Set(col*width, row*height);
+		initTile->body = world->CreateBody(bodyDef);
+		initTile->body->CreateFixture(fixDef);
+		initTile->body->SetUserData(initTile);
+
+		/*ofstream myfile;
+		myfile.open("debug.txt", std::ios::app);
+		myfile << "blocked at (" << col*width << "," << row*height << "," << col*width + width << "," << row*height + height << ")\n";
+		myfile.close();*/
+	}
+
 	tileLayout->push_back(initTile);
 }
 
@@ -272,6 +297,14 @@ void TiledLayer::init(int initColumns,
 	tileLayout = new vector<Tile*>();
 	calculateAndSetLayerWidth();
 	calculateAndSetLayerHeight();
+
+	b2PolygonShape* fixBox = new b2PolygonShape();
+	fixBox->SetAsBox(tileWidth / 2.0f / PIXELS_PER_METER, tileHeight / 2.0f / PIXELS_PER_METER);
+	fixDef = new b2FixtureDef();
+	fixDef->shape = fixBox;
+	fixDef->density = 0.0f;
+	fixDef->friction = 0.5f;
+	fixDef->restitution = 0.0f;
 }
 
 /*

@@ -26,7 +26,7 @@ private:
 
 	// THESE ARE THE BOTS IN THE GAME, LIKE ENEMIES, ROCKETS, OR ANYTHING
 	// THAT MOVES AROUND AND IS NOT THE PLAYER
-
+	//list<Bot*> bots;
 	struct Btree{
 		list<Bot*> bots;
 		Btree* next[2];

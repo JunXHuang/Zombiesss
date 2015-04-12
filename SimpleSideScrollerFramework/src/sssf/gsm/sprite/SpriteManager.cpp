@@ -33,8 +33,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 	if (viewport->areWorldCoordinatesInViewport(
 		sprite->getX(),
 		sprite->getY(),
-		spriteType->getTextureWidth(),
-		spriteType->getTextureHeight()))
+		sprite->getSpriteType()->getTextureWidth(),
+		sprite->getSpriteType()->getTextureHeight()))
 	{
 		// SINCE IT'S VIEWABLE, ADD IT TO THE RENDER LIST
 		RenderItem itemToAdd;
@@ -44,8 +44,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 			(int)(sprite->getY() - viewport->getViewportY() + 0.5),
 			0,
 			sprite->getAlpha(),
-			spriteType->getTextureWidth(),
-			spriteType->getTextureHeight());
+			sprite->getSpriteType()->getTextureWidth(),
+			sprite->getSpriteType()->getTextureHeight());
 	}
 }
 

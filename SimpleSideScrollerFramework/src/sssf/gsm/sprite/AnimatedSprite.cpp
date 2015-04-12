@@ -54,8 +54,8 @@ void AnimatedSprite::changeFrame()
 
 void AnimatedSprite::setSpriteType(AnimatedSpriteType *initSpriteType) {
 	spriteType = initSpriteType;
-	width = spriteType->getTextureWidth();
-	height = spriteType->getTextureHeight();
+
+	fixDef = spriteType->getFixtureDef();
 }
 
 /*

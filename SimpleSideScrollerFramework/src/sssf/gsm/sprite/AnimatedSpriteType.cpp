@@ -10,6 +10,7 @@
 
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
+#include "sssf\gsm\world\World.h"
 
 /*
 	AnimatedSpriteType - Nothing to construct. Note that the vectors storing
@@ -30,6 +31,19 @@ AnimatedSpriteType::~AnimatedSpriteType()
 
 }
 
+void AnimatedSpriteType::setTextureSize(int initTextureWidth, int initTextureHeight)
+{
+	textureWidth = initTextureWidth;
+	textureHeight = initTextureHeight;
+
+	b2PolygonShape* dynamicBox = new b2PolygonShape();
+	dynamicBox->SetAsBox(textureWidth / 2.0f / PIXELS_PER_METER, textureHeight / 2.0f / PIXELS_PER_METER);
+	fixDef = new b2FixtureDef();
+	fixDef->shape = dynamicBox;
+	fixDef->density = 1.0f;
+	fixDef->friction = 0.3f;
+	fixDef->restitution = 0.0f;
+}
 /*
 	addAnimationFrame - This method is for adding an animation (image,duration) tuple to
 	an existing animation state for this type of sprite.

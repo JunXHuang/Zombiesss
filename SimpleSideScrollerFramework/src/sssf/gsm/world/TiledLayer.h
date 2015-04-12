@@ -35,6 +35,7 @@ protected:
 	int layerWidth;
 	int layerHeight;
 	int z;
+	b2FixtureDef* fixDef;
 	// NOTE: z IS HERE IN CASE WE WANT TO LAYER SPRITES
 	// IN FRONT OF OR BEHIND LAYERS IN A GAME WORLD
 
@@ -59,7 +60,7 @@ public:
 				int initWorldWidth, int initWorldHeight);
 	~TiledLayer();
 	void	addRenderItemsToRenderList(RenderList *renderList, Viewport *viewport);
-	void	addTile(Tile *initTile);
+	void	addTile(Game *game, Tile *initTile);
 	int		calculateAndSetLayerHeight();
 	int		calculateAndSetLayerWidth();
 	int		calculateViewportEndColumn(int viewportX, int viewportWidth);

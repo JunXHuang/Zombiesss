@@ -27,6 +27,7 @@ public:
 
 	// DEFINED IN BugginOutTextGenerator.cpp
 	void appendMouseCoords(Game *game);
+	void appendPlayerInfo(Game *game);
 	void initText(Game *game);
 	void updateText(Game *game);
 };

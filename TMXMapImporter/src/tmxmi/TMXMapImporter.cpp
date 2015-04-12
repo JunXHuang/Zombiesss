@@ -8,6 +8,9 @@
 #include "sssf\gsm\state\GameStateManager.h"
 #include "xmlfi\XMLFileImporter.h"
 
+#include "Box2D\Box2D.h"
+#include "Box2D\Dynamics\b2Body.h"
+
 bool TMXMapImporter::loadWorld(Game *game, wstring initDir, wstring mapLevelFileName)
 {
 	dir = initDir;
@@ -279,7 +282,7 @@ bool TMXMapImporter::buildWorldFromInfo(Game *game)
 			imageTile->collidable = ili.collidable;
 			wstring imageSourceW(ili.imageSource.begin(), ili.imageSource.end());
 			imageTile->textureID = worldTextureManager->loadTexture(dir + imageSourceW);
-			imageLayerToAdd->addTile(imageTile);
+			imageLayerToAdd->addTile(game, imageTile);
 	
 			iliIt++;
 		}
@@ -303,8 +306,6 @@ bool TMXMapImporter::buildWorldFromInfo(Game *game)
 			world->addLayer(tiledLayerToAdd);
 
 			// WE HAVE TO ADD ALL THE TILES
-			int row = 0;
-			int col = 0;
 			int uncollidableIndex = tli.tileSetInfo->firstgid;
 			for (unsigned int i = 0; i < tli.gids.size(); i++)
 			{
@@ -314,7 +315,7 @@ bool TMXMapImporter::buildWorldFromInfo(Game *game)
 					tileToAdd->collidable = false;
 				else
 					tileToAdd->collidable = tli.collidable;
-				tiledLayerToAdd->addTile(tileToAdd);
+				tiledLayerToAdd->addTile(game, tileToAdd);
 			}
 			tliIt++;
 		}

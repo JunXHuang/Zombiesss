@@ -25,6 +25,8 @@
 #include "Box2D\Dynamics\b2World.h"
 #include "Box2D\Common\b2Math.h"
 
+static const float PIXELS_PER_METER = 32.0f;
+
 class Game;
 class SpriteManager;
 

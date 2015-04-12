@@ -19,6 +19,8 @@
 #include "sssf\platforms\Windows\WindowsTimer.h"
 
 static const wstring	W_MOUSE_COORDS_TEXT = L"Mouse: (";
+static const wstring	W_PLAYER_POSITION_TEXT = L"Player Position: (";
+static const wstring	W_PLAYER_VELOCITY_TEXT = L"Player Velocity: (";
 static const int		W_TEXT_X = 200;
 static const int		W_TEXT_Y = 10;
 
@@ -35,6 +37,28 @@ void BugginOutTextGenerator::appendMouseCoords(Game *game)
 	textToGenerate.append(wss.str());
 }
 
+void BugginOutTextGenerator::appendPlayerInfo(Game *game)
+{
+	wstringstream wss1;
+	wstringstream wss2;
+	CollidableObject* player = game->getGSM()->getSpriteManager()->getPlayer();
+	if (!player->isPhysicsSet()) return;
+	textToGenerate.append(W_PLAYER_POSITION_TEXT);
+	wss1 << (int)player->getX();
+	wss1 << L", ";
+	wss1 << (int)player->getY();
+	wss1 << L")";
+	wss1 << L"\n";
+	textToGenerate.append(wss1.str());
+	textToGenerate.append(W_PLAYER_VELOCITY_TEXT);
+	wss2 << (int)player->getVelocityX();
+	wss2 << L", ";
+	wss2 << (int)player->getVelocityY();
+	wss2 << L")";
+	wss2 << L"\n";
+	textToGenerate.append(wss2.str());
+}
+
 /*
 	initText - Provides an example of how to render text to our screen every frame,
 	allowing for the text to continually change. This method adds a text object
@@ -45,6 +69,7 @@ void BugginOutTextGenerator::initText(Game *game)
 {
 	// FIRST UPDATE THE TEXT THIS GENERATOR IS USING
 	appendMouseCoords(game);
+	appendPlayerInfo(game);
 
 	// AND THEN HAND IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	GameText *text = game->getText();
@@ -63,4 +88,5 @@ void BugginOutTextGenerator::updateText(Game *game)
 	// WHAT WE WANT.
 	textToGenerate.clear();
 	appendMouseCoords(game);
+	appendPlayerInfo(game);
 }

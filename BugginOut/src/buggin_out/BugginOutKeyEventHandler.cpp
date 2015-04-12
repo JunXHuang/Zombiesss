@@ -72,7 +72,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDownForFirstTime(SPACE_KEY))
 		{
-			if (player->getVelocityY() == 0.0f)
+			if ((int)player->getVelocityY() == 0)
 			{
 				vY = JUMP_SPEED;
 			}
@@ -117,6 +117,26 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			viewportMoved = true;
 		}
 		Viewport *viewport = game->getGUI()->getViewport();
+
+		if (!viewportMoved) {
+			//check if viewport is not on player
+			float pX = player->getX() + (player->getSpriteType()->getTextureWidth() / 2);
+			float pY = player->getY() + (player->getSpriteType()->getTextureHeight() / 2);
+			float centerX = viewport->getViewportX() + (viewport->getViewportWidth() / 2);
+			float centerY = viewport->getViewportY() + (viewport->getViewportHeight() / 2);
+			if (pX != centerX || pY != centerY) {
+				//viewport not on player, move to player.
+				if (centerY > pY)
+					viewportVy -= min(MAX_VIEWPORT_AXIS_VELOCITY, fabs(centerY - pY));
+				if (centerY < pY)
+					viewportVy += min(MAX_VIEWPORT_AXIS_VELOCITY, fabs(centerY - pY));
+				if (centerX > pX)
+					viewportVx -= min(MAX_VIEWPORT_AXIS_VELOCITY, fabs(centerX - pX));
+				if (centerX < pX)
+					viewportVx += min(MAX_VIEWPORT_AXIS_VELOCITY, fabs(centerX - pX));
+				viewportMoved = true;
+			}
+		}
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx+0.5f), (int)floor(viewportVy+0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
 		

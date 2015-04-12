@@ -11,6 +11,7 @@
 #include "sssf_VS\stdafx.h"
 #include "sssf\data_loader\GameDataLoader.h"
 #include "sssf\game\Game.h"
+#include "sssf\timer\GameTimer.h"
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\graphics\RenderList.h"
 #include "sssf\graphics\TextureManager.h"
@@ -19,6 +20,10 @@
 #include "sssf\gsm\world\World.h"
 #include "sssf\gui\Viewport.h"
 
+
+void draw(void) {
+
+}
 /*
 	World - Default Constructor, it constructs the layers
 	vector, allowing new layers to be added.
@@ -28,6 +33,8 @@ World::World()
 	layers = new vector<WorldLayer*>();
 	worldWidth = 0;
 	worldHeight = 0;
+	b2world->SetAllowSleeping(true);
+	b2world->SetContinuousPhysics(true);
 }
 
 /*
@@ -97,5 +104,5 @@ void World::unloadWorld()
 */
 void World::update(Game *game)
 {
-	b2world->Step(1.0f, 10, 10);
+	b2world->Step(0.2f, 6, 2);
 }

@@ -13,4 +13,5 @@ class Tile
 public:
 	int textureID;
 	bool collidable;
+	b2Body* body;
 };

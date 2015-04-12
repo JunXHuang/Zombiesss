@@ -5,45 +5,36 @@
 #include "Box2D\Box2D.h"
 #include "Box2D\Dynamics\b2Body.h"
 
-// THESE ARE THE SWEEP AND PRUNE ORDERINGS
-const unsigned int LEFT_EDGE = 0;
-const unsigned int RIGHT_EDGE = 1;
-const unsigned int TOP_EDGE = 2;
-const unsigned int BOTTOM_EDGE = 3;
-
 class CollidableObject
 {
 protected:
 	b2BodyDef* bodyDef;
+	b2FixtureDef* fixDef;
 	b2Body* body;
-
-	float width;
-	float height;
-	float density;
-
+	bool physics = false;
 public:
 	CollidableObject()	{}
 	~CollidableObject()	{}
 
-	float getX() { return body->GetPosition().x; }
-	float getY() { return body->GetPosition().y; }
-	float getVelocityX() { return body->GetLinearVelocity().x; }
-	float getVelocityY() { return body->GetLinearVelocity().y; }
-	float getWidth() { return width; }
-	float getHeight() { return height; }
+	float getX() { return body->GetPosition().x * PIXELS_PER_METER; }
+	float getY() { return body->GetPosition().y * PIXELS_PER_METER; }
+	float getVelocityX() { return body->GetLinearVelocity().x * PIXELS_PER_METER; }
+	float getVelocityY() { return body->GetLinearVelocity().y * PIXELS_PER_METER; }
+	float isPhysicsSet() { return physics; }
 
 	void setPosition(float initX, float initY) {
-		b2Vec2 position = body->GetPosition();
-		position.x = initX;
-		position.y = initY;
+		b2Vec2 position;
+		position.x = initX / PIXELS_PER_METER;
+		position.y = initY / PIXELS_PER_METER;
 		body->SetTransform(position, 0.0f);
 	}
 	void setVelocity(float initX, float initY) {
-		b2Vec2 velocity = body->GetLinearVelocity();
-		velocity.x = initX;
-		velocity.y = initY;
+		b2Vec2 velocity;
+		velocity.x = initX / PIXELS_PER_METER;
+		velocity.y = initY / PIXELS_PER_METER;
 		body->SetLinearVelocity(velocity);
 	}
 
+	void applyPhysics(World* world, float initX, float initY);
 	void applyPhysics(World* world);
 };

@@ -13,6 +13,7 @@
 
 #pragma once
 #include "sssf_VS\stdafx.h"
+#include "Box2D\Box2D.h"
 
 class AnimatedSpriteType
 {
@@ -31,23 +32,24 @@ private:
 	// WIDTH & HEIGHT OF TEXTURES
 	int textureHeight, textureWidth;
 
+	b2FixtureDef* fixDef;
+
 public:
 	// INLINED ACCESSOR METHODS
 	unsigned int getSequenceSize(wstring state)	{ return animationSequences[state]->size();		}
 	unsigned int getSpriteTypeID()				{ return spriteTypeID;							}
 	int	getTextureHeight()						{ return textureHeight;							}
 	int	getTextureWidth()						{ return textureWidth;							}
+	b2FixtureDef* getFixtureDef()				{ return fixDef;								}
 
 	// INLINED MUTATOR METHODS
 	void setSpriteTypeID(int initSpriteTypeID)
 	{	spriteTypeID = initSpriteTypeID;							}
-	void setTextureSize(int initTextureWidth,	int initTextureHeight)
-	{	textureWidth = initTextureWidth;
-		textureHeight = initTextureHeight;							}
 
 	// METHODS DEFINED IN AnimatedSpriteType.cpp
 	AnimatedSpriteType();
 	~AnimatedSpriteType();
+	void			setTextureSize(int initTextureWidth, int initTextureHeight);
 	void			addAnimationFrame(wstring animationState, unsigned int imageId, unsigned int duration);
 	void			addAnimationSequence(wstring animationState);
 	unsigned int	getAnimationFrameID(wstring animationState, int frameIndex);

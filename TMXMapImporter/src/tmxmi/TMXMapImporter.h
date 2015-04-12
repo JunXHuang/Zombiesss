@@ -4,6 +4,7 @@
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
 #include "sssf\game\Game.h"
+#include "sssf\gsm\world\World.h"
 #include "sssf\gsm\state\GameStateManager.h"
 #include "xmlfi\XMLFileImporter.h"
 

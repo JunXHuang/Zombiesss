@@ -116,7 +116,7 @@ void SpriteManager::addBot(Game *game, Bot *botToAdd)
 	//bots.push_back(botToAdd);
 	Btree *temp = bots;
 	bool ran = false;
-	int x = botToAdd->getX(), num;
+	int x =(int)botToAdd->getX(), num;
 	int WorldX = game->getGSM()->getWorld()->getWorldWidth();
 	//Adding bot to 3/4 to 1 of the map
 	num = WorldX;

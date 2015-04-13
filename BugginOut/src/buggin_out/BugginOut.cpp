@@ -42,7 +42,7 @@
 // DIRECTX INCLUDES
 #include "sssf\platforms\DirectX\DirectXGraphics.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
-#include "Box2D\Box2D.h"
+#include "Box2D.h"
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 

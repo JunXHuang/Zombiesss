@@ -122,8 +122,8 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			//check if viewport is not on player
 			float pX = player->getX() + (player->getSpriteType()->getTextureWidth() / 2);
 			float pY = player->getY() + (player->getSpriteType()->getTextureHeight() / 2);
-			float centerX = viewport->getViewportX() + (viewport->getViewportWidth() / 2);
-			float centerY = viewport->getViewportY() + (viewport->getViewportHeight() / 2);
+			float centerX = (float)viewport->getViewportX() + (viewport->getViewportWidth() / 2);
+			float centerY = (float)viewport->getViewportY() + (viewport->getViewportHeight() / 2);
 			if (pX != centerX || pY != centerY) {
 				//viewport not on player, move to player.
 				if (centerY > pY)

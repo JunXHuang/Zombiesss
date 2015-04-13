@@ -1,15 +1,14 @@
 #include "tmxmi_VS\stdafx.h"
 #include "tmxmi\TMXMapImporter.h"
-#include "tinyxml\tinystr.h";
-#include "tinyxml\tinyxml.h";
+#include "tinyxml\tinystr.h"
+#include "tinyxml\tinyxml.h"
 #include "sssf\game\Game.h"
 #include "sssf\gsm\world\TiledLayer.h"
 #include "sssf\gsm\world\Tile.h"
 #include "sssf\gsm\state\GameStateManager.h"
 #include "xmlfi\XMLFileImporter.h"
 
-#include "Box2D\Box2D.h"
-#include "Box2D\Dynamics\b2Body.h"
+#include "Box2D.h"
 
 bool TMXMapImporter::loadWorld(Game *game, wstring initDir, wstring mapLevelFileName)
 {

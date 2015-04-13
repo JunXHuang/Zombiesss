@@ -2,8 +2,7 @@
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\world\World.h"
 
-#include "Box2D\Box2D.h"
-#include "Box2D\Dynamics\b2Body.h"
+#include "Box2D.h"
 
 class CollidableObject
 {

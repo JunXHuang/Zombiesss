@@ -163,7 +163,6 @@ void TiledLayer::addTile(Game *game, Tile *initTile)
 		bodyDef->position.Set(col*width, row*height);
 		initTile->body = world->CreateBody(bodyDef);
 		initTile->body->CreateFixture(fixDef);
-		initTile->body->SetUserData(initTile);
 
 		/*ofstream myfile;
 		myfile.open("debug.txt", std::ios::app);

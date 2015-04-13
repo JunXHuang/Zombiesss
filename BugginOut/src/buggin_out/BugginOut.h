@@ -9,8 +9,8 @@
 */
 
 // HERE IS THE BugginOut GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
-static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerDesert/";
-static const wstring	W_LEVEL_1_NAME			= L"SideScrollerDesertLevel.tmx";
+static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
+static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
 static const wstring	W_INIT_FILE				= L"data/ZombiesssInit.txt";
 static const wstring	W_GUI_INIT_FILE			= L"data/BugginOutGUI.txt";

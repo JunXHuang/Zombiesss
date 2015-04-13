@@ -178,7 +178,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSprite *player = spriteManager->getPlayer();
 
 	// NOTE THAT RED BOX MAN IS SPRITE ID 2
-	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(2);
+	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(0);
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
@@ -193,6 +193,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	for (int i = 2; i <= 26; i++)
 	{
+		botSpriteType = spriteManager->getSpriteType((i%3)+1);
 		float botX = 400.0f + (i * 100.0f);
 		float botY = 100.0f;
 		makeRandomJumpingBot(game, botSpriteType, botX, botY);
@@ -213,8 +214,10 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	makeRandomJumpingBot(game, botSpriteType, 700, 1400);
 
 	// AND THEN A BUNCH LINED UP NEAR THE LEVEL EXIT
-	for (int i = 0; i < 14; i++)
+	for (int i = 0; i < 14; i++){
+		botSpriteType = spriteManager->getSpriteType((i % 3)+1);
 		makeRandomJumpingBot(game, botSpriteType, 1700.0f + (i*100.0f), 1300.0f);
+	}
 
 }
 

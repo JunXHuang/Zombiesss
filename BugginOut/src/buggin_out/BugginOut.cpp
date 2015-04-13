@@ -102,7 +102,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	delete (BugginOutTextGenerator*)bugginOutGame->getText()->getTextGenerator();
 	delete bugginOutButtonHandler;
 	delete bugginOutKeyHandler;
-	delete bugginOutGame;
+	delete bugginOutDataLoader;
+	//delete bugginOutGame;
 
 	// AND RETURN
 	return 0;

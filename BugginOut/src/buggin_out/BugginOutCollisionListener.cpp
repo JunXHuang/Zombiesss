@@ -9,14 +9,30 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 
 	//check if fixture A was a ball
 	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+	AnimatedSprite *Obj1=NULL,*Obj2=NULL;
 	if (bodyUserData)
-		static_cast<Bot*>(bodyUserData);
+		Obj1 = static_cast<AnimatedSprite*>(bodyUserData);
 
 	//check if fixture B was a ball
 	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
 	if (bodyUserData)
-		static_cast<Bot*>(bodyUserData);
-
+		Obj2 = static_cast<AnimatedSprite*>(bodyUserData);
+	if (Obj1){
+		//Player
+		if (Obj1->getSpriteType()->getSpriteTypeID() == 2){}
+		//Bot
+		else{
+			if (!Obj2){}
+		}
+	}
+	if (Obj2){
+		//Player
+		if (Obj2->getSpriteType()->getSpriteTypeID() == 2){}
+		//Bot
+		else{
+			if (!Obj1){}
+		}
+	}
 }
 
 void BugginOutCollisionListener::EndContact(b2Contact* contact) {

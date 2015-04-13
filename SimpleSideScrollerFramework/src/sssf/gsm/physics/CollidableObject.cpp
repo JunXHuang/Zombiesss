@@ -1,20 +1,16 @@
 #include "sssf_VS\stdafx.h"
 
 #include "sssf\gsm\physics\CollidableObject.h"
+#include "sssf\gsm\state\GameStateManager.h"
 
-void CollidableObject::applyPhysics(World* world, float initX, float initY)
+void CollidableObject::applyPhysics(Game* game)
 {
 	bodyDef = new b2BodyDef();
 	bodyDef->type = b2_dynamicBody;
-	bodyDef->position.Set(initX / PIXELS_PER_METER, initY / PIXELS_PER_METER);
-	body = world->getPWorld()->CreateBody(bodyDef);
+	bodyDef->position.Set(0.0f, 0.0f);
+	body = game->getGSM()->getWorld()->getPWorld()->CreateBody(bodyDef);
 	body->CreateFixture(fixDef);
 	body->SetUserData(this);
 
 	physics = true;
-}
-
-void CollidableObject::applyPhysics(World* world)
-{
-	applyPhysics(world, 0.0f, 0.0f);
 }

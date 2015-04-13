@@ -160,14 +160,9 @@ void TiledLayer::addTile(Game *game, Tile *initTile)
 
 		b2BodyDef* bodyDef = new b2BodyDef();
 		bodyDef->type = b2_staticBody;
-		bodyDef->position.Set(col*width, row*height);
+		bodyDef->position.Set((col*width) + (width/2), (row*height) + (height/2));
 		initTile->body = world->CreateBody(bodyDef);
 		initTile->body->CreateFixture(fixDef);
-
-		/*ofstream myfile;
-		myfile.open("debug.txt", std::ios::app);
-		myfile << "blocked at (" << col*width << "," << row*height << "," << col*width + width << "," << row*height + height << ")\n";
-		myfile.close();*/
 	}
 
 	tileLayout->push_back(initTile);

@@ -172,8 +172,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	// LET'S MAKE A PLAYER SPRITE
 	// @TODO - IT WOULD BE BETTER TO LOAD THIS STUFF FROM A FILE
 	GameStateManager *gsm = game->getGSM();
-	World *world = gsm->getWorld();
-	world->setGravity(W_GRAVITY);
+	game->getGSM()->getWorld()->setGravity(W_GRAVITY);
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	AnimatedSprite *player = spriteManager->getPlayer();
 
@@ -182,7 +181,8 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
-	player->applyPhysics(world, PLAYER_INIT_X, PLAYER_INIT_Y);
+	player->applyPhysics(game);
+	player->setPosition(PLAYER_INIT_X, PLAYER_INIT_Y);
 	player->setVelocity(0.0f, 0.0f);
 
 	AnimatedSpriteType *botSpriteType = spriteManager->getSpriteType(1);
@@ -224,12 +224,12 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
 {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
-	World *world = game->getGSM()->getWorld();
 	RandomJumpingBot *bot = new RandomJumpingBot(30, 120, 128);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);
 	bot->setCurrentState(JUMPING);
-	bot->applyPhysics(world, initX, initY);
+	bot->applyPhysics(game);
+	bot->setPosition(initX, initY);
 	spriteManager->addBot(game, bot);
 }
 

@@ -10,21 +10,27 @@ protected:
 	b2BodyDef* bodyDef;
 	b2FixtureDef* fixDef;
 	b2Body* body;
+
+	float width, height;
 	bool physics = false;
 public:
 	CollidableObject()	{}
 	~CollidableObject()	{}
 
-	float getX() { return body->GetPosition().x * PIXELS_PER_METER; }
-	float getY() { return body->GetPosition().y * PIXELS_PER_METER; }
+	float getX() {
+		return (body->GetPosition().x * PIXELS_PER_METER) - (width / 2);
+	}
+	float getY() {
+		return (body->GetPosition().y * PIXELS_PER_METER) - (height / 2);
+	}
 	float getVelocityX() { return body->GetLinearVelocity().x * PIXELS_PER_METER; }
 	float getVelocityY() { return body->GetLinearVelocity().y * PIXELS_PER_METER; }
 	float isPhysicsSet() { return physics; }
 
 	void setPosition(float initX, float initY) {
 		b2Vec2 position;
-		position.x = initX / PIXELS_PER_METER;
-		position.y = initY / PIXELS_PER_METER;
+		position.x = (initX + (width/2)) / PIXELS_PER_METER;
+		position.y = (initY + (height/2)) / PIXELS_PER_METER;
 		body->SetTransform(position, 0.0f);
 	}
 	void setVelocity(float initX, float initY) {
@@ -34,6 +40,5 @@ public:
 		body->SetLinearVelocity(velocity);
 	}
 
-	void applyPhysics(World* world, float initX, float initY);
-	void applyPhysics(World* world);
+	void applyPhysics(Game* game);
 };

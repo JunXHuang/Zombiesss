@@ -38,7 +38,7 @@
    </animation_sequence>
   </animation_state>
   <animation_state>
-   <state>BOUNCING</state>
+   <state>JUMPING</state>
    <animation_sequence>
     <pose image_id="3" duration="4"/>
     <pose image_id="4" duration="4"/>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite_type>
+    <!-- <image_config>SEPARATED</image_config> -->
+    <width>64</width>
+    <height>64</height>
+    <images_list>
+        <image_file id="1" file_name="player_idle.png"/>
+        <image_file id="2" file_name="player_right1.png"/>
+        <image_file id="3" file_name="player_right2.png"/>
+        <image_file id="4" file_name="player_right3.png"/>
+        <image_file id="5" file_name="player_left1.png"/>
+        <image_file id="6" file_name="player_left2.png"/>
+        <image_file id="7" file_name="player_left3.png"/>
+    </images_list>
+    <animations_list>
+        <animation_state>
+            <state>IDLE</state>
+            <animation_sequence>
+                <pose image_id="1" duration="20"/>
+            </animation_sequence>
+        </animation_state>
+    <animation_state>
+            <state>JUMPING</state>
+            <animation_sequence>
+                <pose image_id="1" duration="10"/>
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>ATTACKING_RIGHT</state>
+            <animation_sequence>
+                <pose image_id="2" duration="1"/>
+                <pose image_id="3" duration="2"/>
+                <pose image_id="4" duration="1"/>
+                <pose image_id="3" duration="3"/>
+            </animation_sequence>
+        </animation_state>
+		<animation_state>
+            <state>ATTACKING_LEFT</state>
+            <animation_sequence>
+                <pose image_id="5" duration="1"/>
+                <pose image_id="6" duration="2"/>
+                <pose image_id="7" duration="1"/>
+                <pose image_id="6" duration="3"/>
+            </animation_sequence>
+        </animation_state>
+    </animations_list>  
+</sprite_type>

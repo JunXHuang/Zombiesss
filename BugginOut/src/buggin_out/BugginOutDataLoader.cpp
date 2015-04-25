@@ -10,7 +10,7 @@
 // GAME OBJECT INCLUDES
 #include "sssf\game\Game.h"
 #include "sssf\graphics\GameGraphics.h"
-#include "sssf\gsm\ai\bots\RandomJumpingBot.h"
+#include "sssf\gsm\ai\Bot.h"
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\world\TiledLayer.h"
 #include "sssf\gui\Cursor.h"
@@ -224,7 +224,9 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
 {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
-	RandomJumpingBot *bot = new RandomJumpingBot(30, 120, 128);
+	string keys[] = { "initMin", "initMax", "initVel" };
+	string vals[] = { "30", "120", "128" };
+	Bot *bot = new Bot(W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);
 	bot->setCurrentState(JUMPING);

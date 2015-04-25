@@ -10,6 +10,7 @@
 
 // HERE IS THE BugginOut GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
+static const string		W_JUMP_BOT_FILE			= "data/bots/RandomJumpingBot.lua";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
 static const wstring	W_INIT_FILE				= L"data/ZombiesssInit.txt";

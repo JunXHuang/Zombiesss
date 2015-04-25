@@ -1,16 +1,20 @@
 #pragma once
-
 #include "sssf_VS\stdafx.h"
 #include "sssf\game\Game.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
+#include "LuaPlus.h"
 
-class Bot : public AnimatedSprite
-{
+class Bot : public AnimatedSprite {
+protected:
+	LuaPlus::LuaState* luaState;
+	void init(string fileName);
+private:
+	Bot(LuaPlus::LuaState* initState) { luaState = initState; }
 public:
-	Bot()	{}
-	~Bot()	{}
+	Bot(string fileName, int argc, string argk[], string argv[]);
+	Bot(string fileName, int argc, string argv[]);
+	~Bot();
 
-	// TO BE DEFINED BY BOT AI CLASSES
-	virtual void think(Game *game)=0;
-	virtual Bot* clone()=0;
+	void think(Game *game);
+	Bot* clone() { return new Bot(luaState); }
 };

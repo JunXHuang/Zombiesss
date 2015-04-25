@@ -221,6 +221,7 @@ void SpriteManager::update(Game *game)
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 
+	
 	// NOW UPDATE THE REST OF THE SPRITES
 
 	Btree *temp = bots;
@@ -229,6 +230,7 @@ void SpriteManager::update(Game *game)
 	{
 		Bot *bot = temp->bots.front();
 		bot->think(game);
+		MoveBot(bot);
 		bot->updateSprite();
 		temp->bots.pop_front();
 		addBot(game, bot);
@@ -240,6 +242,7 @@ void SpriteManager::update(Game *game)
 		{
 			Bot *bot = temp->bots.front();
 			bot->think(game);
+			MoveBot(bot);
 			bot->updateSprite();
 			temp->bots.pop_front();
 			addBot(game, bot);
@@ -251,6 +254,7 @@ void SpriteManager::update(Game *game)
 			{
 				Bot *bot = temp->bots.front();
 				bot->think(game);
+				MoveBot(bot);
 				bot->updateSprite();
 				temp->bots.pop_front();
 				addBot(game, bot);
@@ -258,7 +262,15 @@ void SpriteManager::update(Game *game)
 		}
 	}
 }
-
+void SpriteManager::MoveBot(Bot *bot){
+	int playerLocX = player.getX();
+	if (bot->getX() <= (playerLocX + 300) && bot->getX() >= (playerLocX - 300)){
+		if (bot->getX() > playerLocX)
+			bot->setVelocity(-10, 0);
+		else
+			bot->setVelocity(10, 0);
+	}
+}
 SpriteManager::SpriteManager(){
 	//Setting up Binary Tree into 4 different parts.
 	bots = new Btree();

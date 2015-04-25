@@ -89,7 +89,7 @@ void RandomJumpingBot::pickRandomJump()
 	// NOW WE CAN SCALE OUR X AND Y VELOCITIES
 	float jumpVelocity = (float)maxVelocity;
 	float jumpVelocityX = jumpVelocity * cos(randomAngleInRadians);
-	float jumpVelocityY = -jumpVelocity * sin(randomAngleInRadians);
+	float jumpVelocityY = 0;// -jumpVelocity * sin(randomAngleInRadians);
 	this->setVelocity(jumpVelocityX, jumpVelocityY);
 //	pp.setVelocity(0.0f, jumpVelocity);
 }
@@ -122,4 +122,5 @@ void RandomJumpingBot::think(Game *game)
 		animationCounter++;
 		animationRandomizer = (rand() % 45) + 5;
 	}
+
 }

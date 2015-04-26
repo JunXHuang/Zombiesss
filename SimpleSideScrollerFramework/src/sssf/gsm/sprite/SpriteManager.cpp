@@ -230,7 +230,7 @@ void SpriteManager::update(Game *game)
 	{
 		Bot *bot = temp->bots.front();
 		bot->think(game);
-		MoveBot(bot);
+		//MoveBot(bot);
 		bot->updateSprite();
 		temp->bots.pop_front();
 		addBot(game, bot);
@@ -242,7 +242,7 @@ void SpriteManager::update(Game *game)
 		{
 			Bot *bot = temp->bots.front();
 			bot->think(game);
-			MoveBot(bot);
+			//MoveBot(bot);
 			bot->updateSprite();
 			temp->bots.pop_front();
 			addBot(game, bot);
@@ -254,7 +254,7 @@ void SpriteManager::update(Game *game)
 			{
 				Bot *bot = temp->bots.front();
 				bot->think(game);
-				MoveBot(bot);
+				//MoveBot(bot);
 				bot->updateSprite();
 				temp->bots.pop_front();
 				addBot(game, bot);

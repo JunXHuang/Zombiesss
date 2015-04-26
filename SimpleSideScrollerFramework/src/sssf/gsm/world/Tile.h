@@ -14,4 +14,6 @@ public:
 	int textureID;
 	bool collidable;
 	b2Body* body;
+	Tile() { }
+	~Tile() { body->GetWorld()->DestroyBody(body); }
 };

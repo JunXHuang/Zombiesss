@@ -90,7 +90,16 @@ void World::addWorldRenderItemsToRenderList(Game *game)
 */
 void World::unloadWorld()
 {
-	layers->clear();
+	vector<WorldLayer*>::iterator it = layers->begin();
+	WorldLayer* prevLayer = *(it);
+	while (it != layers->end())
+	{
+		it++;
+		delete prevLayer;
+		prevLayer = *(it);
+	}
+	delete layers;
+	layers = new vector<WorldLayer*>();
 	worldWidth = 0;
 	worldHeight = 0;
 }

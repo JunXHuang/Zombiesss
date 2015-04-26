@@ -164,7 +164,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	// LOAD THE LEVEL'S BACKGROUND TILES
 	TMXMapImporter tmxMapImporter;
 	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
-
+	LevelCheck = 1;
 	// LOAD THE LEVEL'S SPRITE IMAGES
 	PoseurSpriteTypesImporter psti;
 	psti.loadSpriteTypes(game, SPRITE_TYPES_LIST);
@@ -182,7 +182,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);
 	player->applyPhysics(game);
-	player->setPosition(PLAYER_INIT_X, PLAYER_INIT_Y);
+	player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 	player->setVelocity(0.0f, 0.0f);
 
 	AnimatedSpriteType *botSpriteType = spriteManager->getSpriteType(1);

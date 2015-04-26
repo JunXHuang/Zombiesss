@@ -9,10 +9,30 @@
 */
 
 // HERE IS THE BugginOut GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
+static int LevelCheck;
+
+static const float		PLAYER_LEVEL1_X = 80.0f;
+static const float		PLAYER_LEVEL1_Y = 100.0f;
+
+static const float		PLAYER_LEVEL2_X = 80.0f;
+static const float		PLAYER_LEVEL2_Y = 100.0f;
+
+static const float		PLAYER_LEVEL3_X = 80.0f;
+static const float		PLAYER_LEVEL3_Y = 1700.0f;
+
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
 static const string		W_JUMP_BOT_FILE			= "data/bots/RandomJumpingBot.lua";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
+
+static const wstring	W_LEVEL_2_DIR			= L"data/levels/SideScrollerForest/";
+static const wstring	W_LEVEL_2_NAME			= L"SideScrollerForestLevel.tmx";
+static const wstring	W_LEVEL_2_PATH			= W_LEVEL_2_DIR + W_LEVEL_2_NAME;
+
+static const wstring	W_LEVEL_3_DIR			= L"data/levels/SideScrollerThirdLevel/";
+static const wstring	W_LEVEL_3_NAME			= L"SideScrollerThirdLevel.tmx";
+static const wstring	W_LEVEL_3_PATH			= W_LEVEL_3_DIR + W_LEVEL_3_NAME;
+
 static const wstring	W_INIT_FILE				= L"data/ZombiesssInit.txt";
 static const wstring	W_GUI_INIT_FILE			= L"data/BugginOutGUI.txt";
 static const string		W_DEBUG_FILE			= "DebugOutput.txt";
@@ -60,8 +80,6 @@ static const float		W_GRAVITY = 0.8f;
 static const float		JUMPING_BOT_MIN_CYCLES = 30;
 static const float		JUMPING_BOT_MAX_CYCLES = 120;
 static const float		JUMPING_BOT_MAX_VELOCITY = 40;
-static const float		PLAYER_INIT_X = 80.0f;
-static const float		PLAYER_INIT_Y = 100.0f;
 static const float		JUMP_SPEED = -128.0f;
 static const float		PLAYER_SPEED = 32.0f;
 static const int		MIN_FPS = 5;

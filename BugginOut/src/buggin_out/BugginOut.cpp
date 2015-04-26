@@ -43,6 +43,7 @@
 #include "sssf\platforms\DirectX\DirectXGraphics.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
 #include "Box2D.h"
+#include <time.h>
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -62,7 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 	// CREATE THE GAME
 	Game *bugginOutGame = new Game();
-
+	srand(time(NULL));
 	// FIRST WE'LL SETUP THE DATA LOADER, SINCE IT MAY NEED TO READ
 	// IN DATA TO SETUP OTHER STUFF
 	BugginOutDataLoader *bugginOutDataLoader = new BugginOutDataLoader();

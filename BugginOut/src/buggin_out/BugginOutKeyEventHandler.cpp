@@ -21,6 +21,7 @@
 #include "sssf\gui\GameGUI.h"
 #include "sssf\input\GameInput.h"
 #include "sssf\timer\GameTimer.h"
+#include "tmxmi\TMXMapImporter.h"
 #include "sssf\platforms\Windows\WindowsTimer.h"
 
 /*
@@ -38,7 +39,10 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 	GameStateManager *gsm = game->getGSM();
 	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
 	Viewport *viewport = game->getGUI()->getViewport();
-	
+	TMXMapImporter tmxMapImporter;
+	World *unload = game->getGSM()->getWorld();
+	SpriteManager *spriteManager = gsm->getSpriteManager();
+
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
@@ -89,7 +93,39 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		{
 			//gsm->getPhysics()->activateForSingleUpdate();
 		}
-
+		/*load level 1 cheat CTRL +1*/
+		if (input->isKeyDown(VK_CONTROL) && input->isKeyDown(49u)){
+			if (LevelCheck != 1){
+				spriteManager->unloadSprites();
+				unload->unloadWorld();
+				spriteManager->loadSprites(game);
+				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
+				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
+				LevelCheck = 1;
+			}
+		}
+		/*load level 2 cheat CTRL + 2*/
+		if (input->isKeyDown(VK_CONTROL) && input->isKeyDown(50u)){
+			if (LevelCheck != 2){
+				spriteManager->unloadSprites();
+				unload->unloadWorld();
+				spriteManager->loadSprites(game);
+				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
+				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
+				LevelCheck = 2;
+			}
+		}
+		/*load level 3 cheat CTRL +3*/
+		if (input->isKeyDown(VK_CONTROL) && input->isKeyDown(51u)){
+			if (LevelCheck != 3){
+				spriteManager->unloadSprites();
+				unload->unloadWorld();
+				spriteManager->loadSprites(game);
+				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
+				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
+				LevelCheck = 3;
+			}
+		}
 		// NOW SET THE ACTUAL PLAYER VELOCITY
  		player->setVelocity(vX, vY);
 

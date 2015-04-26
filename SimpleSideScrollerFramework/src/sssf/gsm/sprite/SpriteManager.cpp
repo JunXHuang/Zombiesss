@@ -16,6 +16,7 @@ See SpriteManager.h for a class description.
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\state\GameStateManager.h"
+#include "sssf\gsm\ai\bots\RandomJumpingBot.h"
 
 /*
 addSpriteToRenderList - This method checks to see if the sprite
@@ -175,13 +176,7 @@ clearSprites - This empties all of the sprites and sprite types.
 void SpriteManager::clearSprites()
 {
 	spriteTypes.clear();
-	//Clear all bots
-	bots->bots.clear();
-	for (int i = 0; i < 2; i++){
-		bots->next[i]->bots.clear();
-		for (int j = 0; j < 2; j++)
-			bots->next[i]->next[j]->bots.clear();
-	}
+
 }
 
 /*
@@ -202,7 +197,13 @@ has been allocated for game sprites.
 */
 void SpriteManager::unloadSprites()
 {
-	// @TODO - WE'LL DO THIS LATER WHEN WE LEARN MORE ABOUT MEMORY MANAGEMENT
+	//Clear all bots
+	bots->bots.clear();
+	for (int i = 0; i < 2; i++){
+		bots->next[i]->bots.clear();
+		for (int j = 0; j < 2; j++)
+			bots->next[i]->next[j]->bots.clear();
+	}
 }
 
 Bot* SpriteManager::removeBot(Bot *botToRemove)
@@ -292,4 +293,23 @@ SpriteManager::~SpriteManager(){
 		delete[] bots->next[i];
 	}
 	delete[] bots;
+}
+void SpriteManager::loadSprites(Game *game){
+	AnimatedSpriteType *botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
+	int BotPosX;
+	for (int i = 0; i < 10; i++){
+		BotPosX = rand() % 2000;
+		makeRandomJumpingBot(game, botSpriteType, BotPosX, 200);
+	}
+}
+void SpriteManager::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
+{
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	RandomJumpingBot *bot = new RandomJumpingBot(30, 120, 128);
+	bot->setSpriteType(randomJumpingBotType);
+	bot->setAlpha(255);
+	bot->setCurrentState(L"JUMPING");
+	bot->applyPhysics(game);
+	bot->setPosition(initX, initY);
+	spriteManager->addBot(game, bot);
 }

@@ -6,7 +6,7 @@
 
 class Bot : public AnimatedSprite {
 protected:
-	LuaPlus::LuaState* luaState;
+	LuaPlus::LuaStateAuto luaState;
 	LuaPlus::LuaObject luaMetaTable;
 	void init(string fileName);
 private:

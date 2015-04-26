@@ -69,7 +69,9 @@ void Bot::init(string fileName) {
 }
 
 Bot::~Bot() {
-	LuaPlus::LuaState::Destroy(luaState);
+	if (physics)
+		body->GetWorld()->DestroyBody(body);
+	physics = false;
 }
 
 

@@ -14,6 +14,7 @@
 #pragma once
 #include "buggin_out_VS\stdafx.h"
 #include "sssf\input\KeyEventHandler.h"
+#include "sssf\gsm\sprite\AnimatedSpriteType.h"
 
 class Game;
 
@@ -23,4 +24,6 @@ public:
 	BugginOutKeyEventHandler()		{}
 	~BugginOutKeyEventHandler()		{}
 	void handleKeyEvents(Game *game);
+	void loadSprites(Game *game);
+	void makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY);
 };

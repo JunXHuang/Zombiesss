@@ -59,7 +59,7 @@ protected:
 public:	
 	// BY DEFAULT, TILES ARE NOT COLLIDABLE
 	WorldLayer()	{	collidableTiles = false; }
-	~WorldLayer()	{}
+	virtual ~WorldLayer() {}
 
 	// INLINED ACCESSOR METHOD
 	bool  hasCollidableTiles() { return collidableTiles; }

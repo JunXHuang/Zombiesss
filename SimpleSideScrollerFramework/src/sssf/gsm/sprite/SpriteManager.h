@@ -63,6 +63,4 @@ public:
 	void				unloadSprites();
 	void				update(Game *game);
 	void				MoveBot(Bot *bot);
-	void				loadSprites(Game *game);
-	void				makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY);
 };

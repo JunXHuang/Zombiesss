@@ -53,12 +53,11 @@ TiledLayer::TiledLayer(	int initColumns,
 TiledLayer::~TiledLayer() 
 {
 	vector<Tile*>::iterator it = tileLayout->begin();
-	Tile* prevTile = *(it);
 	while (it != tileLayout->end())
 	{
+		Tile* tile = *(it);
 		it++;
-		delete prevTile;
-		prevTile = *(it);
+		delete tile;
 	}
 	delete tileLayout;
 }

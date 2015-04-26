@@ -13,7 +13,9 @@ class Tile
 public:
 	int textureID;
 	bool collidable;
-	b2Body* body;
+	b2Body* body = NULL;
 	Tile() { }
-	~Tile() { body->GetWorld()->DestroyBody(body); }
+	~Tile() {
+		if (body != NULL) body->GetWorld()->DestroyBody(body);
+	}
 };

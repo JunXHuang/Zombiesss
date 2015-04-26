@@ -15,7 +15,11 @@ protected:
 	bool physics = false;
 public:
 	CollidableObject()	{}
-	~CollidableObject()	{}
+	~CollidableObject()	{
+		if (physics)
+			body->GetWorld()->DestroyBody(body);
+		physics = false;
+	}
 
 	float getX() {
 		return (body->GetPosition().x * PIXELS_PER_METER) - (width / 2);

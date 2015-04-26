@@ -16,7 +16,6 @@ See SpriteManager.h for a class description.
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\state\GameStateManager.h"
-#include "sssf\gsm\ai\bots\RandomJumpingBot.h"
 
 /*
 addSpriteToRenderList - This method checks to see if the sprite
@@ -198,11 +197,30 @@ has been allocated for game sprites.
 void SpriteManager::unloadSprites()
 {
 	//Clear all bots
+	list<Bot*>::iterator it = bots->bots.begin();
+	while (it != bots->bots.end()) {
+		Bot* bot = *(it);
+		it++;
+		delete bot;
+	}
 	bots->bots.clear();
-	for (int i = 0; i < 2; i++){
+	for (int i = 0; i < 2; i++) {
+		list<Bot*>::iterator it = bots->next[i]->bots.begin();
+		while (it != bots->next[i]->bots.end()) {
+			Bot* bot = *(it);
+			it++;
+			delete bot;
+		}
 		bots->next[i]->bots.clear();
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < 2; j++) {
+			list<Bot*>::iterator it = bots->next[i]->next[j]->bots.begin();
+			while (it != bots->next[i]->next[j]->bots.end()) {
+				Bot* bot = *(it);
+				it++;
+				delete bot;
+			}
 			bots->next[i]->next[j]->bots.clear();
+		}
 	}
 }
 
@@ -293,23 +311,4 @@ SpriteManager::~SpriteManager(){
 		delete[] bots->next[i];
 	}
 	delete[] bots;
-}
-void SpriteManager::loadSprites(Game *game){
-	AnimatedSpriteType *botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
-	int BotPosX;
-	for (int i = 0; i < 10; i++){
-		BotPosX = rand() % 2000;
-		makeRandomJumpingBot(game, botSpriteType, BotPosX, 200);
-	}
-}
-void SpriteManager::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
-{
-	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
-	RandomJumpingBot *bot = new RandomJumpingBot(30, 120, 128);
-	bot->setSpriteType(randomJumpingBotType);
-	bot->setAlpha(255);
-	bot->setCurrentState(L"JUMPING");
-	bot->applyPhysics(game);
-	bot->setPosition(initX, initY);
-	spriteManager->addBot(game, bot);
 }

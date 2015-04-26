@@ -32,7 +32,9 @@ AnimatedSprite::AnimatedSprite()
 */
 AnimatedSprite::~AnimatedSprite() 
 {
-
+	if (physics)
+		body->GetWorld()->DestroyBody(body);
+	physics = false;
 }
 
 /*

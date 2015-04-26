@@ -94,33 +94,33 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			//gsm->getPhysics()->activateForSingleUpdate();
 		}
 		/*load level 1 cheat CTRL +1*/
-		if (input->isKeyDown(VK_CONTROL) && input->isKeyDown(49u)){
+		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(49u)){
 			if (LevelCheck != 1){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
-				spriteManager->loadSprites(game);
+				loadSprites(game);
 				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 				LevelCheck = 1;
 			}
 		}
 		/*load level 2 cheat CTRL + 2*/
-		if (input->isKeyDown(VK_CONTROL) && input->isKeyDown(50u)){
+		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(50u)){
 			if (LevelCheck != 2){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
-				spriteManager->loadSprites(game);
+				loadSprites(game);
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
 				LevelCheck = 2;
 			}
 		}
 		/*load level 3 cheat CTRL +3*/
-		if (input->isKeyDown(VK_CONTROL) && input->isKeyDown(51u)){
+		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(51u)){
 			if (LevelCheck != 3){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
-				spriteManager->loadSprites(game);
+				loadSprites(game);
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
 				LevelCheck = 3;
@@ -204,4 +204,26 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 	// THIS SLOWS DOWN OUR GAME LOOP, BUT WILL NOT GO BELOW 5 FRAMES PER SECOND
 	else if (input->isKeyDown(VK_END) && (fps > MIN_FPS))
 		timer->setTargetFPS(fps - FPS_INC);
+}
+
+void BugginOutKeyEventHandler::loadSprites(Game *game){
+	AnimatedSpriteType *botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
+	int BotPosX;
+	for (int i = 0; i < 10; i++){
+		BotPosX = rand() % 2000;
+		makeRandomJumpingBot(game, botSpriteType, BotPosX, 200);
+	}
+}
+void BugginOutKeyEventHandler::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)
+{
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	string keys[] = { "initMin", "initMax", "initVel" };
+	string vals[] = { "30", "120", "128" };
+	Bot *bot = new Bot(W_JUMP_BOT_FILE, 3, keys, vals);
+	bot->setSpriteType(randomJumpingBotType);
+	bot->setAlpha(255);
+	bot->setCurrentState(L"JUMPING");
+	bot->applyPhysics(game);
+	bot->setPosition(initX, initY);
+	spriteManager->addBot(game, bot);
 }

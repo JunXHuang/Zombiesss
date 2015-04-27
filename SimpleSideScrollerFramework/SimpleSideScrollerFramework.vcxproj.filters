@@ -296,5 +296,8 @@
     <ClInclude Include="src\sssf\os\GameOS.h">
       <Filter>src\sssf\os</Filter>
     </ClInclude>
+    <ClInclude Include="src\sssf\gsm\physics\CollisionListener.h">
+      <Filter>src\sssf\gsm\physics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

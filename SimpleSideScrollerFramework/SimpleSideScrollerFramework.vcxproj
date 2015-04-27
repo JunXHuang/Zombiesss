@@ -58,6 +58,7 @@
     <ClInclude Include="src\sssf\gsm\ai\Bot.h" />
     <ClInclude Include="src\sssf\gsm\ai\BotRecycler.h" />
     <ClInclude Include="src\sssf\gsm\physics\CollidableObject.h" />
+    <ClInclude Include="src\sssf\gsm\physics\CollisionListener.h" />
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSprite.h" />
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSpriteType.h" />
     <ClInclude Include="src\sssf\gsm\sprite\SpriteManager.h" />

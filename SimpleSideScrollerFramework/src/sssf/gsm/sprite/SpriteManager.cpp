@@ -240,56 +240,55 @@ void SpriteManager::update(Game *game)
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 
+	World* world = game->getGSM()->getWorld();
+	if (player.getX() < 0 || player.getY() < 0 ||
+		player.getX() + player.getSpriteType()->getTextureWidth() > world->getWorldWidth() ||
+		player.getY() + player.getSpriteType()->getTextureHeight() > world->getWorldHeight()) {
+		world->getListener()->OutOfBounds(game);
+	}
+
 	
 	// NOW UPDATE THE REST OF THE SPRITES
-
 	Btree *temp = bots;
 	int counter = temp->bots.size();
 	while (counter--)
 	{
-		Bot *bot = temp->bots.front();
-		bot->think(game);
-		//MoveBot(bot);
-		bot->updateSprite();
+		ProcessBot(game, temp->bots.front());
 		temp->bots.pop_front();
-		addBot(game, bot);
 	}
 	for (int i = 0; i < 2; i++){
 		temp = bots->next[i];
 		counter = temp->bots.size();
 		while (counter--)
 		{
-			Bot *bot = temp->bots.front();
-			bot->think(game);
-			//MoveBot(bot);
-			bot->updateSprite();
+			ProcessBot(game, temp->bots.front());
 			temp->bots.pop_front();
-			addBot(game, bot);
 		}
 		for (int j = 0; j < 2; j++){
 			temp = bots->next[i]->next[j];
 			counter = temp->bots.size();
 			while (counter--)
 			{
-				Bot *bot = temp->bots.front();
-				bot->think(game);
-				//MoveBot(bot);
-				bot->updateSprite();
+				ProcessBot(game, temp->bots.front());
 				temp->bots.pop_front();
-				addBot(game, bot);
 			}
 		}
 	}
 }
-void SpriteManager::MoveBot(Bot *bot){
-	int playerLocX = player.getX();
-	if (bot->getX() <= (playerLocX + 300) && bot->getX() >= (playerLocX - 300)){
-		if (bot->getX() > playerLocX)
-			bot->setVelocity(-10, 0);
-		else
-			bot->setVelocity(10, 0);
-	}
+
+void SpriteManager::ProcessBot(Game *game, Bot *bot){
+	bot->think(game);
+	bot->updateSprite();
+	addBot(game, bot);
+
+	/*World* world = game->getGSM()->getWorld();
+	if (bot->getX() < 0 || bot->getY() < 0 ||
+		bot->getX() + bot->getSpriteType()->getTextureWidth() > world->getWorldWidth() ||
+		bot->getY() + bot->getSpriteType()->getTextureHeight() > world->getWorldHeight()) {
+		world->getListener()->OutOfBounds(game, bot);
+	}*/
 }
+
 SpriteManager::SpriteManager(){
 	//Setting up Binary Tree into 4 different parts.
 	bots = new Btree();

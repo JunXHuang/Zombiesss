@@ -21,6 +21,7 @@
 #include "sssf\data_loader\GameDataLoader.h"
 #include "sssf\graphics\RenderList.h"
 #include "sssf\gsm\world\WorldLayer.h"
+#include "sssf\gsm\physics\CollisionListener.h"
 
 #include "Box2D\Dynamics\b2World.h"
 #include "Box2D\Common\b2Math.h"
@@ -43,23 +44,27 @@ private:
 	// THESE ARE THE BACKGROUND LAYERS
 	vector<WorldLayer*> *layers;
 
+	CollisionListener* listener;
+
 	b2Vec2* b2grav = new b2Vec2(0.0f, 9.8f);
 	b2World* b2world = new b2World(*b2grav);
 public:
 	// INLINED ACCESSOR METHODS
-	vector<WorldLayer*>*	getLayers()	{ return layers;				}
-	int						getNumLayers() { return layers->size();		}
-	int						getWorldHeight()	{ return worldHeight;	}
-	int						getWorldWidth()		{ return worldWidth;	}
-	b2World*				getPWorld()			{ return b2world;		}
+	vector<WorldLayer*>*	getLayers()			{ return layers;			}
+	int						getNumLayers()		{ return layers->size();	}
+	int						getWorldHeight()	{ return worldHeight;		}
+	int						getWorldWidth()		{ return worldWidth;		}
+	b2World*				getPWorld()			{ return b2world;			}
+	CollisionListener*		getListener()		{ return listener;			}
+
 
 	// INLINED MUTATOR METHODS
 	void setWorldHeight(int initWorldHeight)
 	{ worldHeight = initWorldHeight;							}
 	void setWorldWidth(int initWorldWidth)
 	{ worldWidth = initWorldWidth;								}
-	void setCollisionListener(b2ContactListener* initListener)
-	{ b2world->SetContactListener(initListener);				}
+	void setCollisionListener(CollisionListener* initListener)
+	{ listener = initListener; b2world->SetContactListener(listener); }
 	void setGravity(float initGravity) {
 		b2grav = new b2Vec2(0.0f, initGravity);
 		b2world->SetGravity(*b2grav);

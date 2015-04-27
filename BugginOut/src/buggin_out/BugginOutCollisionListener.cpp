@@ -1,4 +1,5 @@
 #include "sssf\game\Game.h"
+#include "sssf\gsm\state\GameStateManager.h"
 #include "sssf\gsm\ai\Bot.h"
 #include "buggin_out\BugginOutCollisionListener.h"
 
@@ -40,11 +41,16 @@ void BugginOutCollisionListener::EndContact(b2Contact* contact) {
 	//check if fixture A was a ball
 	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
 	if (bodyUserData)
-		static_cast<Bot*>(bodyUserData);
+		static_cast<AnimatedSprite*>(bodyUserData);
 
 	//check if fixture B was a ball
 	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
 	if (bodyUserData)
-		static_cast<Bot*>(bodyUserData);
+		static_cast<AnimatedSprite*>(bodyUserData);
 
+}
+
+void BugginOutCollisionListener::OutOfBounds(Game* game) {
+	//player out of bounds
+	return;
 }

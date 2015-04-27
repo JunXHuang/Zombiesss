@@ -15,18 +15,17 @@ static const float		PLAYER_LEVEL1_X = 80.0f;
 static const float		PLAYER_LEVEL1_Y = 100.0f;
 
 static const float		PLAYER_LEVEL2_X = 80.0f;
-static const float		PLAYER_LEVEL2_Y = 100.0f;
+static const float		PLAYER_LEVEL2_Y = 1400.0f;
 
 static const float		PLAYER_LEVEL3_X = 80.0f;
 static const float		PLAYER_LEVEL3_Y = 1700.0f;
 
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
-static const string		W_JUMP_BOT_FILE			= "data/bots/RandomJumpingBot.lua";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
 
-static const wstring	W_LEVEL_2_DIR			= L"data/levels/SideScrollerForest/";
-static const wstring	W_LEVEL_2_NAME			= L"SideScrollerForestLevel.tmx";
+static const wstring	W_LEVEL_2_DIR			= L"data/levels/SideScrollerSecondLevel/";
+static const wstring	W_LEVEL_2_NAME			= L"SideScrollerSecondLevel.tmx";
 static const wstring	W_LEVEL_2_PATH			= W_LEVEL_2_DIR + W_LEVEL_2_NAME;
 
 static const wstring	W_LEVEL_3_DIR			= L"data/levels/SideScrollerThirdLevel/";
@@ -36,6 +35,8 @@ static const wstring	W_LEVEL_3_PATH			= W_LEVEL_3_DIR + W_LEVEL_3_NAME;
 static const wstring	W_INIT_FILE				= L"data/ZombiesssInit.txt";
 static const wstring	W_GUI_INIT_FILE			= L"data/BugginOutGUI.txt";
 static const string		W_DEBUG_FILE			= "DebugOutput.txt";
+
+static const string		W_JUMP_BOT_FILE			= "data/bots/RandomJumpingBot.lua";
 
 // HERE ARE THE GAME PROPERTIES WE ARE LOADING FROM FROM THE SETUP FILE
 static const wstring	W_TITLE					= L"TITLE";

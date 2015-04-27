@@ -43,6 +43,12 @@ public:
 		velocity.y = initY / PIXELS_PER_METER;
 		body->SetLinearVelocity(velocity);
 	}
+	void applyForce(float initX, float initY) {
+		b2Vec2 force;
+		force.x = initX / PIXELS_PER_METER;
+		force.y = initY / PIXELS_PER_METER;
+		body->ApplyForce(force, body->GetWorldCenter(), true);
+	}
 
 	void applyPhysics(Game* game);
 };

@@ -28,7 +28,7 @@ function pickRandomJump()
 	local jumpVelocity = maxVelocity;
 	local jumpVelocityX = jumpVelocity * math.cos(randomAngleInRadians);
 	local jumpVelocityY = -jumpVelocity * math.sin(randomAngleInRadians);
-	this:setVelocity(jumpVelocityX, jumpVelocityY);
+	this:setVelocity(jumpVelocityX*(math.random()%3+1), 0);
 	
 	return 0;
 end
@@ -54,9 +54,9 @@ function moveBot(player)
 	local playerLocX = player:getX();
 	if (this:getX() <= (playerLocX + 300) and this:getX() >= (playerLocX - 300)) then
 		if (this:getX() > playerLocX) then
-			this:setVelocity(-10, 0);
+			this:setVelocity(-30, 0);
 		else
-			this:setVelocity(10, 0);
+			this:setVelocity(30, 0);
 		end
 	end
 end
@@ -70,10 +70,11 @@ function think(player)
 	-- EACH FRAME WE'LL TEST THIS BOT TO SEE IF WE NEED
 	-- TO PICK A DIFFERENT DIRECTION TO FLOAT IN
 
-	moveBot(player);
+	
 	if cyclesRemainingBeforeThinking == 0 then
-		--pickRandomJump();
+		pickRandomJump();
 		pickRandomCyclesInRange();
+		moveBot(player);
 	else
 		cyclesRemainingBeforeThinking = cyclesRemainingBeforeThinking - 1;
 	end

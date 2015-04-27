@@ -20,6 +20,7 @@ static const float		PLAYER_LEVEL2_Y = 100.0f;
 static const float		PLAYER_LEVEL3_X = 100.0f;
 static const float		PLAYER_LEVEL3_Y = 1500.0f;
 
+static int						NumberOfBotsPerLevel;
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
 static const string		W_JUMP_BOT_FILE			= "data/bots/RandomJumpingBot.lua";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";

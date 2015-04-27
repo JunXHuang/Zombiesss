@@ -56,6 +56,7 @@ void BugginOutTextGenerator::appendPlayerInfo(Game *game)
 	wss2 << (int)player->getVelocityY();
 	wss2 << L")";
 	wss2 << L"\n";
+	wss2 << game->getGSM()->getWorld()->getWorldWidth() << "\n";
 	textToGenerate.append(wss2.str());
 }
 

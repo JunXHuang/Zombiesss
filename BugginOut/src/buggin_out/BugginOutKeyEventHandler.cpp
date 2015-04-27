@@ -98,10 +98,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			if (LevelCheck != 1){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
-				loadSprites(game);
 				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 				LevelCheck = 1;
+				NumberOfBotsPerLevel = 10;
+				loadSprites(game);
 			}
 		}
 		/*load level 2 cheat CTRL + 2*/
@@ -109,10 +110,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			if (LevelCheck != 2){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
-				loadSprites(game);
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
 				LevelCheck = 2;
+				NumberOfBotsPerLevel = 10;
+				loadSprites(game);
 			}
 		}
 		/*load level 3 cheat CTRL +3*/
@@ -120,10 +122,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			if (LevelCheck != 3){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
-				loadSprites(game);
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
 				LevelCheck = 3;
+				NumberOfBotsPerLevel = 10;
+				loadSprites(game);
 			}
 		}
 		// NOW SET THE ACTUAL PLAYER VELOCITY
@@ -207,11 +210,12 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 }
 
 void BugginOutKeyEventHandler::loadSprites(Game *game){
-	AnimatedSpriteType *botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
-	int BotPosX;
-	for (int i = 0; i < 10; i++){
-		BotPosX = rand() % 2000;
-		makeRandomJumpingBot(game, botSpriteType, BotPosX, 200);
+	AnimatedSpriteType *botSpriteType;
+	int BotPosX, worldWidth = game->getGSM()->getWorld()->getWorldWidth()-500,worldHeight=game->getGSM()->getWorld()->getWorldHeight()/10;
+	for (int i = 0; i < NumberOfBotsPerLevel; i++){
+		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(rand() % 4 + 1);
+		BotPosX = rand() % worldWidth+500;
+		makeRandomJumpingBot(game, botSpriteType, (float)BotPosX,(float)worldHeight);
 	}
 }
 void BugginOutKeyEventHandler::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)

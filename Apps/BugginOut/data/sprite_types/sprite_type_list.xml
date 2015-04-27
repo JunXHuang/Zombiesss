@@ -2,8 +2,8 @@
 <sprite_type_list>
 <sprite_type>player</sprite_type>
   <sprite_type>red_box_man</sprite_type>
-  <sprite_type>zombie</sprite_type>
   <sprite_type>blue_round_man</sprite_type>
   <sprite_type>green_round_man</sprite_type>
   <sprite_type>yellow_box_man</sprite_type>
+  <sprite_type>zombie</sprite_type>
 </sprite_type_list>

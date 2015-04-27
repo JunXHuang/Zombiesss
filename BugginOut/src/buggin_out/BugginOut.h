@@ -17,9 +17,10 @@ static const float		PLAYER_LEVEL1_Y = 100.0f;
 static const float		PLAYER_LEVEL2_X = 80.0f;
 static const float		PLAYER_LEVEL2_Y = 1400.0f;
 
-static const float		PLAYER_LEVEL3_X = 80.0f;
-static const float		PLAYER_LEVEL3_Y = 1700.0f;
+static const float		PLAYER_LEVEL3_X = 100.0f;
+static const float		PLAYER_LEVEL3_Y = 1500.0f;
 
+static int						NumberOfBotsPerLevel;
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;

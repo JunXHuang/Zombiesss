@@ -9,7 +9,7 @@
 */
 
 // HERE IS THE BugginOut GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
-static int LevelCheck;
+static int LevelCheck=1;
 
 static const float		PLAYER_LEVEL1_X = 80.0f;
 static const float		PLAYER_LEVEL1_Y = 100.0f;

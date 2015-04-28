@@ -2,9 +2,11 @@
 #include "sssf\gsm\state\GameStateManager.h"
 #include "sssf\gsm\ai\Bot.h"
 #include "buggin_out\BugginOutCollisionListener.h"
-
+#include "tmxmi\TMXMapImporter.h"
 #include "Box2D\Dynamics\Contacts\b2Contact.h"
 #include "Box2D\Dynamics\b2Fixture.h"
+#include "buggin_out\BugginOut.h"
+#include "buggin_out\BugginOutKeyEventHandler.h"
 
 void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 
@@ -52,4 +54,24 @@ void BugginOutCollisionListener::EndContact(b2Contact* contact) {
 
 void BugginOutCollisionListener::OutOfBounds(Game* game) {
 	//player out of bounds
+	AnimatedSprite *player= game->getGSM()->getSpriteManager()->getPlayer();
+	BugginOutKeyEventHandler temp;
+	if (player->getX() > game->getGSM()->getWorld()->getWorldWidth() || player->getY() > game->getGSM()->getWorld()->getWorldHeight()){
+		TMXMapImporter tmxMapImporter;
+		game->getGSM()->getSpriteManager()->unloadSprites();
+		game->getGSM()->getWorld()->unloadWorld();
+		LevelCheck=(LevelCheck+1%3)+1;
+		switch (LevelCheck){
+		case 2:
+			tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
+			player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
+			break;
+		case 3:
+			tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
+			player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
+			break;
+		}
+		NumberOfBotsPerLevel = 10;
+		temp.loadSprites(game);
+	}
 }

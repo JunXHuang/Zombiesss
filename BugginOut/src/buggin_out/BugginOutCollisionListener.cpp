@@ -52,5 +52,4 @@ void BugginOutCollisionListener::EndContact(b2Contact* contact) {
 
 void BugginOutCollisionListener::OutOfBounds(Game* game) {
 	//player out of bounds
-	return;
 }

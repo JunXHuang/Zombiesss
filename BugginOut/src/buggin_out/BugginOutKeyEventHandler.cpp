@@ -23,7 +23,7 @@
 #include "sssf\timer\GameTimer.h"
 #include "tmxmi\TMXMapImporter.h"
 #include "sssf\platforms\Windows\WindowsTimer.h"
-
+#include<buggin_out\XAudio2.h>
 /*
 	handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
 	gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
@@ -43,6 +43,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 	World *unload = game->getGSM()->getWorld();
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 
+	
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
@@ -88,9 +89,12 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
 			//gsm->getPhysics()->togglePhysics();
+			XAudio2 *xAudio2 = new XAudio2();
+			xAudio2->initXAudio();
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
+			//xAudio2->TurnOffAudio();
 			//gsm->getPhysics()->activateForSingleUpdate();
 		}
 		/*load level 1 cheat CTRL +1*/

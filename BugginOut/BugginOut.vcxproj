@@ -17,6 +17,7 @@
     <ClCompile Include="src\buggin_out\BugginOutDataLoader.cpp" />
     <ClCompile Include="src\buggin_out\BugginOutKeyEventHandler.cpp" />
     <ClCompile Include="src\buggin_out\BugginOutTextGenerator.cpp" />
+    <ClCompile Include="src\buggin_out\XAudio2.cpp" />
     <ClCompile Include="src\buggin_out_VS\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +27,8 @@
     <ClInclude Include="src\buggin_out\BugginOutDataLoader.h" />
     <ClInclude Include="src\buggin_out\BugginOutKeyEventHandler.h" />
     <ClInclude Include="src\buggin_out\BugginOutTextGenerator.h" />
+    <ClInclude Include="src\buggin_out\wave.h" />
+    <ClInclude Include="src\buggin_out\XAudio2.h" />
     <ClInclude Include="src\buggin_out_VS\Resource.h" />
     <ClInclude Include="src\buggin_out_VS\stdafx.h" />
     <ClInclude Include="src\buggin_out_VS\targetver.h" />
@@ -84,7 +87,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;winmm.lib;PoseurSpriteTypesImporter.lib;SimpleSideScrollerFramework.lib;tinyxml.lib;TMXMapImporter.lib;XMLFileImporter.lib;Box2D.lib;LuaPlus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;winmm.lib;PoseurSpriteTypesImporter.lib;SimpleSideScrollerFramework.lib;tinyxml.lib;TMXMapImporter.lib;XMLFileImporter.lib;Box2D.lib;LuaPlus.lib;xaudio2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Link>

@@ -37,6 +37,7 @@ GameStateManager::GameStateManager()
 GameStateManager::~GameStateManager()	
 {
 	delete spriteManager;
+	xAudio2->FreeAudioEngine();
 	delete xAudio2;
 }
 

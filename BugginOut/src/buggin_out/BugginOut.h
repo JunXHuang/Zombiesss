@@ -21,6 +21,7 @@ static const float		PLAYER_LEVEL3_X = 100.0f;
 static const float		PLAYER_LEVEL3_Y = 1500.0f;
 
 static int						NumberOfBotsPerLevel;
+static  char*			AudioStr				= "data/Sound/ah.wav";
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;

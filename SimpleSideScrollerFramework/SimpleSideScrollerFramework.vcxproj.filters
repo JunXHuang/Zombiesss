@@ -65,6 +65,9 @@
     <Filter Include="src\sssf\platforms\Windows">
       <UniqueIdentifier>{9a2ecd2f-2b7c-47fd-bb83-6c6d66626dd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\sssf\XAudio2">
+      <UniqueIdentifier>{d7cf9e08-d6c1-4074-b6c0-06afa65044af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\sssf_VS\ReadMe.txt">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="src\sssf\gsm\ai\Bot.cpp">
       <Filter>src\sssf\gsm\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sssf\XAudio2\XAudio2.cpp">
+      <Filter>src\sssf\XAudio2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="src\sssf\gsm\physics\CollisionListener.h">
       <Filter>src\sssf\gsm\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\XAudio2\wave.h">
+      <Filter>src\sssf\XAudio2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\XAudio2\XAudio2.h">
+      <Filter>src\sssf\XAudio2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

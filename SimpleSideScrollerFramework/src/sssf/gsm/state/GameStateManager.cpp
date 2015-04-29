@@ -27,6 +27,7 @@ GameStateManager::GameStateManager()
 	spriteManager = new SpriteManager();
 	currentGameState = GS_SPLASH_SCREEN;
 	currentLevel = NO_LEVEL_LOADED;
+	xAudio2 = new XAudio2();
 }
 
 /*
@@ -36,6 +37,7 @@ GameStateManager::GameStateManager()
 GameStateManager::~GameStateManager()	
 {
 	delete spriteManager;
+	delete xAudio2;
 }
 
 /*

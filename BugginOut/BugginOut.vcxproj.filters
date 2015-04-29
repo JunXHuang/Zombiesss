@@ -34,9 +34,6 @@
     <ClCompile Include="src\buggin_out\BugginOutTextGenerator.cpp">
       <Filter>src\buggin_out</Filter>
     </ClCompile>
-    <ClCompile Include="src\buggin_out\XAudio2.cpp">
-      <Filter>src\buggin_out</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buggin_out_VS\Resource.h">
@@ -64,12 +61,6 @@
       <Filter>src\buggin_out</Filter>
     </ClInclude>
     <ClInclude Include="src\buggin_out\BugginOutTextGenerator.h">
-      <Filter>src\buggin_out</Filter>
-    </ClInclude>
-    <ClInclude Include="src\buggin_out\wave.h">
-      <Filter>src\buggin_out</Filter>
-    </ClInclude>
-    <ClInclude Include="src\buggin_out\XAudio2.h">
       <Filter>src\buggin_out</Filter>
     </ClInclude>
   </ItemGroup>

@@ -24,6 +24,7 @@
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\world\World.h"
 #include "sssf\gsm\world\WorldLayer.h"
+#include "sssf\XAudio2\XAudio2.h"
 
 class Game;
 
@@ -57,6 +58,8 @@ private:
 	// FOR MANAGING DYNAMIC GAME OBJECTS FOR CURRENT LEVEL
 	// NOTE THAT WE CALL THE DYNAMIC OBJECTS "SPRITES"
 	SpriteManager *spriteManager;
+	XAudio2 *xAudio2;
+	
 
 public:
 	// INLINED ACCESSOR METHODS
@@ -66,6 +69,7 @@ public:
 	SpriteManager*	getSpriteManager()		{ return spriteManager;				}
 	World*			getWorld()				{ return &world;					}
 	wstring			getCurrentLevelName()	{ return levelNames[currentLevel];	}
+	XAudio2*		getXAudio2()			{ return xAudio2;					}
 
 	// METHODS FOR TESTING THE CURRENT GAME STATE
 	bool			isAppActive();

@@ -26,6 +26,7 @@ static char*			AudioStr				= "data/Sound/ah.wav";
 static char*			Level1Sound				= "data/Sound/Level1.wav";
 static char*			Level2Sound				= "data/Sound/Level2.wav";
 static char*			Level3Sound				= "data/Sound/Level3.wav";
+static char*			HitSound				= "data/Sound/hit.wav";
 
 static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerForest/";
 static const wstring	W_LEVEL_1_NAME			= L"SideScrollerForestLevel.tmx";

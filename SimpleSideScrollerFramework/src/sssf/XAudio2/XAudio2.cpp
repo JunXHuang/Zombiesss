@@ -59,7 +59,6 @@ void XAudio2::playAudio(){
 	g_source->Stop();
 	g_source->FlushSourceBuffers();
 	g_source->Start();
-
 	//play the sound
 	g_source->SubmitSourceBuffer(buffer.xaBuffer());
 }

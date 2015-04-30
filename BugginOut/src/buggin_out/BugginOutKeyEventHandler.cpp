@@ -57,15 +57,24 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 
 		if (input->isKeyDown(A_KEY))
 		{
-			player->setWalk(true);
-			vX = -PLAYER_SPEED;
-			player->setCurrentState(ATTACKING_LEFT);
+			if (!player->isStunned()) {
+				player->setWalk(true);
+				vX = -PLAYER_SPEED;
+				player->setCurrentState(ATTACKING_LEFT);
+			} else {
+				//setstate
+			}
 		}
 		else if (input->isKeyDown(D_KEY))
 		{
-			player->setWalk(true);
-			vX = PLAYER_SPEED;
-			player->setCurrentState(ATTACKING_RIGHT);
+			if (!player->isStunned()) {
+				player->setWalk(true);
+				vX = PLAYER_SPEED;
+				player->setCurrentState(ATTACKING_RIGHT);
+			}
+			else {
+				//setstate
+			}
 		}
 		else if (input->isKeyDownForFirstTime(G_KEY))
 		{
@@ -79,7 +88,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDownForFirstTime(SPACE_KEY))
 		{
-			if ((int)player->getVelocityY() == 0)
+			if ((int)player->getVelocityY() == 0 && !player->isStunned())
 			{
 				vY = JUMP_SPEED;
 			}
@@ -88,7 +97,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				cout << "WHAT HAPPENED?";
 			}
 		}
-		if (input->isKeyDownForFirstTime(VK_CONTROL)) {
+		if (input->isKeyDownForFirstTime(VK_CONTROL) && !player->isStunned()) {
 			SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 			if (player->getCurrentState() == ATTACKING_LEFT || player->getCurrentState() == ATTACKING_RIGHT) {
 				string keys[] = { "init" };

@@ -76,7 +76,9 @@ function think(player)
 	if cyclesRemainingBeforeThinking == 0 then
 		--pickRandomJump();
 		pickRandomCyclesInRange();
-		SpawnBall();
+		if (math.random(5) == 1) then
+			SpawnBall();
+		end
 	else
 		cyclesRemainingBeforeThinking = cyclesRemainingBeforeThinking - 1;
 	end

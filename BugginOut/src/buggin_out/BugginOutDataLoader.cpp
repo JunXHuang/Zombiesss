@@ -199,7 +199,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 // UNCOMMENT THE FOLLOWING CODE BLOCK WHEN YOU ARE READY TO ADD SOME BOTS
 
-	for (int i = 2; i <= 16; i++)
+	/*for (int i = 2; i <= 16; i++)
 	{
 		botSpriteType = spriteManager->getSpriteType((i%5)+1);
 		float botX = 400.0f + (i * 100.0f);
@@ -225,8 +225,14 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	for (int i = 0; i < 7; i++){
 		botSpriteType = spriteManager->getSpriteType((i % 5)+1);
 		makeRandomJumpingBot(game, botSpriteType, 1700.0f + (i*100.0f), 1300.0f);
-	}
+	}*/
 
+	int BotPosX, worldWidth = game->getGSM()->getWorld()->getWorldWidth() - 500, worldHeight = game->getGSM()->getWorld()->getWorldHeight() / 10;
+	for (int i = 0; i < NumberOfBotsPerLevel; i++){
+		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(rand() % 4 + 1);
+		BotPosX = rand() % worldWidth + 500;
+		makeRandomJumpingBot(game, botSpriteType, (float)BotPosX, (float)worldHeight);
+	}
 }
 
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)

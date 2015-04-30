@@ -41,6 +41,7 @@ protected:
 	unsigned int animationCounter;
 	int LevelCheck;
 	bool walked;
+	int stunned;
 	int frameCounter;
 public:
 	// INLINED ACCESSOR METHODS
@@ -52,6 +53,8 @@ public:
 	int					getLevelCheck()		{ return LevelCheck; }
 	bool				getWalk()			{ return walked; }
 	void				setWalk(bool w)		{ walked = w; }
+	bool				isStunned()			{ return (stunned > 0);  }
+	void				stun(int ticks)		{ stunned = ticks; }
 	int					getFC()				{ return frameCounter; }
 	void				setFC(int fc)		{ frameCounter = fc; }
 	void				setDieOnAnimEnd(bool die) { dieOnAnimEnd = die; }

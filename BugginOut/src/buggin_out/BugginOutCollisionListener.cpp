@@ -34,7 +34,7 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 				player = Obj2;
 				bot = static_cast<Bot*>(Obj1);
 			}
-			if (player->getY() + (3 * (player->getSpriteType()->getTextureHeight() / 4)) < bot->getY())
+			if (player->getY() + (player->getSpriteType()->getTextureHeight() / 2) < bot->getY())
 				bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
 			else 
 				bot->getGame()->getGSM()->finishGame();
@@ -69,7 +69,11 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 			int otherID = other->getSpriteType()->getSpriteTypeID();
 			if (otherID == 0) {
 				//player vs ball
-				//TODO: stun
+				other->stun(15);
+				if (other->getCurrentState() == ATTACKING_LEFT)
+					other->setCurrentState(STUNNED_LEFT);
+				else
+					other->setCurrentState(STUNNED_RIGHT);
 				//remove ball
 				ball->getGame()->getGSM()->getSpriteManager()->removeBot(ball);
 			} else {
@@ -164,6 +168,17 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 			game->getGSM()->getWorld()->unloadWorld();
 			player->setLevelCheck((player->getLevelCheck() + 1) % 3);
 			switch (player->getLevelCheck()){
+			case 1:
+				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
+				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
+				xAudio2->FreeAudioEngine();
+				xAudio2->initXAudio();
+				xAudio2->loadWavFile(Level1Sound);
+				xAudio2->createSource();
+				xAudio2->getSource()->SetVolume(0.1);
+				xAudio2->playAudio();
+				temp.loadSprites(game);
+				break;
 			case 2:
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);

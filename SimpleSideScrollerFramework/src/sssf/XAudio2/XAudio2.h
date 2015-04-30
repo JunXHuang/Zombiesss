@@ -12,6 +12,7 @@ public:
 	void FreeAudioEngine();
 	void TurnOffAudio();
 	int loadWavFile(char *str);
+	IXAudio2SourceVoice* getSource(){ return g_source; }
 private:
 	IXAudio2 *g_engine;
 	IXAudio2SourceVoice *g_source;

@@ -254,7 +254,7 @@ void SpriteManager::update(Game *game)
 
 	//walking sound effect
 	if (player.getWalk()){
-		if (player.getFC() >= 30){
+		if (player.getFC() >= 15){
 			player.setFC(0);
 			XAudio2 *xAudio2=game->getGSM()->getXAudio2();
 			xAudio2->loadWavFile("data/Sound/walking.wav");

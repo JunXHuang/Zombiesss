@@ -54,6 +54,15 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 
 		// YOU MIGHT WANT TO UNCOMMENT THIS FOR SOME TESTING,
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
+		
+		
+																	/*
+																	//Hit soundeffect
+																	xAudio2->loadWavFile(HitSound);
+																	xAudio2->createSource();
+																	xAudio2->playAudio();
+																	*/
+
 		if (input->isKeyDown(A_KEY))
 		{
 			player->setWalk(true);
@@ -113,6 +122,9 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
 			//gsm->getPhysics()->togglePhysics();
+			xAudio2->loadWavFile(HitSound);
+			xAudio2->createSource();
+			xAudio2->playAudio();
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
@@ -129,6 +141,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
+				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
 			}
 		}
@@ -143,6 +156,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
+				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
 			}
 		}
@@ -157,6 +171,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
+				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
 			}
 		}

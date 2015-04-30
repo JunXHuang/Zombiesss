@@ -88,6 +88,7 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
+				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
@@ -99,6 +100,7 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
+				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;

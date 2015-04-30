@@ -89,50 +89,57 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
 			//gsm->getPhysics()->togglePhysics();
-			xAudio2->initXAudio();
-			xAudio2->loadWavFile(AudioStr);
-			xAudio2->createSource();
-			xAudio2->playAudio();
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
-			xAudio2->TurnOffAudio();
 			//gsm->getPhysics()->activateForSingleUpdate();
 		}
 		/*load level 1 cheat CTRL +1*/
 		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(49u)){
-			if (LevelCheck != 1){
+			if (player->getLevelCheck() != 1){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
 				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
-				LevelCheck = 1;
-				NumberOfBotsPerLevel = 10;
+				player->setLevelCheck(1);
 				loadSprites(game);
+				xAudio2->TurnOffAudio();
+				xAudio2->initXAudio();
+				xAudio2->loadWavFile(Level1Sound);
+				xAudio2->createSource();
+				xAudio2->playAudio();
 			}
 		}
 		/*load level 2 cheat CTRL + 2*/
 		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(50u)){
-			if (LevelCheck != 2){
+			if (player->getLevelCheck() != 2){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
-				LevelCheck = 2;
-				NumberOfBotsPerLevel = 10;
+				player->setLevelCheck(2);
 				loadSprites(game);
+				xAudio2->TurnOffAudio();
+				xAudio2->initXAudio();
+				xAudio2->loadWavFile(Level2Sound);
+				xAudio2->createSource();
+				xAudio2->playAudio();
 			}
 		}
 		/*load level 3 cheat CTRL +3*/
 		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(51u)){
-			if (LevelCheck != 3){
+			if (player->getLevelCheck() != 3){
 				spriteManager->unloadSprites();
 				unload->unloadWorld();
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
-				LevelCheck = 3;
-				NumberOfBotsPerLevel = 10;
+				player->setLevelCheck(3);
 				loadSprites(game);
+				xAudio2->TurnOffAudio();
+				xAudio2->initXAudio();
+				xAudio2->loadWavFile(Level3Sound);
+				xAudio2->createSource();
+				xAudio2->playAudio();
 			}
 		}
 		// NOW SET THE ACTUAL PLAYER VELOCITY

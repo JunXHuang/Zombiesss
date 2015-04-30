@@ -37,12 +37,15 @@ protected:
 
 	// USED TO ITERATE THROUGH THE CURRENT ANIMATION SEQUENCE
 	unsigned int animationCounter;
+	int LevelCheck;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
 	wstring				getCurrentState()	{ return currentState;		}
 	unsigned int		getFrameIndex()		{ return frameIndex;		}
 	AnimatedSpriteType*	getSpriteType()		{ return spriteType;		}
+	void				setLevelCheck(int i)		{ LevelCheck = i; }
+	int					getLevelCheck()		{ return LevelCheck; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

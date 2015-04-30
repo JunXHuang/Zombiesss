@@ -7,7 +7,7 @@
 #include "Box2D\Dynamics\b2Fixture.h"
 #include "buggin_out\BugginOut.h"
 #include "buggin_out\BugginOutKeyEventHandler.h"
-
+#include "sssf\XAudio2\XAudio2.h"
 void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 
 	//check if fixture A was a ball
@@ -55,23 +55,39 @@ void BugginOutCollisionListener::EndContact(b2Contact* contact) {
 void BugginOutCollisionListener::OutOfBounds(Game* game) {
 	//player out of bounds
 	AnimatedSprite *player= game->getGSM()->getSpriteManager()->getPlayer();
-	BugginOutKeyEventHandler temp;
-	if (player->getX() > game->getGSM()->getWorld()->getWorldWidth() || player->getY() > game->getGSM()->getWorld()->getWorldHeight()){
-		TMXMapImporter tmxMapImporter;
-		game->getGSM()->getSpriteManager()->unloadSprites();
-		game->getGSM()->getWorld()->unloadWorld();
-		LevelCheck=(LevelCheck+1%3)+1;
-		switch (LevelCheck){
-		case 2:
-			tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
-			player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
-			break;
-		case 3:
-			tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
-			player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
-			break;
+	XAudio2 *xAudio2 = game->getGSM()->getXAudio2();
+	if (player->getLevelCheck() != 3){
+		if (player->getX() > game->getGSM()->getWorld()->getWorldWidth() || player->getY() > game->getGSM()->getWorld()->getWorldHeight()){
+			TMXMapImporter tmxMapImporter;
+			BugginOutKeyEventHandler temp;
+			game->getGSM()->getSpriteManager()->unloadSprites();
+			game->getGSM()->getWorld()->unloadWorld();
+			player->setLevelCheck((player->getLevelCheck() + 1) % 3);
+			switch (player->getLevelCheck()){
+			case 2:
+				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
+				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
+				xAudio2->TurnOffAudio();
+				xAudio2->initXAudio();
+				xAudio2->loadWavFile(Level2Sound);
+				xAudio2->createSource();
+				xAudio2->playAudio();
+				temp.loadSprites(game);
+				break;
+			case 0:
+				player->setLevelCheck(3);
+				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
+				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
+				xAudio2->TurnOffAudio();
+				xAudio2->initXAudio();
+				xAudio2->loadWavFile(Level3Sound);
+				xAudio2->createSource();
+				xAudio2->playAudio();
+			temp.loadSprites(game);
+				break;
+			default: break;
+			}
 		}
-		NumberOfBotsPerLevel = 10;
-		temp.loadSprites(game);
 	}
 }
+

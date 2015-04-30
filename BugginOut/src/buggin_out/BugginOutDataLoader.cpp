@@ -35,6 +35,7 @@
 
 // ANIMATED SPRITE TYPE LOADING
 #include "psti\PoseurSpriteTypesImporter.h"
+#include "sssf\XAudio2\XAudio2.h"
 
 /*
 	loadGame - This method loads the setup game data into the game and
@@ -165,7 +166,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	// LOAD THE LEVEL'S BACKGROUND TILES
 	TMXMapImporter tmxMapImporter;
 	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
-	LevelCheck = 1;
+	
 	// LOAD THE LEVEL'S SPRITE IMAGES
 	PoseurSpriteTypesImporter psti;
 	psti.loadSpriteTypes(game, SPRITE_TYPES_LIST);
@@ -176,9 +177,14 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	game->getGSM()->getWorld()->setGravity(W_GRAVITY);
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	AnimatedSprite *player = spriteManager->getPlayer();
-
+	XAudio2 *xAudio2 = game->getGSM()->getXAudio2();
+	xAudio2->initXAudio();
+	xAudio2->loadWavFile(Level1Sound);
+	xAudio2->createSource();
+	xAudio2->playAudio();
 	// NOTE THAT RED BOX MAN IS SPRITE ID 2
 	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(0);
+	player->setLevelCheck(1);
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
 	player->setCurrentState(IDLE);

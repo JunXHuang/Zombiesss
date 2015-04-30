@@ -34,7 +34,7 @@ World::World()
 	worldWidth = 0;
 	worldHeight = 0;
 	b2world->SetAllowSleeping(true);
-	//b2world->SetContinuousPhysics(true);
+	b2world->SetContinuousPhysics(true);
 }
 
 /*

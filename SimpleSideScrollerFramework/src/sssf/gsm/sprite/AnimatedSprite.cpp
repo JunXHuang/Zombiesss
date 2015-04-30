@@ -55,14 +55,16 @@ void AnimatedSprite::changeFrame(Game *game)
 
 	// GO BACK TO FIRST INDEX IF NECESSARY
 	if (frameIndex == spriteType->getSequenceSize(currentState)) {
-		frameIndex = 0;
 		if (dieOnAnimEnd) {
 			SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
 			if (this != spriteManager->getPlayer()){
 				Bot* bot = static_cast<Bot*>(this);
 				game->getGSM()->getSpriteManager()->removeBot(bot);
-			}
-		}
+				frameIndex -= 2;
+			} else
+				frameIndex = 0;
+		} else
+			frameIndex = 0;
 	}
 }
 

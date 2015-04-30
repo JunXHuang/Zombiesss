@@ -54,14 +54,6 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 
 		// YOU MIGHT WANT TO UNCOMMENT THIS FOR SOME TESTING,
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
-		
-		
-																	/*
-																	//Hit soundeffect
-																	xAudio2->loadWavFile(HitSound);
-																	xAudio2->createSource();
-																	xAudio2->playAudio();
-																	*/
 
 		if (input->isKeyDown(A_KEY))
 		{
@@ -117,6 +109,9 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setPosition(player->getX() + player->getSpriteType()->getTextureWidth(), player->getY());
 					spriteManager->addBot(game, bot);
 				}
+				xAudio2->loadWavFile(HitSound);
+				xAudio2->createSource();
+				xAudio2->playAudio();
 			}
 		}
 		if (input->isKeyDownForFirstTime(P_KEY))

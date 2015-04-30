@@ -296,7 +296,7 @@ void TiledLayer::init(int initColumns,
 	fixDef = new b2FixtureDef();
 	fixDef->shape = fixBox;
 	fixDef->density = 0.0f;
-	fixDef->friction = 0.5f;
+	fixDef->friction = 0.0f;
 	fixDef->restitution = 0.0f;
 }
 

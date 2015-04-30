@@ -233,7 +233,7 @@ void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *r
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	string keys[] = { "initMin", "initMax", "initVel" };
 	string vals[] = { "30", "120", "128" };
-	Bot *bot = new Bot(W_JUMP_BOT_FILE, 3, keys, vals);
+	Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);
 	bot->setCurrentState(JUMPING);

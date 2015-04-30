@@ -60,7 +60,7 @@ private:
 	SpriteManager *spriteManager;
 	XAudio2 *xAudio2;
 	
-
+	bool unload;
 public:
 	// INLINED ACCESSOR METHODS
 	GameState		getCurrentGameState()	{ return currentGameState;			}
@@ -82,6 +82,7 @@ public:
 	void			goToGame();
 	void			goToLoadLevel();
 	void			goToMainMenu();
+	void			finishGame();
 
 	// METHODS DEFINED in GameStateManager.cpp
 	GameStateManager();

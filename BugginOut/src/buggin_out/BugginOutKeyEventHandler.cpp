@@ -40,7 +40,6 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
 	Viewport *viewport = game->getGUI()->getViewport();
 	TMXMapImporter tmxMapImporter;
-	World *unload = game->getGSM()->getWorld();
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	XAudio2 *xAudio2 = game->getGSM()->getXAudio2();
 	
@@ -88,6 +87,29 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				cout << "WHAT HAPPENED?";
 			}
 		}
+		if (input->isKeyDownForFirstTime(VK_CONTROL)) {
+			SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+			if (player->getCurrentState() == ATTACKING_LEFT || player->getCurrentState() == ATTACKING_RIGHT) {
+				string keys[] = { "init" };
+				string vals[] = { "1" };
+				Bot *bot = new Bot(game, W_BAT_BOT_FILE, 1, keys, vals);
+				bot->setSpriteType(spriteManager->getSpriteType(6));
+				bot->setAlpha(255);
+				bot->setDieOnAnimEnd(true);
+				if (player->getCurrentState() == ATTACKING_LEFT) {
+					bot->setCurrentState(ATTACKING_LEFT);
+					bot->applyPhysics(game);
+					bot->setPosition(player->getX() - bot->getSpriteType()->getTextureWidth(), player->getY());
+					spriteManager->addBot(game, bot);
+				}
+				if (player->getCurrentState() == ATTACKING_RIGHT) {
+					bot->setCurrentState(ATTACKING_RIGHT);
+					bot->applyPhysics(game);
+					bot->setPosition(player->getX() + player->getSpriteType()->getTextureWidth(), player->getY());
+					spriteManager->addBot(game, bot);
+				}
+			}
+		}
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
 			//gsm->getPhysics()->togglePhysics();
@@ -99,13 +121,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		/*load level 1 cheat CTRL +1*/
 		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(49u)){
 			if (player->getLevelCheck() != 1){
-				spriteManager->unloadSprites();
-				unload->unloadWorld();
+				game->getGSM()->unloadCurrentLevel();
 				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 				player->setLevelCheck(1);
 				loadSprites(game);
-				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
@@ -115,13 +135,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		/*load level 2 cheat CTRL + 2*/
 		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(50u)){
 			if (player->getLevelCheck() != 2){
-				spriteManager->unloadSprites();
-				unload->unloadWorld();
+				game->getGSM()->unloadCurrentLevel();
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
 				player->setLevelCheck(2);
 				loadSprites(game);
-				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
@@ -131,13 +149,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		/*load level 3 cheat CTRL +3*/
 		if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(51u)){
 			if (player->getLevelCheck() != 3){
-				spriteManager->unloadSprites();
-				unload->unloadWorld();
+				game->getGSM()->unloadCurrentLevel();
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
 				player->setLevelCheck(3);
 				loadSprites(game);
-				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
@@ -238,7 +254,7 @@ void BugginOutKeyEventHandler::makeRandomJumpingBot(Game *game, AnimatedSpriteTy
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	string keys[] = { "initMin", "initMax", "initVel" };
 	string vals[] = { "30", "120", "128" };
-	Bot *bot = new Bot(W_JUMP_BOT_FILE, 3, keys, vals);
+	Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);
 	bot->setCurrentState(L"JUMPING");

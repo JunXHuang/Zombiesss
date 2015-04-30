@@ -8,7 +8,8 @@ static int LPPrint(LuaPlus::LuaState* state) {
 	return 0;
 }
 
-Bot::Bot(string fileName, int argc, string argk[], string argv[]) {
+Bot::Bot(Game* initGame, string fileName, int argc, string argk[], string argv[]) {
+	game = initGame;
 	luaState = LuaPlus::LuaState::Create(true);
 
 	for (int i = 0; i < argc; i++) {
@@ -18,7 +19,8 @@ Bot::Bot(string fileName, int argc, string argk[], string argv[]) {
 	init(fileName);
 }
 
-Bot::Bot(string fileName, int argc, string argv[]) {
+Bot::Bot(Game* initGame, string fileName, int argc, string argv[]) {
+	game = initGame;
 	luaState = LuaPlus::LuaState::Create(true);
 	
 	for (int i = 0; i < argc; i++) {
@@ -35,7 +37,7 @@ void Bot::init(string fileName) {
 	//forward bot functions
 	luaMetaTable = luaGlobals.CreateTable("MultiObjectMetaTable");
 	luaMetaTable.SetObject("__index", luaMetaTable);
-	luaMetaTable.RegisterObjectDirect("changeFrame",		(AnimatedSprite*)0,		&Bot::changeFrame);
+	//luaMetaTable.RegisterObjectDirect("changeFrame",		(AnimatedSprite*)0,		&Bot::changeFrame);
 	luaMetaTable.RegisterObjectDirect("getAlpha",			(AnimatedSprite*)0,		&Bot::getAlpha);
 	luaMetaTable.RegisterObjectDirect("getCurrentImageID",	(AnimatedSprite*)0,		&Bot::getCurrentImageID);
 	//luaMetaTable.RegisterObjectDirect("getCurrentState",	(AnimatedSprite*)0,		&Bot::getCurrentState);

@@ -25,6 +25,8 @@ protected:
 	// TRANSPARENCY/OPACITY
 	int alpha;
 
+	bool dieOnAnimEnd;
+
 	// THE "current" STATE DICTATES WHICH ANIMATION SEQUENCE 
 	// IS CURRENTLY IN USE, BUT IT MAP ALSO BE USED TO HELP
 	// WITH OTHER GAME ACTIVITIES, LIKE PHYSICS
@@ -52,6 +54,7 @@ public:
 	void				setWalk(bool w)		{ walked = w; }
 	int					getFC()				{ return frameCounter; }
 	void				setFC(int fc)		{ frameCounter = fc; }
+	void				setDieOnAnimEnd(bool die) { dieOnAnimEnd = die; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
@@ -61,8 +64,8 @@ public:
 	AnimatedSprite();
 	~AnimatedSprite();
 	void setSpriteType(AnimatedSpriteType *initSpriteType);
-	void changeFrame();
+	void changeFrame(Game *game);
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);
-	void updateSprite();
+	void updateSprite(Game *game);
 };

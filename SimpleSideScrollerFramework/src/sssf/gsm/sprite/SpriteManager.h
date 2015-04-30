@@ -39,8 +39,9 @@ private:
 
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
-	BotRecycler recyclableBots;
+	//BotRecycler recyclableBots;
 
+	list<Bot*> botsToRemove;
 public:
 	// NOTHING TO INIT OR DESTROY
 	SpriteManager();

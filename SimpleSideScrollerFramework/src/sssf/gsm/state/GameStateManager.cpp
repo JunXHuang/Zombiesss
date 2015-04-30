@@ -28,6 +28,7 @@ GameStateManager::GameStateManager()
 	currentGameState = GS_SPLASH_SCREEN;
 	currentLevel = NO_LEVEL_LOADED;
 	xAudio2 = new XAudio2();
+	unload = false;
 }
 
 /*
@@ -214,6 +215,12 @@ void GameStateManager::unloadCurrentLevel()
 {
 	spriteManager->unloadSprites();
 	world.unloadWorld();
+	xAudio2->FreeAudioEngine();
+}
+
+void GameStateManager::finishGame()
+{
+	unload = true;
 }
 
 /*
@@ -227,4 +234,10 @@ void GameStateManager::update(Game *game)
 {
 	spriteManager->update(game);
 	world.update(game);
+
+	if (unload) {
+		unload = false;
+		this->unloadCurrentLevel();
+		this->goToMainMenu();
+	}
 }

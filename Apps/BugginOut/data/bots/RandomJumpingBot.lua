@@ -52,11 +52,11 @@ end
 
 function moveBot(player)
 	local playerLocX = player:getX();
-	if (this:getX() <= (playerLocX + 300) and this:getX() >= (playerLocX - 300)) then
+	if (this:getX() <= (playerLocX + 500) and this:getX() >= (playerLocX - 500)) then
 		if (this:getX() > playerLocX) then
-			this:setVelocity(-30, 0);
+			this:setVelocity(-10, this:getVelocityY());
 		else
-			this:setVelocity(30, 0);
+			this:setVelocity(10, this:getVelocityY());
 		end
 	end
 end
@@ -70,11 +70,10 @@ function think(player)
 	-- EACH FRAME WE'LL TEST THIS BOT TO SEE IF WE NEED
 	-- TO PICK A DIFFERENT DIRECTION TO FLOAT IN
 
-	
+	moveBot(player);
 	if cyclesRemainingBeforeThinking == 0 then
 		pickRandomJump();
 		pickRandomCyclesInRange();
-		moveBot(player);
 	else
 		cyclesRemainingBeforeThinking = cyclesRemainingBeforeThinking - 1;
 	end

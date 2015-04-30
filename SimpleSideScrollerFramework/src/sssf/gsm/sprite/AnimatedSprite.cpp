@@ -10,7 +10,8 @@
 
 #include "sssf_VS\stdafx.h"
 #include "sssf\gsm\sprite\AnimatedSprite.h"
-#include "sssf\gsm\sprite\AnimatedSpriteType.h"
+#include "sssf\gsm\sprite\AnimatedSprite.h"
+#include "sssf\gsm\state\GameStateManager.h"
 
 #include "Box2D\Dynamics\b2World.h"
 #include "Box2D\Dynamics\b2Fixture.h"
@@ -26,6 +27,7 @@ AnimatedSprite::AnimatedSprite()
 	animationCounter = 0;
 	walked = false;
 	frameCounter = 0;
+	dieOnAnimEnd = false;
 }
 
 /*
@@ -43,7 +45,7 @@ AnimatedSprite::~AnimatedSprite()
 	changeFrame - This method allows for the changing of an image in an 
 	animation sequence for a given animation state.
 */
-void AnimatedSprite::changeFrame()
+void AnimatedSprite::changeFrame(Game *game)
 {
 	// RESET THE COUNTER
 	animationCounter = 0;
@@ -52,8 +54,16 @@ void AnimatedSprite::changeFrame()
 	frameIndex += 2;
 
 	// GO BACK TO FIRST INDEX IF NECESSARY
-	if (frameIndex == spriteType->getSequenceSize(currentState))
+	if (frameIndex == spriteType->getSequenceSize(currentState)) {
 		frameIndex = 0;
+		if (dieOnAnimEnd) {
+			SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
+			if (this != spriteManager->getPlayer()){
+				Bot* bot = static_cast<Bot*>(this);
+				game->getGSM()->getSpriteManager()->removeBot(bot);
+			}
+		}
+	}
 }
 
 void AnimatedSprite::setSpriteType(AnimatedSpriteType *initSpriteType) {
@@ -100,7 +110,7 @@ void AnimatedSprite::setCurrentState(wstring newState)
 	the animation speed. It also updates the sprite location
 	per the current velocity.
 */
-void AnimatedSprite::updateSprite()
+void AnimatedSprite::updateSprite(Game* game)
 {
 	unsigned int duration = spriteType->getDuration(currentState, frameIndex);
 	animationCounter++;
@@ -108,5 +118,5 @@ void AnimatedSprite::updateSprite()
 	// WE ONLY CHANGE THE ANIMATION FRAME INDEX WHEN THE
 	// ANIMATION COUNTER HAS REACHED THE DURATION
 	if (animationCounter >= duration)
-		changeFrame();
+		changeFrame(game);
 }

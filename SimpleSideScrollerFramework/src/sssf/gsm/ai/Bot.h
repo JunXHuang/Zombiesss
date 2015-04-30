@@ -8,14 +8,17 @@ class Bot : public AnimatedSprite {
 protected:
 	LuaPlus::LuaStateAuto luaState;
 	LuaPlus::LuaObject luaMetaTable;
+
 	void init(string fileName);
 private:
+	Game* game;
 	Bot(LuaPlus::LuaState* initState) { luaState = initState; }
 public:
-	Bot(string fileName, int argc, string argk[], string argv[]);
-	Bot(string fileName, int argc, string argv[]);
+	Bot(Game* initGame, string fileName, int argc, string argk[], string argv[]);
+	Bot(Game* initGame, string fileName, int argc, string argv[]);
 	~Bot();
 
+	Game* getGame() { return game; }
 	void think(Game *game);
 	Bot* clone() { return new Bot(luaState); }
 };

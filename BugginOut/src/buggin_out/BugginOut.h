@@ -44,6 +44,7 @@ static const wstring	W_GUI_INIT_FILE			= L"data/BugginOutGUI.txt";
 static const string		W_DEBUG_FILE			= "DebugOutput.txt";
 
 static const string		W_JUMP_BOT_FILE			= "data/bots/RandomJumpingBot.lua";
+static const string		W_BAT_BOT_FILE			= "data/bots/BatBot.lua";
 
 // HERE ARE THE GAME PROPERTIES WE ARE LOADING FROM FROM THE SETUP FILE
 static const wstring	W_TITLE					= L"TITLE";

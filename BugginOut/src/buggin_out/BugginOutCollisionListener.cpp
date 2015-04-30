@@ -15,25 +15,42 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 	AnimatedSprite *Obj1=NULL,*Obj2=NULL;
 	if (bodyUserData)
 		Obj1 = static_cast<AnimatedSprite*>(bodyUserData);
-
 	//check if fixture B was a ball
 	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
 	if (bodyUserData)
 		Obj2 = static_cast<AnimatedSprite*>(bodyUserData);
-	if (Obj1){
-		//Player
-		if (Obj1->getSpriteType()->getSpriteTypeID() == 2){}
-		//Bot
-		else{
-			if (!Obj2){}
+
+	if (Obj1 && Obj2){
+		int obj1ID = Obj1->getSpriteType()->getSpriteTypeID();
+		int obj2ID = Obj2->getSpriteType()->getSpriteTypeID();
+		if ((obj1ID == 0 || obj2ID == 0) && (obj1ID != 6 && obj2ID != 6)) {
+			//player vs zombie
+			AnimatedSprite* player;
+			Bot* bot;
+			if (obj1ID == 0) {
+				player = Obj1;
+				bot = static_cast<Bot*>(Obj2);
+			} else {
+				player = Obj2;
+				bot = static_cast<Bot*>(Obj1);
+			}
+			if (player->getY() + (3 * (player->getSpriteType()->getTextureHeight() / 4)) < bot->getY())
+				bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
+			else 
+				bot->getGame()->getGSM()->finishGame();
 		}
-	}
-	if (Obj2){
-		//Player
-		if (Obj2->getSpriteType()->getSpriteTypeID() == 2){}
-		//Bot
-		else{
-			if (!Obj1){}
+		if ((obj1ID == 6 || obj2ID == 6) && (obj1ID != 0 && obj2ID != 0)) {
+			//bat vs zombie
+			Bot* bat;
+			Bot* bot;
+			if (obj1ID == 6) {
+				bat = static_cast<Bot*>(Obj1);
+				bot = static_cast<Bot*>(Obj2);
+			} else {
+				bat = static_cast<Bot*>(Obj2);
+				bot = static_cast<Bot*>(Obj1);
+			}
+			bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
 		}
 	}
 }

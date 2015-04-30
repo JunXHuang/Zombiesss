@@ -227,8 +227,8 @@ void SpriteManager::unloadSprites()
 
 Bot* SpriteManager::removeBot(Bot *botToRemove)
 {
+	botsToRemove.push_back(botToRemove);
 	return NULL;
-	// @TODO - WE'LL DO THIS LATER WHEN WE LEARN MORE ABOUT MEMORY MANAGEMENT
 }
 
 /*
@@ -238,6 +238,20 @@ update method such that they may update themselves.
 */
 void SpriteManager::update(Game *game)
 {
+	for (list<Bot*>::iterator itr = botsToRemove.begin(); itr != botsToRemove.end(); itr++) {
+		Bot* bot = (*itr);
+
+		bots->bots.remove(bot);
+		for (int i = 0; i < 2; i++) {
+			bots->next[i]->bots.remove(bot);
+			for (int j = 0; j < 2; j++)
+				bots->next[i]->next[j]->bots.remove(bot);
+		}
+		if (bot)
+			delete bot;
+	}
+	botsToRemove.clear();
+
 	//walking sound effect
 	if (player.getWalk()){
 		if (player.getFC() >= 30){
@@ -252,7 +266,7 @@ void SpriteManager::update(Game *game)
 			player.setFC(player.getFC()+1);
 	}
 	// UPDATE THE PLAYER SPRITE
-	player.updateSprite();
+	player.updateSprite(game);
 
 	World* world = game->getGSM()->getWorld();
 	if (player.getX() < 0 || player.getY() < 0 ||
@@ -292,7 +306,7 @@ void SpriteManager::update(Game *game)
 
 void SpriteManager::ProcessBot(Game *game, Bot *bot){
 	bot->think(game);
-	bot->updateSprite();
+	bot->updateSprite(game);
 	addBot(game, bot);
 
 	/*World* world = game->getGSM()->getWorld();

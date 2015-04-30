@@ -236,9 +236,6 @@
     <ClInclude Include="src\sssf\gsm\sprite\AnimatedSpriteType.h">
       <Filter>src\sssf\gsm\sprite</Filter>
     </ClInclude>
-    <ClInclude Include="src\sssf\gsm\sprite\SpriteManager.h">
-      <Filter>src\sssf\gsm\sprite</Filter>
-    </ClInclude>
     <ClInclude Include="src\sssf\gsm\physics\CollidableObject.h">
       <Filter>src\sssf\gsm\physics</Filter>
     </ClInclude>
@@ -310,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="src\sssf\XAudio2\XAudio2.h">
       <Filter>src\sssf\XAudio2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\gsm\sprite\SpriteManager.h">
+      <Filter>src\sssf\gsm\state</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

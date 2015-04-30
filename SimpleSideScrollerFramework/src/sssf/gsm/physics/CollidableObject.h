@@ -12,6 +12,7 @@ protected:
 	b2Body* body;
 
 	float width, height;
+	float vx, vy;
 	bool physics = false;
 public:
 	CollidableObject()	{}
@@ -38,9 +39,18 @@ public:
 		body->SetTransform(position, 0.0f);
 	}
 	void setVelocity(float initX, float initY) {
+		vx = initX / PIXELS_PER_METER;
+		vy = initY / PIXELS_PER_METER;
+
 		b2Vec2 velocity;
-		velocity.x = initX / PIXELS_PER_METER;
-		velocity.y = initY / PIXELS_PER_METER;
+		velocity.x = vx;
+		velocity.y = vy;
+		body->SetLinearVelocity(velocity);
+	}
+	void updateVelocity() {
+		b2Vec2 velocity = body->GetLinearVelocity();
+		velocity.x = vx;
+		//velocity.y = vy;
 		body->SetLinearVelocity(velocity);
 	}
 	void applyForce(float initX, float initY) {
@@ -48,6 +58,13 @@ public:
 		force.x = initX / PIXELS_PER_METER;
 		force.y = initY / PIXELS_PER_METER;
 		body->ApplyForce(force, body->GetWorldCenter(), true);
+	}
+	void setGravity(bool gravity) {
+		if (gravity) {
+			body->SetGravityScale(1.0);
+		} else {
+			body->SetGravityScale(0.0);
+		}
 	}
 
 	void applyPhysics(Game* game);

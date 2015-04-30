@@ -7,4 +7,5 @@
   <sprite_type>yellow_box_man</sprite_type>
   <sprite_type>zombie</sprite_type>
   <sprite_type>bat</sprite_type>
+  <sprite_type>ball</sprite_type>
 </sprite_type_list>

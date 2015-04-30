@@ -20,5 +20,8 @@ public:
 
 	Game* getGame() { return game; }
 	void think(Game *game);
+	void setVar(string var, int val);
+	void setVar(string var, float val);
+	void setVar(string var, string val);
 	Bot* clone() { return new Bot(luaState); }
 };

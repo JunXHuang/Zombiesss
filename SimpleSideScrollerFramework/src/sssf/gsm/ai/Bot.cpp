@@ -1,9 +1,35 @@
 #include "sssf/gsm/ai/Bot.h"
 #include "sssf/gsm/state/GameStateManager.h"
 
+static Bot* thisBot;
+
 static int LPPrint(LuaPlus::LuaState* state) {
 	OutputDebugStringA(state->CheckString(1));
 	OutputDebugStringA("\n");
+
+	return 0;
+}
+
+static int LPSpawn(LuaPlus::LuaState* state) {
+	Game* game = thisBot->getGame();
+	SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
+	AnimatedSprite* player = spriteManager->getPlayer();
+
+	string keys[] = { "init"};
+	string vals[] = { "1"};
+	Bot *bot = new Bot(game, "data/bots/BallBot.lua", 1, keys, vals);
+	bot->setSpriteType(spriteManager->getSpriteType(7));
+	bot->setAlpha(255);
+	bot->setCurrentState(L"IDLE");
+	bot->applyPhysics(game);
+	bot->setPosition(thisBot->getX(), thisBot->getY());
+	bot->setGravity(false);
+	spriteManager->addBot(game, bot);
+	if (thisBot->getX() > player->getX()) {
+		bot->setVelocity(-30, 0);
+	} else {
+		bot->setVelocity(30, 0);
+	}
 
 	return 0;
 }
@@ -33,6 +59,7 @@ Bot::Bot(Game* initGame, string fileName, int argc, string argv[]) {
 void Bot::init(string fileName) {
 	LuaPlus::LuaObject luaGlobals = luaState->GetGlobals();
 	luaGlobals.Register("PrintString", LPPrint);
+	luaGlobals.Register("SpawnBall", LPSpawn);
 
 	//forward bot functions
 	luaMetaTable = luaGlobals.CreateTable("MultiObjectMetaTable");
@@ -76,8 +103,25 @@ Bot::~Bot() {
 	physics = false;
 }
 
+void Bot::setVar(string var, int val) {
+	LuaPlus::LuaObject sObj = luaState->GetGlobal(var.c_str());
+	sObj.AssignInteger(luaState, val);
+}
+
+void Bot::setVar(string var, float val) {
+	LuaPlus::LuaObject sObj = luaState->GetGlobal(var.c_str());
+	sObj.AssignNumber(luaState, val);
+}
+
+void Bot::setVar(string var, string val) {
+	LuaPlus::LuaObject sObj = luaState->GetGlobal(var.c_str());
+	sObj.AssignString(luaState, val.c_str());
+}
+
 
 void Bot::think(Game *game) {
+	thisBot = this;
+
 	LuaPlus::LuaObject luaPlayer = luaState->BoxPointer(game->getGSM()->getSpriteManager()->getPlayer());
 	luaPlayer.SetMetaTable(luaMetaTable);
 

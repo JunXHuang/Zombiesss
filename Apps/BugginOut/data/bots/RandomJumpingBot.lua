@@ -58,6 +58,8 @@ function moveBot(player)
 		else
 			this:setVelocity(10, this:getVelocityY());
 		end
+	else
+		this:setVelocity(0, this:getVelocityY());
 	end
 end
 
@@ -72,8 +74,9 @@ function think(player)
 
 	moveBot(player);
 	if cyclesRemainingBeforeThinking == 0 then
-		pickRandomJump();
+		--pickRandomJump();
 		pickRandomCyclesInRange();
+		SpawnBall();
 	else
 		cyclesRemainingBeforeThinking = cyclesRemainingBeforeThinking - 1;
 	end

@@ -330,12 +330,12 @@ void BugginOutDataLoader::initMainMenu(GameGUI *gui,	DirectXTextureManager *guiT
 	ScreenGUI *mainMenuGUI = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(W_MAIN_MENU_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->x = 256;
-	imageToAdd->y = 100;
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->alpha = 200;
-	imageToAdd->width = 512;
-	imageToAdd->height = 512;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
 	imageToAdd->imageID = imageID;
 	mainMenuGUI->addOverlayImage(imageToAdd);
 
@@ -349,8 +349,8 @@ void BugginOutDataLoader::initMainMenu(GameGUI *gui,	DirectXTextureManager *guiT
 	// - INIT THE EXIT BUTTON
 	buttonToAdd->initButton(normalTextureID, 
 							mouseOverTextureID,
-							412,
-							500,
+							576,
+							300,
 							0,
 							255,
 							200,
@@ -372,8 +372,8 @@ void BugginOutDataLoader::initMainMenu(GameGUI *gui,	DirectXTextureManager *guiT
 	// - INIT THE START BUTTON
 	buttonToAdd->initButton(normalTextureID, 
 							mouseOverTextureID,
-							412,
-							350,
+							320,
+							300,
 							0,
 							255,
 							200,

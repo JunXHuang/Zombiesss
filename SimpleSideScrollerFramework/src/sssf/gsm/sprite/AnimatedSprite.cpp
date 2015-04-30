@@ -114,6 +114,8 @@ void AnimatedSprite::setCurrentState(wstring newState)
 */
 void AnimatedSprite::updateSprite(Game* game)
 {
+	this->updateVelocity();
+
 	unsigned int duration = spriteType->getDuration(currentState, frameIndex);
 	animationCounter++;
 

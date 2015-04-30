@@ -227,7 +227,9 @@ void SpriteManager::unloadSprites()
 
 Bot* SpriteManager::removeBot(Bot *botToRemove)
 {
-	botsToRemove.push_back(botToRemove);
+	//make sure there are no duplicates
+	if (std::find(botsToRemove.begin(), botsToRemove.end(), botToRemove) == botsToRemove.end())
+		botsToRemove.push_back(botToRemove); //remove bot
 	return NULL;
 }
 

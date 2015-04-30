@@ -180,6 +180,9 @@ void Game::quitGame()
 	// CLEAN UP ALL THE WORLD TEXTURES
 	graphics->clearWorldTextures();
 
+	// UNLOAD CURRENT LEVEL
+	gsm->unloadCurrentLevel();
+
 	// WE'RE GOING BACK TO THE MAIN MENU
 	gsm->goToMainMenu();
 }

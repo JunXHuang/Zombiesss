@@ -38,6 +38,8 @@ protected:
 	// USED TO ITERATE THROUGH THE CURRENT ANIMATION SEQUENCE
 	unsigned int animationCounter;
 	int LevelCheck;
+	bool walked;
+	int frameCounter;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
@@ -46,6 +48,10 @@ public:
 	AnimatedSpriteType*	getSpriteType()		{ return spriteType;		}
 	void				setLevelCheck(int i)		{ LevelCheck = i; }
 	int					getLevelCheck()		{ return LevelCheck; }
+	bool				getWalk()			{ return walked; }
+	void				setWalk(bool w)		{ walked = w; }
+	int					getFC()				{ return frameCounter; }
+	void				setFC(int fc)		{ frameCounter = fc; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

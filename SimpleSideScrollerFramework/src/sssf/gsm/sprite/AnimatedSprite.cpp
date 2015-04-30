@@ -24,6 +24,8 @@ AnimatedSprite::AnimatedSprite()
 	spriteType = 0;
 	frameIndex = 0;
 	animationCounter = 0;
+	walked = false;
+	frameCounter = 0;
 }
 
 /*

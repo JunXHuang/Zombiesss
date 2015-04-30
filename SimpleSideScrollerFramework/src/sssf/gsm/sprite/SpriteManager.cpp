@@ -16,6 +16,7 @@ See SpriteManager.h for a class description.
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\state\GameStateManager.h"
+#include "sssf\XAudio2\XAudio2.h"
 
 /*
 addSpriteToRenderList - This method checks to see if the sprite
@@ -237,6 +238,19 @@ update method such that they may update themselves.
 */
 void SpriteManager::update(Game *game)
 {
+	//walking sound effect
+	if (player.getWalk()){
+		if (player.getFC() >= 30){
+			player.setFC(0);
+			XAudio2 *xAudio2=game->getGSM()->getXAudio2();
+			xAudio2->loadWavFile("data/Sound/walking.wav");
+			xAudio2->createSource();
+			xAudio2->playAudio();
+			player.setWalk(false);
+		}
+		else
+			player.setFC(player.getFC()+1);
+	}
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 

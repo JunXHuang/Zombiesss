@@ -57,11 +57,13 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
 		if (input->isKeyDown(A_KEY))
 		{
+			player->setWalk(true);
 			vX = -PLAYER_SPEED;
 			player->setCurrentState(ATTACKING_LEFT);
 		}
 		else if (input->isKeyDown(D_KEY))
 		{
+			player->setWalk(true);
 			vX = PLAYER_SPEED;
 			player->setCurrentState(ATTACKING_RIGHT);
 		}
@@ -103,7 +105,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 				player->setLevelCheck(1);
 				loadSprites(game);
-				xAudio2->TurnOffAudio();
+				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
@@ -119,7 +121,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
 				player->setLevelCheck(2);
 				loadSprites(game);
-				xAudio2->TurnOffAudio();
+				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
@@ -135,7 +137,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
 				player->setLevelCheck(3);
 				loadSprites(game);
-				xAudio2->TurnOffAudio();
+				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();

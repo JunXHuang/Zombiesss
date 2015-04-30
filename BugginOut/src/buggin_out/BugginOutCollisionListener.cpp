@@ -67,7 +67,7 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 			case 2:
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
-				xAudio2->TurnOffAudio();
+				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
@@ -78,12 +78,12 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				player->setLevelCheck(3);
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
-				xAudio2->TurnOffAudio();
+				xAudio2->FreeAudioEngine();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
 				xAudio2->playAudio();
-			temp.loadSprites(game);
+				temp.loadSprites(game);
 				break;
 			default: break;
 			}

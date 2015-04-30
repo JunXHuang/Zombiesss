@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BugginOut", "BugginOut\BugginOut.vcxproj", "{3E2D6D4A-BBFA-4423-AA70-CC0F35ECE4F8}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoseurSpriteTypesImporter", "PoseurSpriteTypesImporter\PoseurSpriteTypesImporter.vcxproj", "{B7AF65B4-2B6A-47F3-BA7C-816ADDCC1FC4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaPlus", "LuaPlus\LuaPlus.vcxproj", "{36554151-8896-407A-AFFC-671AAA15CCD9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XAudio2BasicSound", "XAudio2BasicSound\XAudio2BasicSound_2012.vcxproj", "{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +92,18 @@ Global
 		{36554151-8896-407A-AFFC-671AAA15CCD9}.Release|Win32.ActiveCfg = Release|Win32
 		{36554151-8896-407A-AFFC-671AAA15CCD9}.Release|Win32.Build.0 = Release|Win32
 		{36554151-8896-407A-AFFC-671AAA15CCD9}.Release|x64.ActiveCfg = Release|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Debug|Win32.Build.0 = Debug|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Debug|x64.ActiveCfg = Debug|x64
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Debug|x64.Build.0 = Debug|x64
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Profile|Win32.ActiveCfg = Profile|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Profile|Win32.Build.0 = Profile|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Profile|x64.ActiveCfg = Profile|x64
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Profile|x64.Build.0 = Profile|x64
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Release|Win32.ActiveCfg = Release|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Release|Win32.Build.0 = Release|Win32
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Release|x64.ActiveCfg = Release|x64
+		{C93E74C8-D021-4DA6-92DE-4BF63FAC418B}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -43,6 +43,7 @@ protected:
 	bool walked;
 	int stunned;
 	int frameCounter;
+	bool isZombie;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
@@ -58,6 +59,8 @@ public:
 	int					getFC()				{ return frameCounter; }
 	void				setFC(int fc)		{ frameCounter = fc; }
 	void				setDieOnAnimEnd(bool die) { dieOnAnimEnd = die; }
+	bool				getisZombie()		{ return isZombie; }
+	void				setisZombie(bool is){ isZombie = is; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
@@ -71,4 +74,5 @@ public:
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);
 	void updateSprite(Game *game);
+
 };

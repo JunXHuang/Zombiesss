@@ -242,7 +242,6 @@ void SpriteManager::update(Game *game)
 {
 	for (list<Bot*>::iterator itr = botsToRemove.begin(); itr != botsToRemove.end(); itr++) {
 		Bot* bot = (*itr);
-
 		bots->bots.remove(bot);
 		for (int i = 0; i < 2; i++) {
 			bots->next[i]->bots.remove(bot);
@@ -304,6 +303,7 @@ void SpriteManager::update(Game *game)
 			}
 		}
 	}
+	updateZombieSpriteFacingLocation();
 }
 
 void SpriteManager::ProcessBot(Game *game, Bot *bot){
@@ -340,4 +340,38 @@ SpriteManager::~SpriteManager(){
 		delete[] bots->next[i];
 	}
 	delete[] bots;
+}
+
+void SpriteManager::updateZombieSpriteFacingLocation(){
+	list<Bot*>::iterator it = bots->bots.begin();
+	while (it != bots->bots.end()) {
+		Bot* bot = *(it);
+		it++;
+		if (bot->getisZombie())
+		if (bot->getVelocityX()>1)
+			bot->setCurrentState(L"RIGHT");
+		else bot->setCurrentState(L"LEFT");
+	}
+	for (int i = 0; i < 2; i++) {
+		list<Bot*>::iterator it = bots->next[i]->bots.begin();
+		while (it != bots->next[i]->bots.end()) {
+			Bot* bot = *(it);
+			it++;
+			if (bot->getisZombie())
+			if (bot->getVelocityX()>1)
+				bot->setCurrentState(L"RIGHT");
+			else bot->setCurrentState(L"LEFT");
+		}
+		for (int j = 0; j < 2; j++) {
+			list<Bot*>::iterator it = bots->next[i]->next[j]->bots.begin();
+			while (it != bots->next[i]->next[j]->bots.end()) {
+				Bot* bot = *(it);
+				it++;
+				if (bot->getisZombie())
+				if (bot->getVelocityX()>1)
+					bot->setCurrentState(L"RIGHT");
+				else bot->setCurrentState(L"LEFT");
+			}
+		}
+	}
 }

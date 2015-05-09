@@ -18,7 +18,7 @@ static int LPSpawn(LuaPlus::LuaState* state) {
 	string keys[] = { "init"};
 	string vals[] = { "1"};
 	Bot *bot = new Bot(game, "data/bots/BallBot.lua", 1, keys, vals);
-	bot->setSpriteType(spriteManager->getSpriteType(7));
+	bot->setSpriteType(spriteManager->getSpriteType(3));
 	bot->setAlpha(255);
 	bot->setCurrentState(L"IDLE");
 	bot->applyPhysics(game);

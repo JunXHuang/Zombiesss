@@ -56,6 +56,8 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 				//bat vs zombie - kill zombie
 				bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
 			}
+			//screen shake
+			shake(bot->getGame());
 		} else if ((obj1ID == 7 || obj2ID == 7) && (obj1ID < 6 || obj2ID < 6)) {
 			Bot* ball;
 			AnimatedSprite* other;
@@ -208,3 +210,13 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 	}
 }
 
+
+void BugginOutCollisionListener::shake(Game* game) {
+	float randX = 0;
+	float randY = 0;
+	(std::rand() % 2) == 0 ? randX = -16 : randX = 16;
+	(std::rand() % 2) == 0 ? randY = -16 : randY = 16;
+	Viewport* view = game->getGUI()->getViewport();
+	World* world = game->getGSM()->getWorld();
+	view->moveViewport((int)floor(randX), (int)floor(randY), world->getWorldWidth(), world->getWorldHeight());
+}

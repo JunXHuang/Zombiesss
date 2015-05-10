@@ -103,7 +103,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				string keys[] = { "init" };
 				string vals[] = { "1" };
 				Bot *bot = new Bot(game, W_BAT_BOT_FILE, 1, keys, vals);
-				bot->setSpriteType(spriteManager->getSpriteType(2));
+				bot->setSpriteType(spriteManager->getSpriteType(BAT_SPRITE_TYPE));
 				bot->setAlpha(255);
 				bot->setDieOnAnimEnd(true);
 				if (player->getCurrentState() == ATTACKING_LEFT) {
@@ -180,7 +180,8 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			}
 		}
 		// NOW SET THE ACTUAL PLAYER VELOCITY
- 		player->setVelocity(vX, vY);
+		if (!player->isDieOnAnimEnd())
+ 			player->setVelocity(vX, vY);
 
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
@@ -263,7 +264,7 @@ void BugginOutKeyEventHandler::loadSprites(Game *game){
 	AnimatedSpriteType *botSpriteType;
 	int BotPosX, worldWidth = game->getGSM()->getWorld()->getWorldWidth()-500,worldHeight=game->getGSM()->getWorld()->getWorldHeight()/10;
 	for (int i = 0; i < NumberOfBotsPerLevel; i++){
-		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
+		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(ZOMBIE_SPRITE_TYPE);
 		BotPosX = rand() % worldWidth+500;
 		makeRandomJumpingBot(game, botSpriteType, (float)BotPosX,(float)worldHeight);
 	}
@@ -272,7 +273,7 @@ void BugginOutKeyEventHandler::makeRandomJumpingBot(Game *game, AnimatedSpriteTy
 {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	string keys[] = { "initMin", "initMax", "initVel" };
-	string vals[] = { "30", "120", "128" };
+	string vals[] = { "30", "90", "128" };
 	Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);

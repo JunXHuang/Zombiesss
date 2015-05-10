@@ -13,6 +13,14 @@
         <image_file id="7" file_name="player_left3.png"/>
         <image_file id="8" file_name="player_stunned_left.png"/>
         <image_file id="9" file_name="player_stunned_right.png"/>
+        <image_file id="10" file_name="player_die1.png"/>
+        <image_file id="11" file_name="player_die2.png"/>
+        <image_file id="12" file_name="player_die3.png"/>
+        <image_file id="13" file_name="player_die4.png"/>
+        <image_file id="14" file_name="player_die5.png"/>
+        <image_file id="15" file_name="player_die6.png"/>
+        <image_file id="16" file_name="player_die7.png"/>
+        <image_file id="17" file_name="player_die8.png"/>
     </images_list>
     <animations_list>
         <animation_state>
@@ -55,6 +63,19 @@
             <state>STUNNED_RIGHT</state>
             <animation_sequence>
                 <pose image_id="9" duration="20"/>
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>DEAD</state>
+            <animation_sequence>
+                <pose image_id="10" duration="4"/>
+                <pose image_id="11" duration="4"/>
+                <pose image_id="12" duration="4"/>
+                <pose image_id="13" duration="4"/>
+                <pose image_id="14" duration="4"/>
+                <pose image_id="15" duration="4"/>
+                <pose image_id="16" duration="4"/>
+                <pose image_id="17" duration="64"/>
             </animation_sequence>
         </animation_state>
     </animations_list>  

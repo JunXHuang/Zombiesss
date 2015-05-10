@@ -59,6 +59,7 @@ public:
 	int					getFC()				{ return frameCounter; }
 	void				setFC(int fc)		{ frameCounter = fc; }
 	void				setDieOnAnimEnd(bool die) { dieOnAnimEnd = die; }
+	bool				isDieOnAnimEnd()	{ return dieOnAnimEnd; }
 	bool				getisZombie()		{ return isZombie; }
 	void				setisZombie(bool is){ isZombie = is; }
 

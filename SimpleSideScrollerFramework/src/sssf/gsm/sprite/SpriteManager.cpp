@@ -18,6 +18,9 @@ See SpriteManager.h for a class description.
 #include "sssf\gsm\state\GameStateManager.h"
 #include "sssf\XAudio2\XAudio2.h"
 
+static const wstring LEFT(L"LEFT");
+static const wstring RIGHT(L"RIGHT");
+
 /*
 addSpriteToRenderList - This method checks to see if the sprite
 parameter is inside the viewport. If it is, a RenderItem is generated
@@ -347,30 +350,36 @@ void SpriteManager::updateZombieSpriteFacingLocation(){
 	while (it != bots->bots.end()) {
 		Bot* bot = *(it);
 		it++;
-		if (bot->getisZombie())
-		if (bot->getVelocityX()>1)
-			bot->setCurrentState(L"RIGHT");
-		else bot->setCurrentState(L"LEFT");
+		if (bot->getisZombie()) {
+			if (bot->getVelocityX() > 1.0)
+				bot->setCurrentState(RIGHT);
+			if (bot->getVelocityX() < -1.0)
+				bot->setCurrentState(LEFT);
+		}
 	}
 	for (int i = 0; i < 2; i++) {
 		list<Bot*>::iterator it = bots->next[i]->bots.begin();
 		while (it != bots->next[i]->bots.end()) {
 			Bot* bot = *(it);
 			it++;
-			if (bot->getisZombie())
-			if (bot->getVelocityX()>1)
-				bot->setCurrentState(L"RIGHT");
-			else bot->setCurrentState(L"LEFT");
+			if (bot->getisZombie()) {
+				if (bot->getVelocityX() > 1.0)
+					bot->setCurrentState(RIGHT);
+				if (bot->getVelocityX() < -1.0)
+					bot->setCurrentState(LEFT);
+			}
 		}
 		for (int j = 0; j < 2; j++) {
 			list<Bot*>::iterator it = bots->next[i]->next[j]->bots.begin();
 			while (it != bots->next[i]->next[j]->bots.end()) {
 				Bot* bot = *(it);
 				it++;
-				if (bot->getisZombie())
-				if (bot->getVelocityX()>1)
-					bot->setCurrentState(L"RIGHT");
-				else bot->setCurrentState(L"LEFT");
+				if (bot->getisZombie()) {
+					if (bot->getVelocityX() > 1.0)
+						bot->setCurrentState(RIGHT);
+					if (bot->getVelocityX() < -1.0)
+						bot->setCurrentState(LEFT);
+				}
 			}
 		}
 	}

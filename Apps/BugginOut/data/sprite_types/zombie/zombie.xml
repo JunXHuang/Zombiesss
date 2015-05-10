@@ -35,7 +35,7 @@
             </animation_sequence>
         </animation_state>
         <animation_state>
-            <state>LEFTDEAD</state>
+            <state>LEFT_DEAD</state>
             <animation_sequence>
                 <pose image_id="7" duration="10"/>
                 <pose image_id="8" duration="12"/>
@@ -43,7 +43,7 @@
             </animation_sequence>
         </animation_state>
         <animation_state>
-            <state>RIGHTDEAD</state>
+            <state>RIGHT_DEAD</state>
             <animation_sequence>
                 <pose image_id="10" duration="10"/>
                 <pose image_id="11" duration="12"/>

@@ -99,7 +99,12 @@ static const wstring	ATTACKING_RIGHT(L"ATTACKING_RIGHT");
 static const wstring	ATTACKING_LEFT(L"ATTACKING_LEFT");
 static const wstring	STUNNED_LEFT(L"STUNNED_LEFT");
 static const wstring	STUNNED_RIGHT(L"STUNNED_RIGHT");
+static const wstring	LEFT(L"LEFT");
+static const wstring	RIGHT(L"RIGHT");
+static const wstring	LEFT_DEAD(L"LEFT_DEAD");
+static const wstring	RIGHT_DEAD(L"RIGHT_DEAD");
 static const wstring	IDLE(L"IDLE");
+static const wstring	DEAD(L"DEAD");
 
 // USED FOR MOVEMENT
 const unsigned int W_KEY = (unsigned int)'W';
@@ -117,3 +122,9 @@ const unsigned int SPACE_KEY = VK_SPACE;
 
 // THIS IS JUST FOR SHOWING HOW THE CURSOR CAN BE CHANGED
 const unsigned int C_KEY = (unsigned int)'C';
+
+// SPRITE TYPES
+static const int PLAYER_SPRITE_TYPE = 0;
+static const int ZOMBIE_SPRITE_TYPE = 1;
+static const int BAT_SPRITE_TYPE = 2;
+static const int BALL_SPRITE_TYPE = 3;

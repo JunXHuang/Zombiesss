@@ -184,7 +184,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	xAudio2->getSource()->SetVolume(0.1);
 	xAudio2->playAudio();
 	// NOTE THAT RED BOX MAN IS SPRITE ID 2
-	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(0);
+	AnimatedSpriteType *playerSpriteType = spriteManager->getSpriteType(PLAYER_SPRITE_TYPE);
 	player->setLevelCheck(1);
 	player->setSpriteType(playerSpriteType);
 	player->setAlpha(255);
@@ -193,7 +193,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 	player->setVelocity(0.0f, 0.0f);
 
-	AnimatedSpriteType *botSpriteType = spriteManager->getSpriteType(1);
+	AnimatedSpriteType *botSpriteType = spriteManager->getSpriteType(ZOMBIE_SPRITE_TYPE);
 	// AND LET'S ADD A BUNCH OF RANDOM JUMPING BOTS, FIRST ALONG
 	// A LINE NEAR THE TOP
 
@@ -229,7 +229,6 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	int BotPosX, worldWidth = game->getGSM()->getWorld()->getWorldWidth() - 500, worldHeight = game->getGSM()->getWorld()->getWorldHeight() / 10;
 	for (int i = 0; i < NumberOfBotsPerLevel; i++){
-		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
 		BotPosX = rand() % worldWidth + 500;
 		makeRandomJumpingBot(game, botSpriteType, (float)BotPosX, (float)worldHeight);
 	}
@@ -239,7 +238,7 @@ void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *r
 {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	string keys[] = { "initMin", "initMax", "initVel" };
-	string vals[] = { "30", "120", "128" };
+	string vals[] = { "30", "90", "128" };
 	Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);

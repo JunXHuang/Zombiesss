@@ -61,9 +61,11 @@ void AnimatedSprite::changeFrame(Game *game)
 			if (this != spriteManager->getPlayer()){
 				Bot* bot = static_cast<Bot*>(this);
 				game->getGSM()->getSpriteManager()->removeBot(bot);
-				frameIndex -= 2;
-			} else
-				frameIndex = 0;
+			} else {
+				dieOnAnimEnd = false;
+				game->getGSM()->finishGame();
+			}
+			frameIndex -= 2;
 		} else
 			frameIndex = 0;
 	}
@@ -94,6 +96,7 @@ unsigned int AnimatedSprite::getCurrentImageID()
 */
 void AnimatedSprite::setCurrentState(wstring newState) 
 {
+	if (dieOnAnimEnd) return;
 	string cs(currentState.begin(), currentState.end());
 	string ns(newState.begin(), newState.end());
 	if (strcmp(cs.c_str(), ns.c_str()) != 0)

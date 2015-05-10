@@ -50,19 +50,6 @@ function init()
 	return 0;
 end
 
-function moveBot(player)
-	local playerLocX = player:getX();
-	if (this:getX() <= (playerLocX + 500) and this:getX() >= (playerLocX - 500)) then
-		if (this:getX() > playerLocX) then
-			this:setVelocity(-10, this:getVelocityY());
-		else
-			this:setVelocity(10, this:getVelocityY());
-		end
-	else
-		this:setVelocity(0, this:getVelocityY());
-	end
-end
-
 --[[
 	think - called once per frame, this is where the bot performs its
 	decision-making. Note that we might not actually do any thinking each
@@ -71,12 +58,25 @@ end
 function think(player)
 	-- EACH FRAME WE'LL TEST THIS BOT TO SEE IF WE NEED
 	-- TO PICK A DIFFERENT DIRECTION TO FLOAT IN
-
-	moveBot(player);
+	local playerLocX = player:getX();
+	local inRange = false;
+	if (this:getX() <= (playerLocX + 500) and this:getX() >= (playerLocX - 500)) then
+		--move zombie
+		if (this:getX() > playerLocX) then
+			this:setVelocity(-10, this:getVelocityY());
+		else
+			this:setVelocity(10, this:getVelocityY());
+		end
+		inRange = true;
+	else
+		this:setVelocity(0, this:getVelocityY());
+	end
+	
 	if cyclesRemainingBeforeThinking == 0 then
 		--pickRandomJump();
 		pickRandomCyclesInRange();
-		if (math.random(5) == 1) then
+		--spawn ball
+		if (inRange == true) then
 			SpawnBall();
 		end
 	else

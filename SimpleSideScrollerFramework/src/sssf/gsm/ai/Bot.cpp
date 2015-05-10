@@ -120,6 +120,9 @@ void Bot::setVar(string var, string val) {
 
 
 void Bot::think(Game *game) {
+	//don't think if bot is dead
+	if (dieOnAnimEnd) return;
+
 	thisBot = this;
 
 	LuaPlus::LuaObject luaPlayer = luaState->BoxPointer(game->getGSM()->getSpriteManager()->getPlayer());

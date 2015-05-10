@@ -23,25 +23,29 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 	if (Obj1 && Obj2){
 		int obj1ID = Obj1->getSpriteType()->getSpriteTypeID();
 		int obj2ID = Obj2->getSpriteType()->getSpriteTypeID();
-		if ((obj1ID == 0 || obj2ID == 0) && obj1ID < 6 && obj2ID < 6) {
+		if ((obj1ID == PLAYER_SPRITE_TYPE || obj2ID == PLAYER_SPRITE_TYPE) && (obj1ID == ZOMBIE_SPRITE_TYPE || obj2ID == ZOMBIE_SPRITE_TYPE)) {
 			//player vs zombie - kill player
 			AnimatedSprite* player;
 			Bot* bot;
-			if (obj1ID == 0) {
-				player = Obj1;
+			if (obj1ID == PLAYER_SPRITE_TYPE) {
+				player = static_cast<AnimatedSprite*>(Obj1);
 				bot = static_cast<Bot*>(Obj2);
 			} else {
-				player = Obj2;
+				player = static_cast<AnimatedSprite*>(Obj2);
 				bot = static_cast<Bot*>(Obj1);
 			}
-			if (player->getY() + (player->getSpriteType()->getTextureHeight() / 2) < bot->getY())
-				bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
-			else 
-				bot->getGame()->getGSM()->finishGame();
-		} else if ((obj1ID == 6 || obj2ID == 6) && (obj1ID != 6 || obj2ID != 6) && obj1ID != 0 && obj2ID != 0) {
+			if (!bot->isDieOnAnimEnd()) {
+				if (player->getY() + (player->getSpriteType()->getTextureHeight() / 2) < bot->getY()) {
+					bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
+				} else {
+					player->setCurrentState(DEAD);
+					player->setDieOnAnimEnd(true);
+				}
+			}
+		} else if ((obj1ID == BAT_SPRITE_TYPE || obj2ID == BAT_SPRITE_TYPE) && (obj1ID != PLAYER_SPRITE_TYPE && obj2ID != PLAYER_SPRITE_TYPE)) {
 			Bot* bat;
 			Bot* bot;
-			if (obj1ID == 6) {
+			if (obj1ID == BAT_SPRITE_TYPE) {
 				bat = static_cast<Bot*>(Obj1);
 				bot = static_cast<Bot*>(Obj2);
 			} else {
@@ -49,19 +53,27 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 				bot = static_cast<Bot*>(Obj1);
 			}
 			int botID = bot->getSpriteType()->getSpriteTypeID();
-			if (botID == 7) {
+			if (botID == BALL_SPRITE_TYPE) {
 				//bat vs ball - reverse velocity
 				bot->setVelocity(-bot->getVelocityX(), bot->getVelocityY());
-			} else {
+			} else if (botID == ZOMBIE_SPRITE_TYPE) {
 				//bat vs zombie - kill zombie
-				bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
+				if (bot->getVelocityX() < -1.0) {
+					bot->setCurrentState(LEFT_DEAD);
+					bot->setVelocity(0.0, bot->getVelocityY());
+					bot->setDieOnAnimEnd(true);
+				} else if (bot->getVelocityX() > 1.0) {
+					bot->setCurrentState(RIGHT_DEAD);
+					bot->setVelocity(0.0, bot->getVelocityY());
+					bot->setDieOnAnimEnd(true);
+				} else bot->getGame()->getGSM()->getSpriteManager()->removeBot(bot);
 			}
 			//screen shake
 			shake(bot->getGame());
-		} else if ((obj1ID == 7 || obj2ID == 7) && (obj1ID < 6 || obj2ID < 6)) {
+		} else if ((obj1ID == BALL_SPRITE_TYPE || obj2ID == BALL_SPRITE_TYPE)) {
 			Bot* ball;
 			AnimatedSprite* other;
-			if (obj1ID == 7) {
+			if (obj1ID == BALL_SPRITE_TYPE) {
 				ball = static_cast<Bot*>(Obj1);
 				other = static_cast<AnimatedSprite*>(Obj2);
 			} else {
@@ -69,7 +81,7 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 				other = static_cast<AnimatedSprite*>(Obj1);
 			}
 			int otherID = other->getSpriteType()->getSpriteTypeID();
-			if (otherID == 0) {
+			if (otherID == PLAYER_SPRITE_TYPE) {
 				//player vs ball
 				other->stun(15);
 				if (other->getCurrentState() == ATTACKING_LEFT)
@@ -78,26 +90,34 @@ void BugginOutCollisionListener::BeginContact(b2Contact* contact) {
 					other->setCurrentState(STUNNED_RIGHT);
 				//remove ball
 				ball->getGame()->getGSM()->getSpriteManager()->removeBot(ball);
-			} else {
+			} else if (otherID == ZOMBIE_SPRITE_TYPE) {
 				//zombie vs ball - kill zombie
 				AnimatedSprite* player = ball->getGame()->getGSM()->getSpriteManager()->getPlayer();
 				if ((ball->getVelocityX() > 0 && player->getX() < ball->getX()) ||
 					(ball->getVelocityX() < 0 && player->getX() > ball->getX())) {
 					//ball hostile to zombies
 					Bot* otherBot = static_cast<Bot*>(other);
-					otherBot->getGame()->getGSM()->getSpriteManager()->removeBot(otherBot);
+					if (otherBot->getVelocityX() < -1.0) {
+						otherBot->setCurrentState(LEFT_DEAD);
+						otherBot->setVelocity(0.0, otherBot->getVelocityY());
+						otherBot->setDieOnAnimEnd(true);
+					} else if (otherBot->getVelocityX() > 1.0) {
+						otherBot->setCurrentState(RIGHT_DEAD);
+						otherBot->setVelocity(0.0, otherBot->getVelocityY());
+						otherBot->setDieOnAnimEnd(true);
+					} else otherBot->getGame()->getGSM()->getSpriteManager()->removeBot(otherBot);
 					//remove ball
 					ball->getGame()->getGSM()->getSpriteManager()->removeBot(ball);
 				}
 			}
 		}
 	} else if (Obj1) {
-		if (Obj1->getSpriteType()->getSpriteTypeID() == 7) {
+		if (Obj1->getSpriteType()->getSpriteTypeID() == BALL_SPRITE_TYPE) {
 			Bot* ball = static_cast<Bot*>(Obj1);
 			ball->getGame()->getGSM()->getSpriteManager()->removeBot(ball);
 		}
 	} else if (Obj2) {
-		if (Obj2->getSpriteType()->getSpriteTypeID() == 7) {
+		if (Obj2->getSpriteType()->getSpriteTypeID() == BALL_SPRITE_TYPE) {
 			Bot* ball = static_cast<Bot*>(Obj2);
 			ball->getGame()->getGSM()->getSpriteManager()->removeBot(ball);
 		}
@@ -133,20 +153,22 @@ void BugginOutCollisionListener::PreSolve(b2Contact* contact, const b2Manifold* 
 	if (Obj1 && Obj2) {
 		int obj1ID = Obj1->getSpriteType()->getSpriteTypeID();
 		int obj2ID = Obj2->getSpriteType()->getSpriteTypeID();
-		if ((obj1ID == 7 || obj2ID == 7) && (obj1ID < 6 || obj2ID < 6)) {
-			Bot* ball;
+		if ((obj1ID == ZOMBIE_SPRITE_TYPE || obj2ID == ZOMBIE_SPRITE_TYPE)) {
+			//zombie vs ball - pass through if ball is not hostile
+			Bot* zombie;
 			AnimatedSprite* other;
-			if (obj1ID == 7) {
-				ball = static_cast<Bot*>(Obj1);
+			if (obj1ID == ZOMBIE_SPRITE_TYPE) {
+				zombie = static_cast<Bot*>(Obj1);
 				other = static_cast<AnimatedSprite*>(Obj2);
-			}
-			else {
-				ball = static_cast<Bot*>(Obj2);
+			} else {
+				zombie = static_cast<Bot*>(Obj2);
 				other = static_cast<AnimatedSprite*>(Obj1);
 			}
 			int otherID = other->getSpriteType()->getSpriteTypeID();
-			if (otherID > 0) {
-				//zombie vs ball - pass through if ball is not hostile
+			if (zombie->isDieOnAnimEnd())
+				contact->SetEnabled(false);
+			else if (otherID == BALL_SPRITE_TYPE || otherID == BALL_SPRITE_TYPE) {
+				Bot* ball = static_cast<Bot*>(other);
 				AnimatedSprite* player = ball->getGame()->getGSM()->getSpriteManager()->getPlayer();
 				if ((ball->getVelocityX() > 0 && player->getX() > ball->getX()) ||
 					(ball->getVelocityX() < 0 && player->getX() < ball->getX())) {

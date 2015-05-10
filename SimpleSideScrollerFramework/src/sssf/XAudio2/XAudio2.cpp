@@ -24,25 +24,8 @@ int XAudio2::initXAudio(){
 		return -2;
 	}
 
-
-
-	//start consuming audio in the source voice
-	//g_source->Start();
-	
-	//simple message loop
-	//while (MessageBox(0, TEXT("Do you want to play the sound?"), TEXT("ABLAX: PAS"), MB_YESNO) == IDYES)
-	//{
-	
-	//}
-	
-		//release the engine, NOT the voices!
-	//		g_engine->Release();
-		//again, for COM
-	//		CoUninitialize();
-
 }
 XAudio2::XAudio2(){
-
 }
 XAudio2::~XAudio2(){
 }

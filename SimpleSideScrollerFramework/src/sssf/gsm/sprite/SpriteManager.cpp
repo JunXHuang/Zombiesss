@@ -255,7 +255,7 @@ void SpriteManager::update(Game *game)
 			delete bot;
 	}
 	botsToRemove.clear();
-
+	
 	//walking sound effect
 	if (player.getWalk()){
 		if (player.getFC() >= 15){
@@ -263,6 +263,7 @@ void SpriteManager::update(Game *game)
 			XAudio2 *xAudio2=game->getGSM()->getXAudio2();
 			xAudio2->loadWavFile("data/Sound/walking.wav");
 			xAudio2->createSource();
+			xAudio2->getSource()->SetVolume(0.03);
 			xAudio2->playAudio();
 			player.setWalk(false);
 		}
@@ -278,7 +279,7 @@ void SpriteManager::update(Game *game)
 		player.getY() + player.getSpriteType()->getTextureHeight() > world->getWorldHeight()) {
 		world->getListener()->OutOfBounds(game);
 	}
-
+	world->getListener()->LoopBackGroundMusic(game);
 	
 	// NOW UPDATE THE REST OF THE SPRITES
 	Btree *temp = bots;

@@ -103,7 +103,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				string keys[] = { "init" };
 				string vals[] = { "1" };
 				Bot *bot = new Bot(game, W_BAT_BOT_FILE, 1, keys, vals);
-				bot->setSpriteType(spriteManager->getSpriteType(6));
+				bot->setSpriteType(spriteManager->getSpriteType(2));
 				bot->setAlpha(255);
 				bot->setDieOnAnimEnd(true);
 				if (player->getCurrentState() == ATTACKING_LEFT) {
@@ -263,7 +263,7 @@ void BugginOutKeyEventHandler::loadSprites(Game *game){
 	AnimatedSpriteType *botSpriteType;
 	int BotPosX, worldWidth = game->getGSM()->getWorld()->getWorldWidth()-500,worldHeight=game->getGSM()->getWorld()->getWorldHeight()/10;
 	for (int i = 0; i < NumberOfBotsPerLevel; i++){
-		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(rand() % 4 + 1);
+		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
 		BotPosX = rand() % worldWidth+500;
 		makeRandomJumpingBot(game, botSpriteType, (float)BotPosX,(float)worldHeight);
 	}
@@ -276,7 +276,8 @@ void BugginOutKeyEventHandler::makeRandomJumpingBot(Game *game, AnimatedSpriteTy
 	Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);
-	bot->setCurrentState(L"JUMPING");
+	bot->setCurrentState(L"LEFT");
+	bot->setisZombie(true);
 	bot->applyPhysics(game);
 	bot->setPosition(initX, initY);
 	spriteManager->addBot(game, bot);

@@ -63,5 +63,6 @@ public:
 	Bot*				removeBot(Bot *botToRemove);
 	void				unloadSprites();
 	void				update(Game *game);
+	void				updateZombieSpriteFacingLocation();
 	void				ProcessBot(Game *game, Bot *bot);
 };

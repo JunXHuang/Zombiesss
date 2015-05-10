@@ -229,7 +229,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	int BotPosX, worldWidth = game->getGSM()->getWorld()->getWorldWidth() - 500, worldHeight = game->getGSM()->getWorld()->getWorldHeight() / 10;
 	for (int i = 0; i < NumberOfBotsPerLevel; i++){
-		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(rand() % 4 + 1);
+		botSpriteType = game->getGSM()->getSpriteManager()->getSpriteType(1);
 		BotPosX = rand() % worldWidth + 500;
 		makeRandomJumpingBot(game, botSpriteType, (float)BotPosX, (float)worldHeight);
 	}
@@ -243,8 +243,9 @@ void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *r
 	Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
 	bot->setSpriteType(randomJumpingBotType);
 	bot->setAlpha(255);
-	bot->setCurrentState(JUMPING);
+	bot->setCurrentState(L"LEFT");
 	bot->applyPhysics(game);
+	bot->setisZombie(true);
 	bot->setPosition(initX, initY);
 	spriteManager->addBot(game, bot);
 }

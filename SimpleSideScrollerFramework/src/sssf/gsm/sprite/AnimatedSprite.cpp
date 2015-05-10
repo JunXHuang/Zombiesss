@@ -27,6 +27,7 @@ AnimatedSprite::AnimatedSprite()
 	animationCounter = 0;
 	walked = false;
 	frameCounter = 0;
+	isZombie = false;
 	dieOnAnimEnd = false;
 }
 

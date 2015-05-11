@@ -105,7 +105,6 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				Bot *bot = new Bot(game, W_BAT_BOT_FILE, 1, keys, vals);
 				bot->setSpriteType(spriteManager->getSpriteType(BAT_SPRITE_TYPE));
 				bot->setAlpha(255);
-				bot->setDieOnAnimEnd(true);
 				if (player->getCurrentState() == ATTACKING_LEFT) {
 					bot->setCurrentState(ATTACKING_LEFT);
 					bot->applyPhysics(game);
@@ -118,6 +117,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setPosition(player->getX() + player->getSpriteType()->getTextureWidth(), player->getY());
 					spriteManager->addBot(game, bot);
 				}
+				bot->setDieOnAnimEnd(true);
 				xAudio2->loadWavFile(HitSound);
 				xAudio2->createSource();
 				xAudio2->playAudio();

@@ -263,7 +263,7 @@ void SpriteManager::update(Game *game)
 			XAudio2 *xAudio2=game->getGSM()->getXAudio2();
 			xAudio2->loadWavFile("data/Sound/walking.wav");
 			xAudio2->createSource();
-			xAudio2->getSource()->SetVolume(0.03);
+			xAudio2->getSource()->SetVolume(0.5);
 			xAudio2->playAudio();
 			player.setWalk(false);
 		}

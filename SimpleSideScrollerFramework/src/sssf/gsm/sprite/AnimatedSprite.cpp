@@ -29,6 +29,7 @@ AnimatedSprite::AnimatedSprite()
 	frameCounter = 0;
 	isZombie = false;
 	dieOnAnimEnd = false;
+	MusicFrameCounter = 0;
 }
 
 /*

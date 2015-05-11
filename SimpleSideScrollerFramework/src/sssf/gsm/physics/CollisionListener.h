@@ -6,4 +6,5 @@ class CollisionListener : public b2ContactListener
 {
 public:
 	virtual void OutOfBounds(Game* game) {}
+	virtual void LoopBackGroundMusic(Game* game){}
 };

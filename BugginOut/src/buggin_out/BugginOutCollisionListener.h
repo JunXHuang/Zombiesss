@@ -11,6 +11,6 @@ public:
 	void EndContact(b2Contact* contact);
 	void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
 	void OutOfBounds(Game* game);
-
 	void shake(Game* game);
+	void LoopBackGroundMusic(Game* game);
 };

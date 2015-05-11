@@ -188,29 +188,28 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 		if (player->getX() > game->getGSM()->getWorld()->getWorldWidth() || player->getY() > game->getGSM()->getWorld()->getWorldHeight()){
 			TMXMapImporter tmxMapImporter;
 			BugginOutKeyEventHandler temp;
-			game->getGSM()->getSpriteManager()->unloadSprites();
-			game->getGSM()->getWorld()->unloadWorld();
+			game->getGSM()->unloadCurrentLevel();
 			player->setLevelCheck((player->getLevelCheck() + 1) % 3);
 			switch (player->getLevelCheck()){
 			case 1:
 				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
-				xAudio2->FreeAudioEngine();
+				player->setMFC();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.1);
+				xAudio2->getSource()->SetVolume(0.05);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
 			case 2:
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
-				xAudio2->FreeAudioEngine();
+				player->setMFC();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.1);
+				xAudio2->getSource()->SetVolume(0.05);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
@@ -218,11 +217,11 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				player->setLevelCheck(3);
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
-				xAudio2->FreeAudioEngine();
+				player->setMFC();
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.1);
+				xAudio2->getSource()->SetVolume(0.05);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
@@ -241,4 +240,45 @@ void BugginOutCollisionListener::shake(Game* game) {
 	Viewport* view = game->getGUI()->getViewport();
 	World* world = game->getGSM()->getWorld();
 	view->moveViewport((int)floor(randX), (int)floor(randY), world->getWorldWidth(), world->getWorldHeight());
+}
+void BugginOutCollisionListener::LoopBackGroundMusic(Game* game){
+	XAudio2 *xAudio2 = game->getGSM()->getXAudio2();
+	AnimatedSprite *player = game->getGSM()->getSpriteManager()->getPlayer();
+	switch (player->getLevelCheck()){
+	case 1:
+		if (player->getMFC() == 1300){
+			player->setMFC();
+			xAudio2->FreeAudioEngine();
+			xAudio2->initXAudio();
+			xAudio2->loadWavFile(Level1Sound);
+			xAudio2->createSource();
+			xAudio2->getSource()->SetVolume(0.05);
+			xAudio2->playAudio();
+		}
+		break;
+	case 2:
+		if (player->getMFC() == 930){
+			player->setMFC();
+			xAudio2->FreeAudioEngine();
+			xAudio2->initXAudio();
+			xAudio2->loadWavFile(Level2Sound);
+			xAudio2->createSource();
+			xAudio2->getSource()->SetVolume(0.05);
+			xAudio2->playAudio();
+		}
+		break;
+	case 3:
+		if (player->getMFC() == 1100){
+			player->setMFC();
+			xAudio2->FreeAudioEngine();
+			xAudio2->initXAudio();
+			xAudio2->loadWavFile(Level3Sound);
+			xAudio2->createSource();
+			xAudio2->getSource()->SetVolume(0.05);
+			xAudio2->playAudio();
+		}
+		break;
+	default: break;
+	}
+	player->incMFC();
 }

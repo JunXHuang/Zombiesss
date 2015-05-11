@@ -141,12 +141,13 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 				player->setPosition(PLAYER_LEVEL1_X, PLAYER_LEVEL1_Y);
 				player->setLevelCheck(1);
+				player->setMFC();
 				loadSprites(game);
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
+				xAudio2->getSource()->SetVolume(0.05);
 			}
 		}
 		/*load level 2 cheat CTRL + 2*/
@@ -156,12 +157,13 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
 				player->setPosition(PLAYER_LEVEL2_X, PLAYER_LEVEL2_Y);
 				player->setLevelCheck(2);
+				player->setMFC();
 				loadSprites(game);
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
+				xAudio2->getSource()->SetVolume(0.05);
 			}
 		}
 		/*load level 3 cheat CTRL +3*/
@@ -171,12 +173,13 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 				player->setPosition(PLAYER_LEVEL3_X, PLAYER_LEVEL3_Y);
 				player->setLevelCheck(3);
+				player->setMFC();
 				loadSprites(game);
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.1);
 				xAudio2->playAudio();
+				xAudio2->getSource()->SetVolume(0.05);
 			}
 		}
 		// NOW SET THE ACTUAL PLAYER VELOCITY

@@ -44,6 +44,7 @@ protected:
 	int stunned;
 	int frameCounter;
 	bool isZombie;
+	int MusicFrameCounter;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
@@ -62,6 +63,9 @@ public:
 	bool				isDieOnAnimEnd()	{ return dieOnAnimEnd; }
 	bool				getisZombie()		{ return isZombie; }
 	void				setisZombie(bool is){ isZombie = is; }
+	void				setMFC()			{ MusicFrameCounter = 0; }
+	int					getMFC()			{ return MusicFrameCounter; }
+	void				incMFC()			{ MusicFrameCounter += 1; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

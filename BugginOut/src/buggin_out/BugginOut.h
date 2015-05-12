@@ -10,15 +10,14 @@
 
 // HERE IS THE BugginOut GAME SETUP/INIT FILE. EVERYTHING WOULD START FROM HERE
 
-
 static const float		PLAYER_LEVEL1_X = 80.0f;
-static const float		PLAYER_LEVEL1_Y = 1400.0f;
+static const float		PLAYER_LEVEL1_Y = 100.0f;
 
-static const float		PLAYER_LEVEL2_X = 100.0f;
-static const float		PLAYER_LEVEL2_Y = 1500.0f;
+static const float		PLAYER_LEVEL2_X = 80.0f;
+static const float		PLAYER_LEVEL2_Y = 100.0f;
 
 static const float		PLAYER_LEVEL3_X = 80.0f;
-static const float		PLAYER_LEVEL3_Y = 100.0f;
+static const float		PLAYER_LEVEL3_Y = 10.0f;
 
 static int				NumberOfBotsPerLevel = 10;
 
@@ -28,16 +27,16 @@ static char*			Level2Sound				= "data/Sound/Level2.wav";
 static char*			Level3Sound				= "data/Sound/Level3.wav";
 static char*			HitSound				= "data/Sound/hit.wav";
 
-static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerSecondLevel/";
-static const wstring	W_LEVEL_1_NAME			= L"SideScrollerSecondLevel.tmx";
+static const wstring	W_LEVEL_1_DIR			= L"data/levels/SideScrollerFirstLevel/";
+static const wstring	W_LEVEL_1_NAME			= L"SideScrollerFirstLevel.tmx";
 static const wstring	W_LEVEL_1_PATH			= W_LEVEL_1_DIR + W_LEVEL_1_NAME;
 
-static const wstring	W_LEVEL_2_DIR			= L"data/levels/SideScrollerThirdLevel/";
-static const wstring	W_LEVEL_2_NAME			= L"SideScrollerThirdLevel.tmx";
+static const wstring	W_LEVEL_2_DIR			= L"data/levels/SideScrollerSecondLevel/";
+static const wstring	W_LEVEL_2_NAME			= L"SideScrollerSecondLevel.tmx";
 static const wstring	W_LEVEL_2_PATH			= W_LEVEL_2_DIR + W_LEVEL_2_NAME;
 
-static const wstring	W_LEVEL_3_DIR			= L"data/levels/SideScrollerForest/";
-static const wstring	W_LEVEL_3_NAME			= L"SideScrollerForestLevel.tmx";
+static const wstring	W_LEVEL_3_DIR			= L"data/levels/SideScrollerThirdLevel/";
+static const wstring	W_LEVEL_3_NAME			= L"SideScrollerThirdLevel.tmx";
 static const wstring	W_LEVEL_3_PATH			= W_LEVEL_3_DIR + W_LEVEL_3_NAME;
 
 static const wstring	W_INIT_FILE				= L"data/ZombiesssInit.txt";

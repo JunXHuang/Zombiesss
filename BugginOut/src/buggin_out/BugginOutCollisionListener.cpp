@@ -149,7 +149,12 @@ void BugginOutCollisionListener::PreSolve(b2Contact* contact, const b2Manifold* 
 	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
 	if (bodyUserData)
 		Obj2 = static_cast<AnimatedSprite*>(bodyUserData);
-
+	if (Obj1)
+		if (Obj1->getSpriteType()->getSpriteTypeID() == 4)
+			contact->SetEnabled(false);
+	if (Obj2)
+		if (Obj2->getSpriteType()->getSpriteTypeID() == 4)
+			contact->SetEnabled(false);
 	if (Obj1 && Obj2) {
 		int obj1ID = Obj1->getSpriteType()->getSpriteTypeID();
 		int obj2ID = Obj2->getSpriteType()->getSpriteTypeID();
@@ -282,6 +287,7 @@ void BugginOutCollisionListener::LoopBackGroundMusic(Game* game){
 	}
 	player->incMFC();
 }
+
 void BugginOutCollisionListener::WinLoseDisplay(Game *game){
 	//Player Dies
 	AnimatedSprite* player = game->getGSM()->getSpriteManager()->getPlayer();
@@ -296,6 +302,7 @@ void BugginOutCollisionListener::WinLoseDisplay(Game *game){
 			bot->setCurrentState(L"DIED");
 			bot->setisZombie(false);
 			bot->applyPhysics(game);
+			bot->setGravity(0.0);
 			bot->setPosition(player->getX(), player->getY()-300);	//need to be adjusted
 			spriteManager->addBot(game, bot);
 			player->setLose(true);
@@ -312,6 +319,7 @@ void BugginOutCollisionListener::WinLoseDisplay(Game *game){
 		bot->setCurrentState(L"WIN");
 		bot->setisZombie(false);
 		bot->applyPhysics(game);
+		bot->setGravity(0.0);
 		bot->setPosition(player->getX()-700, player->getY() - 300);	//need to be adjusted
 		spriteManager->addBot(game, bot);
 		player->setWin(true);

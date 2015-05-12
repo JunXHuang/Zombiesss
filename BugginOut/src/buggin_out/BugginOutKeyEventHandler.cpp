@@ -126,9 +126,6 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
 			//gsm->getPhysics()->togglePhysics();
-			xAudio2->loadWavFile(HitSound);
-			xAudio2->createSource();
-			xAudio2->playAudio();
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
@@ -147,7 +144,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
 				xAudio2->playAudio();
-				xAudio2->getSource()->SetVolume(0.05);
+				xAudio2->getSource()->SetVolume(0.05f);
 			}
 		}
 		/*load level 2 cheat CTRL + 2*/
@@ -163,7 +160,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
 				xAudio2->playAudio();
-				xAudio2->getSource()->SetVolume(0.05);
+				xAudio2->getSource()->SetVolume(0.05f);
 			}
 		}
 		/*load level 3 cheat CTRL +3*/
@@ -179,7 +176,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
 				xAudio2->playAudio();
-				xAudio2->getSource()->SetVolume(0.05);
+				xAudio2->getSource()->SetVolume(0.05f);
 			}
 		}
 		// NOW SET THE ACTUAL PLAYER VELOCITY
@@ -211,7 +208,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		Viewport *viewport = game->getGUI()->getViewport();
 
-		if (!viewportMoved) {
+		if (!viewportMoved&&!player->getLose()&&!player->getWin()) {
 			//check if viewport is not on player
 			float pX = player->getX() + (player->getSpriteType()->getTextureWidth() / 2);
 			float pY = player->getY() + (player->getSpriteType()->getTextureHeight() / 2);

@@ -13,4 +13,5 @@ public:
 	void OutOfBounds(Game* game);
 	void shake(Game* game);
 	void LoopBackGroundMusic(Game* game);
+	void WinLoseDisplay(Game* game);
 };

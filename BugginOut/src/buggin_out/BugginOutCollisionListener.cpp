@@ -198,7 +198,7 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level1Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.05);
+				xAudio2->getSource()->SetVolume(0.05f);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
@@ -209,7 +209,7 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level2Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.05);
+				xAudio2->getSource()->SetVolume(0.05f);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
@@ -221,7 +221,7 @@ void BugginOutCollisionListener::OutOfBounds(Game* game) {
 				xAudio2->initXAudio();
 				xAudio2->loadWavFile(Level3Sound);
 				xAudio2->createSource();
-				xAudio2->getSource()->SetVolume(0.05);
+				xAudio2->getSource()->SetVolume(0.05f);
 				xAudio2->playAudio();
 				temp.loadSprites(game);
 				break;
@@ -252,7 +252,7 @@ void BugginOutCollisionListener::LoopBackGroundMusic(Game* game){
 			xAudio2->initXAudio();
 			xAudio2->loadWavFile(Level1Sound);
 			xAudio2->createSource();
-			xAudio2->getSource()->SetVolume(0.05);
+			xAudio2->getSource()->SetVolume(0.05f);
 			xAudio2->playAudio();
 		}
 		break;
@@ -263,7 +263,7 @@ void BugginOutCollisionListener::LoopBackGroundMusic(Game* game){
 			xAudio2->initXAudio();
 			xAudio2->loadWavFile(Level2Sound);
 			xAudio2->createSource();
-			xAudio2->getSource()->SetVolume(0.05);
+			xAudio2->getSource()->SetVolume(0.05f);
 			xAudio2->playAudio();
 		}
 		break;
@@ -274,11 +274,46 @@ void BugginOutCollisionListener::LoopBackGroundMusic(Game* game){
 			xAudio2->initXAudio();
 			xAudio2->loadWavFile(Level3Sound);
 			xAudio2->createSource();
-			xAudio2->getSource()->SetVolume(0.05);
+			xAudio2->getSource()->SetVolume(0.05f);
 			xAudio2->playAudio();
 		}
 		break;
 	default: break;
 	}
 	player->incMFC();
+}
+void BugginOutCollisionListener::WinLoseDisplay(Game *game){
+	//Player Dies
+	AnimatedSprite* player = game->getGSM()->getSpriteManager()->getPlayer();
+	if (player->isDieOnAnimEnd()&&!player->getLose()){
+			AnimatedSpriteType *PlayerDied = game->getGSM()->getSpriteManager()->getSpriteType(4);
+			SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+			string keys[] = { "initMin", "initMax", "initVel" };
+			string vals[] = { "30", "90", "128" };
+			Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
+			bot->setSpriteType(PlayerDied);
+			bot->setAlpha(255);
+			bot->setCurrentState(L"DIED");
+			bot->setisZombie(false);
+			bot->applyPhysics(game);
+			bot->setPosition(player->getX(), player->getY()-300);	//need to be adjusted
+			spriteManager->addBot(game, bot);
+			player->setLose(true);
+	}
+	//Player wins
+	if ((player->getY() > game->getGSM()->getWorld()->getWorldHeight()||player->getX()>game->getGSM()->getWorld()->getWorldWidth())&& (player->getLevelCheck() == 3)&&!player->getWin()){
+		AnimatedSpriteType *PlayerDied = game->getGSM()->getSpriteManager()->getSpriteType(4);
+		SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+		string keys[] = { "initMin", "initMax", "initVel" };
+		string vals[] = { "30", "90", "128" };
+		Bot *bot = new Bot(game, W_JUMP_BOT_FILE, 3, keys, vals);
+		bot->setSpriteType(PlayerDied);
+		bot->setAlpha(255);
+		bot->setCurrentState(L"WIN");
+		bot->setisZombie(false);
+		bot->applyPhysics(game);
+		bot->setPosition(player->getX()-700, player->getY() - 300);	//need to be adjusted
+		spriteManager->addBot(game, bot);
+		player->setWin(true);
+	}
 }

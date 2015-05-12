@@ -181,7 +181,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	xAudio2->initXAudio();
 	xAudio2->loadWavFile(Level1Sound);
 	xAudio2->createSource();
-	xAudio2->getSource()->SetVolume(0.05);
+	xAudio2->getSource()->SetVolume(0.05f);
 	xAudio2->playAudio();
 
 	// NOTE THAT RED BOX MAN IS SPRITE ID 2

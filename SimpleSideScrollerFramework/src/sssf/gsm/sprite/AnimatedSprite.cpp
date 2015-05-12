@@ -30,6 +30,8 @@ AnimatedSprite::AnimatedSprite()
 	isZombie = false;
 	dieOnAnimEnd = false;
 	MusicFrameCounter = 0;
+	win = false;
+	lose = false;
 }
 
 /*

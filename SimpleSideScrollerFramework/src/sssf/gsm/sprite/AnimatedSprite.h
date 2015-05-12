@@ -45,6 +45,8 @@ protected:
 	int frameCounter;
 	bool isZombie;
 	int MusicFrameCounter;
+	bool win;
+	bool lose;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
@@ -66,6 +68,10 @@ public:
 	void				setMFC()			{ MusicFrameCounter = 0; }
 	int					getMFC()			{ return MusicFrameCounter; }
 	void				incMFC()			{ MusicFrameCounter += 1; }
+	bool				getWin()				{ return win; }
+	bool				getLose()				{ return lose; }
+	void				setWin(bool w)			{ win = w; }
+	void				setLose(bool l)			{ lose = l; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)

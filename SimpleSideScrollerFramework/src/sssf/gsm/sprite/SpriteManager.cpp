@@ -280,7 +280,7 @@ void SpriteManager::update(Game *game)
 		world->getListener()->OutOfBounds(game);
 	}
 	world->getListener()->LoopBackGroundMusic(game);
-	
+	world->getListener()->WinLoseDisplay(game);
 	// NOW UPDATE THE REST OF THE SPRITES
 	Btree *temp = bots;
 	int counter = temp->bots.size();

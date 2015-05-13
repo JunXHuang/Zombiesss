@@ -84,9 +84,9 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		else
 		{
 			vX = 0.0f;
-			player->setCurrentState(IDLE);
+			//player->setCurrentState(IDLE);
 		}
-		if (input->isKeyDownForFirstTime(SPACE_KEY))
+		if (input->isKeyDownForFirstTime(87U))
 		{
 			if ((int)player->getVelocityY() == 0 && !player->isStunned())
 			{
@@ -97,7 +97,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				cout << "WHAT HAPPENED?";
 			}
 		}
-		if (input->isKeyDownForFirstTime(VK_CONTROL) && !player->isStunned()) {
+		if (input->isKeyDownForFirstTime(VK_SPACE) && !player->isStunned()) {
 			SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 			if (player->getCurrentState() == ATTACKING_LEFT || player->getCurrentState() == ATTACKING_RIGHT) {
 				string keys[] = { "init" };

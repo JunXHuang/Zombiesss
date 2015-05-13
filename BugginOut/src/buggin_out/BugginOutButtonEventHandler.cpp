@@ -45,4 +45,20 @@ void BugginOutButtonEventHandler::handleButtonEvents(	Game *game,
 	{
 		game->quitGame();
 	}
+	else if (command.compare(W_ABOUT_COMMAND) == 0){
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToAbout();
+	}
+	else if (command.compare(W_BACK_COMMAND) == 0){
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToMainMenu();
+	}
+	else if (command.compare(W_CONTROLS_COMMAND) == 0){
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToControls();
+	}
+	else if (command.compare(W_HELP_COMMAND) == 0){
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToHelp();
+	}
 }

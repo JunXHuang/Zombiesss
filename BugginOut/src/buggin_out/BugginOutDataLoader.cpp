@@ -255,6 +255,7 @@ void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *r
 	Note that we load all the GUI components from this method, including
 	the ScreenGUI with Buttons and Overlays and the Cursor.
 */
+
 void BugginOutDataLoader::hardCodedLoadGUIExample(Game *game)
 {
 	GameGUI *gui = game->getGUI();
@@ -266,8 +267,128 @@ void BugginOutDataLoader::hardCodedLoadGUIExample(Game *game)
 	initSplashScreen(game, gui, guiTextureManager);
 	initMainMenu(gui, guiTextureManager);
 	initInGameGUI(gui, guiTextureManager);
+	initAbout(gui, guiTextureManager);
+	initControls(gui, guiTextureManager);
+	initHelp(gui, guiTextureManager);
 }
+void BugginOutDataLoader::initHelp(GameGUI *gui, DirectXTextureManager *guiTextureManager){
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *AboutGUI = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_HELP_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
+	imageToAdd->imageID = imageID;
+	AboutGUI->addOverlayImage(imageToAdd);
 
+	// AND LET'S ADD AN EXIT BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_PATH);
+	int mouseOverTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE BACK BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		0,
+		0,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_BACK_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	AboutGUI->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_HELP, AboutGUI);
+}
+void BugginOutDataLoader::initControls(GameGUI *gui, DirectXTextureManager *guiTextureManager){
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *AboutGUI = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_CONTROLS_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
+	imageToAdd->imageID = imageID;
+	AboutGUI->addOverlayImage(imageToAdd);
+
+	// AND LET'S ADD AN EXIT BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_PATH);
+	int mouseOverTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE BACK BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		0,
+		0,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_BACK_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	AboutGUI->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_CONTROLS, AboutGUI);
+}
+/* init about page*/
+void BugginOutDataLoader::initAbout(GameGUI *gui, DirectXTextureManager *guiTextureManager){
+	// NOW LET'S LOAD A MAIN MENU GUI SCREEN
+	ScreenGUI *AboutGUI = new ScreenGUI();
+	unsigned int imageID = guiTextureManager->loadTexture(W_ABOUT_PATH);
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->x = 0;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->alpha = 200;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
+	imageToAdd->imageID = imageID;
+	AboutGUI->addOverlayImage(imageToAdd);
+
+	// AND LET'S ADD AN EXIT BUTTON
+	Button *buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+	int normalTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_PATH);
+	int mouseOverTextureID = guiTextureManager->loadTexture(W_EXIT_IMAGE_MO_PATH);
+
+	// - INIT THE BACK BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		0,
+		0,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_BACK_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	AboutGUI->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	gui->addScreenGUI(GS_ABOUT, AboutGUI);
+}
 /*
 	initCursor - initializes a simple little cursor for the gui.
 */
@@ -356,7 +477,7 @@ void BugginOutDataLoader::initMainMenu(GameGUI *gui,	DirectXTextureManager *guiT
 	// - INIT THE EXIT BUTTON
 	buttonToAdd->initButton(normalTextureID, 
 							mouseOverTextureID,
-							576,
+							776,
 							300,
 							0,
 							255,
@@ -379,7 +500,7 @@ void BugginOutDataLoader::initMainMenu(GameGUI *gui,	DirectXTextureManager *guiT
 	// - INIT THE START BUTTON
 	buttonToAdd->initButton(normalTextureID, 
 							mouseOverTextureID,
-							320,
+							120,
 							300,
 							0,
 							255,
@@ -387,6 +508,72 @@ void BugginOutDataLoader::initMainMenu(GameGUI *gui,	DirectXTextureManager *guiT
 							100,
 							false,
 							W_START_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	mainMenuGUI->addButton(buttonToAdd);
+
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	normalTextureID = guiTextureManager->loadTexture(W_ABOUT_IMAGE_PATH);
+	mouseOverTextureID = guiTextureManager->loadTexture(W_ABOUT_IMAGE_MO_PATH);
+
+	// - INIT THE ABOUT BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		300,
+		300,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_ABOUT_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	mainMenuGUI->addButton(buttonToAdd);
+
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	normalTextureID = guiTextureManager->loadTexture(W_CONTROLS_IMAGE_PATH);
+	mouseOverTextureID = guiTextureManager->loadTexture(W_CONTROLS_IMAGE_MO_PATH);
+
+	// - INIT THE CONTROLS BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		600,
+		300,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_CONTROLS_COMMAND);
+
+	// AND NOW LOAD IT INTO A ScreenGUI
+	mainMenuGUI->addButton(buttonToAdd);
+
+	buttonToAdd = new Button();
+
+	// - GET THE BUTTON COMMAND AND IMAGE IDs
+
+	normalTextureID = guiTextureManager->loadTexture(W_HELP_IMAGE_PATH);
+	mouseOverTextureID = guiTextureManager->loadTexture(W_HELP_IMAGE_MO_PATH);
+
+	// - INIT THE CONTROLS BUTTON
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		450,
+		300,
+		0,
+		255,
+		200,
+		100,
+		false,
+		W_HELP_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);

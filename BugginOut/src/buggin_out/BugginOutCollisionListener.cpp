@@ -303,7 +303,7 @@ void BugginOutCollisionListener::WinLoseDisplay(Game *game){
 			bot->setisZombie(false);
 			bot->applyPhysics(game);
 			bot->setGravity(0.0);
-			bot->setPosition(player->getX(), player->getY()-300);	//need to be adjusted
+			bot->setPosition(player->getX()-150, game->getGSM()->getWorld()->getWorldHeight()-600);	//need to be adjusted
 			spriteManager->addBot(game, bot);
 			player->setLose(true);
 	}
@@ -320,7 +320,7 @@ void BugginOutCollisionListener::WinLoseDisplay(Game *game){
 		bot->setisZombie(false);
 		bot->applyPhysics(game);
 		bot->setGravity(0.0);
-		bot->setPosition(player->getX()-700, player->getY() - 300);	//need to be adjusted
+		bot->setPosition(player->getX()-800, player->getY() - 150);	//need to be adjusted
 		spriteManager->addBot(game, bot);
 		player->setWin(true);
 	}

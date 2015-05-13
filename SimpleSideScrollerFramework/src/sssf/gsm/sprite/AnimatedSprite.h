@@ -47,6 +47,7 @@ protected:
 	int MusicFrameCounter;
 	bool win;
 	bool lose;
+	bool gameCheat;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()			{ return alpha;				}
@@ -68,10 +69,11 @@ public:
 	void				setMFC()			{ MusicFrameCounter = 0; }
 	int					getMFC()			{ return MusicFrameCounter; }
 	void				incMFC()			{ MusicFrameCounter += 1; }
-	bool				getWin()				{ return win; }
-	bool				getLose()				{ return lose; }
-	void				setWin(bool w)			{ win = w; }
-	void				setLose(bool l)			{ lose = l; }
+	bool				getWin()			{ return win; }
+	bool				getLose()			{ return lose; }
+	void				setWin(bool w)		{ win = w; }
+	void				setLose(bool l)		{ lose = l; }
+	bool				getGameCheatStatus(){ return gameCheat; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
@@ -85,5 +87,5 @@ public:
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);
 	void updateSprite(Game *game);
-
+	void toggleGameCheat();
 };

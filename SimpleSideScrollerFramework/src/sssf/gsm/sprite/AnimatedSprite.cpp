@@ -32,6 +32,7 @@ AnimatedSprite::AnimatedSprite()
 	MusicFrameCounter = 0;
 	win = false;
 	lose = false;
+	gameCheat = false;
 }
 
 /*
@@ -44,7 +45,11 @@ AnimatedSprite::~AnimatedSprite()
 		body->GetWorld()->DestroyBody(body);
 	physics = false;
 }
-
+void AnimatedSprite::toggleGameCheat(){
+	if (gameCheat)
+		gameCheat = false;
+	else gameCheat = true;
+}
 /*
 	changeFrame - This method allows for the changing of an image in an 
 	animation sequence for a given animation state.

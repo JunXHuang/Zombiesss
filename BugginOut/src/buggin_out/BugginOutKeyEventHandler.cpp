@@ -76,6 +76,17 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				//setstate
 			}
 		}
+		else if (input->isKeyDown(83U))//S key
+		{
+			if (!player->isStunned()) {
+				player->setWalk(true);
+				vY = PLAYER_SPEED;
+				player->setCurrentState(IDLE);
+			}
+			else {
+				//setstate
+			}
+		}
 		else if (input->isKeyDownForFirstTime(G_KEY))
 		{
 			viewport->toggleDebugView();
@@ -86,15 +97,20 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			vX = 0.0f;
 			//player->setCurrentState(IDLE);
 		}
-		if (input->isKeyDownForFirstTime(87U))
+		if (input->isKeyDownForFirstTime(87U))	//space bar
 		{
-			if ((int)player->getVelocityY() == 0 && !player->isStunned())
-			{
-				vY = JUMP_SPEED;
+			if (!player->getGameCheatStatus()){
+				if ((int)player->getVelocityY() == 0 && !player->isStunned())
+				{
+					vY = JUMP_SPEED;
+				}
+				else
+				{
+					cout << "WHAT HAPPENED?";
+				}
 			}
-			else
-			{
-				cout << "WHAT HAPPENED?";
+			else{
+				vY = -PLAYER_SPEED;
 			}
 		}
 		if (input->isKeyDownForFirstTime(VK_SPACE) && !player->isStunned()) {
@@ -125,7 +141,11 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		}
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
-			//gsm->getPhysics()->togglePhysics();
+			player->toggleGameCheat();
+			if (player->getGameCheatStatus())
+				player->setGravity(false);
+			else
+				player->setGravity(true);
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{

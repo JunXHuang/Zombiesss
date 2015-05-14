@@ -14,7 +14,8 @@ Visual Studio 2013
 Box2D for physics engine  
 XAudio2 for audio  
 Tiled for level design  
-Lua for zombie movements
+Lua for zombie movements  
+DirectX SDK for rendering
 
 #[Screenshots]
 ![ScreenShot](https://raw.githubusercontent.com/JunXHuang/Zombiesss/master/screenshots/main_menu.PNG)

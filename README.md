@@ -6,13 +6,15 @@ Created By:
 ===================================
 Bryce Gregerson @dbgtrulz  
 Gabriel Baierle @gbaierle  
-Jun Xiong Huang @junxhuang  
+Jun Xiong Huang @JunXHuang  
 
-Using: 
+Used: 
 =====================================
+Visual Studio 2013  
 Box2D for physics engine  
 XAudio2 for audio  
 Tiled for level design  
+Lua for zombie movements
 
 #[Screenshots]
 ![ScreenShot](https://raw.githubusercontent.com/JunXHuang/Zombiesss/master/screenshots/main_menu.PNG)
